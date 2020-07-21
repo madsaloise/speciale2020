@@ -161,8 +161,9 @@ def _indiff_mixed_action(payoff_matrix, own_supp, opp_supp, A, out):
 
 playerA = np.array([[0, -1, 1], [1, 0, -1], [-1, 1, 0]])
 playerB = np.negative(playerA)
-rps = np.vstack([[playerA, playerB]])
-print(playerA)
-print(playerB)
+rps = NormalFormGame(playerA)
+#([[playerA, playerB]])
+#print(playerA)
+#print(playerB)
 print(rps)
 support_enumeration(rps)
