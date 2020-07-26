@@ -54,10 +54,7 @@ winrates = [[50,50,45,75,55,45,40,65,60,35,70,60],
 
             [40,60,70,80,45,70,50,45,35,60,40,50]]
 
-data = [decks, winrates]
-column_names = data.pop(0)
-df = pd.DataFrame(data, columns=column_names, index=decks)
-print(df)
+
 def solve(decks, winrates):
 
     '''find an optimal strategy based on the given deck winrates.

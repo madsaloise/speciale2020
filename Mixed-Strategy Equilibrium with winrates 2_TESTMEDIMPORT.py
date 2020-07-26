@@ -14,12 +14,22 @@ import matplotlib.pyplot as plt
 
 from scipy.optimize import linprog
 
-df = pd.read_excel (r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Winrates_Data.xlsx')
+#Importerer
 
-print(df)
+df = pd.read_excel (r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Winrates_Data.xlsx')
 
 column_names = list(df.columns)
 print(column_names)
+
+Row_list =[] 
+  
+# Iterate over each row 
+for index, rows in df.iterrows(): 
+    # Create list for the current row 
+    my_list =[rows.Date, rows.Event, rows.Cost] 
+      
+    # append the list to the final list 
+    Row_list.append(my_list) 
 
 '''decks = ["Mid-range Druid", "Token Druid", "Mid-range Hunter",
 
