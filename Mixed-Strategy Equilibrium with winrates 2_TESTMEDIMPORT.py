@@ -1,7 +1,5 @@
 ''' hs_gto.py
 
-
-
 Calculates a game theory optimal deck selection strategy for hearthstone laddering. 
 
 Utilities in the payoff matrix are based on win-rates from the tempostorm website '''
@@ -16,9 +14,14 @@ import matplotlib.pyplot as plt
 
 from scipy.optimize import linprog
 
+df = pd.read_excel (r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Winrates_Data.xlsx')
 
+print(df)
 
-decks = ["Mid-range Druid", "Token Druid", "Mid-range Hunter",
+column_names = list(df.columns)
+print(column_names)
+
+'''decks = ["Mid-range Druid", "Token Druid", "Mid-range Hunter",
 
          "Freeze Mage", "Mech Mage", "Secret Paladin", 
 
@@ -52,18 +55,18 @@ winrates = [[50,50,45,75,55,45,40,65,60,35,70,60],
 
             [30,25,45,90,65,40,60,40,40,40,50,60],
 
-            [40,60,70,80,45,70,50,45,35,60,40,50]]
-
+            [40,60,70,80,45,70,50,45,35,60,40,50]]'''
+'''
 data = [decks, winrates]
 column_names = data.pop(0)
 df = pd.DataFrame(data, columns=column_names, index=decks)
 print(df)
-def solve(decks, winrates):
+def solve(decks, winrates):'''
 
-    '''find an optimal strategy based on the given deck winrates.
+'''find an optimal strategy based on the given deck winrates.
 
     the number of decks must match the number of rows/columns in winrates'''
-
+'''
     num_decks=len(decks)
 
 
@@ -128,4 +131,4 @@ print(winrates)
 
 if __name__ == '__main__':
 
-    print(list(solve(decks, winrates)))
+    print(list(solve(decks, winrates)))'''
