@@ -16,7 +16,7 @@ from scipy.optimize import linprog
 
 #Importerer
 
-df = pd.read_excel (r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Winrates_Data.xlsx')
+df = pd.read_excel (r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data.xlsx')
 
 column_names = list(df.columns)
 print(column_names)
