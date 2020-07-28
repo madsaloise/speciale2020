@@ -26,6 +26,7 @@ Row_list =[]
 # Iterate over each row 
 for index, rows in df.iterrows(): 
     # Create list for the current row 
+    
     my_list =[rows.Date, rows.Event, rows.Cost] 
       
     # append the list to the final list 
