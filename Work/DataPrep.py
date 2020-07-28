@@ -1,18 +1,8 @@
-''' hs_gto.py
-
-Calculates a game theory optimal deck selection strategy for hearthstone laddering. 
-
-Utilities in the payoff matrix are based on win-rates from the tempostorm website '''
-
-import seaborn as sns
+#Preparing Data from excel to multiple lists for rows and columns
 
 import numpy as np
 
 import pandas as pd
-
-import matplotlib.pyplot as plt
-
-from scipy.optimize import linprog
 
 #Importerer
 def ImportExcelFile(Kolonner, Rækker, dataframe):
@@ -26,19 +16,18 @@ def ImportExcelFile(Kolonner, Rækker, dataframe):
     else:
         if dataframe == 1:
             return df
-    '''
-    Row_list =[] 
+        else: 
+            if Rækker == 1:
+                Row_list =[] 
   
-    # Iterate over each row 
-    for index, rows in df.iterrows(): 
-        # Create list for the current row 
-    
-        my_list =[rows.Date, rows.Event, rows.Cost] 
-      
-        # append the list to the final list 
-        Row_list.append(my_list) 
-    
-        '''
-    #if Rækker == 1:
-    #    return Rowlist
+                # Iterate over each row 
+                for i in range((df.shape[0])): 
+                    # Using iloc to access the values of  
+                    # the current row denoted by "i" 
+                    Row_list.append(list(df.iloc[i, :])) 
+                return Row_list
+            else:
+                "Set one of the inputs to 1"
+
+
 
