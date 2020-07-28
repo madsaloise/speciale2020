@@ -10,7 +10,6 @@ def ImportExcelFile(Kolonner, Rækker, dataframe):
 
     column_names = list(df.columns)
 
-    
     if Kolonner == 1: 
         return column_names
     else:
@@ -19,10 +18,8 @@ def ImportExcelFile(Kolonner, Rækker, dataframe):
         else: 
             if Rækker == 1:
                 Row_list =[] 
-  
                 # Iterate over each row 
-                for i in range((df.shape[0])): 
-                    # Using iloc to access the values of  
+                for i in range((df.shape[0])):  
                     # the current row denoted by "i" 
                     Row_list.append(list(df.iloc[i, :])) 
                 return Row_list

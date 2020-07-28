@@ -1,3 +1,10 @@
+#Imports
+import seaborn as sns
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.optimize import linprog
+
 
 #Importerer DataPrep
 from DataPrep import ImportExcelFile 
@@ -9,5 +16,11 @@ from DataPrep import ImportExcelFile
 column_names = ImportExcelFile(1,0,0)
 row_names = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
-print(column_names)
-print(row_names)
+
+#Importerer 
+from MixedEquilibriumWinrates import solve
+#Syntax:
+# solve(decks, winrates)
+# decks = kolonnenavne
+# winrates = rækkenavne (rækkenavne er en liste over winrates, print den for at tjekke den. Misledende navn..)
+print(list(solve(column_names, row_names)))
