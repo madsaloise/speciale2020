@@ -8,6 +8,8 @@ Utilities in the payoff matrix are based on win-rates from the tempostorm websit
 
 import seaborn as sns
 
+import copy
+
 import numpy as np
 
 import pandas as pd
@@ -74,12 +76,14 @@ def solve(decks, winrates):
 
 
     # calculate the payoff matrix from win percentages
+
     payoffs=[]
     for i in winrates:
+        print(i)
         for j in i:
             for u in [(j/50.0)-1]:
-                payoffs.append(list(winrates.iloc[u, :]))
-                
+                payoffs.append(u)
+    payoffs.append(payoff)
     print(payoffs)
 
     # append a column of -1s to subtract z from each upper bound constraint 
