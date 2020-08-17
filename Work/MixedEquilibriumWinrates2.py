@@ -78,7 +78,8 @@ def solve(decks, winrates):
     for i in winrates:
         for j in i:
             for u in [(j/50.0)-1]:
-                payoffs.append(u)
+                payoffs.append(list(winrates.iloc[u, :]))
+                
     print(payoffs)
 
     # append a column of -1s to subtract z from each upper bound constraint 
