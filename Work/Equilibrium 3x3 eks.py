@@ -13,9 +13,6 @@ from scipy.optimize import linprog
 
 decks = ["Highlander Mage", "Mech Paladin","Ressurect Priest"]
 
-
-# winrates for each deck from the tempostorm website
-
 winrates = [[50,46,56],
 
             [54,50,40],
@@ -28,18 +25,11 @@ def solve(decks, winrates):
 
     num_decks=len(decks)
 
-
-
-    
     c = [0 for i in range(num_decks)]
 
     c.append(1)
 
-
-
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
-
-
 
     for r in payoffs:
 
@@ -47,27 +37,15 @@ def solve(decks, winrates):
 
     print(payoffs)
 
-    
-
     b_ub = [0 for i in range(num_decks)]
-
-
-
-    
-
+  
     ones = [1 for i in range(num_decks)]
-
-    
 
     ones.append(0)
 
     A_eq = [ones]
 
-    
-
     b_eq = [1]
-
-    
 
     bounds = [(0,None) for i in range(num_decks+1)]
 
