@@ -71,18 +71,15 @@ def solve(decks, winrates):
 
     c.append(1)
 
-
-
     # calculate the payoff matrix from win percentages
 
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
     # append a column of -1s to subtract z from each upper bound constraint 
-    print(payoffs)
     for r in payoffs:
 
         r.append(-1.0)
 
-
+    print(payoffs)
 
     # inequality constraint right hand sides
 
