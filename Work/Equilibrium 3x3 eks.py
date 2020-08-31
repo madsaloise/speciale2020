@@ -42,9 +42,9 @@ def solve(decks, winrates):
     ones = [1 for i in range(num_decks)]
 
     ones.append(0)
-
+    print(ones)
     A_eq = [ones]
-
+    print(A_eq)
     b_eq = [1]
 
     bounds = [(0,None) for i in range(num_decks+1)]
