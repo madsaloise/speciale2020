@@ -28,5 +28,5 @@ WinRatesMixedEq = list(solve(deck_names, winrates))
 print(WinRatesMixedEq)
 
 #Level-K Model, syntax: levelksolve(decks, winrates), level 0 antages at spille uniformt
-from LevelKModel import levelksolve
+from LevelKModelTeori import levelksolve
 print(list(levelksolve(deck_names, winrates)))
