@@ -1,4 +1,3 @@
-
 import seaborn as sns
 
 import numpy as np
@@ -9,19 +8,8 @@ import matplotlib.pyplot as plt
 
 from scipy.optimize import linprog
 
-
-
-decks = ["Highlander Mage", "Mech Paladin","Ressurect Priest"]
-
-winrates = [[50,46,56],
-
-            [54,50,40],
-
-            [44,60,50]]
-
-
-def solve(decks, winrates):
-
+def levelksolve(decks, winrates, weights):
+    
 
     num_decks=len(decks)
 
@@ -56,4 +44,4 @@ def solve(decks, winrates):
 
 if __name__ == '__main__':
 
-    print(list(solve(decks, winrates)))
+    print(list(levelksolve(decks, winrates)))

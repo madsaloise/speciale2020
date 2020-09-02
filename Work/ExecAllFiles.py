@@ -24,6 +24,8 @@ from MixedEquilibriumWinrates import solve
 # decks = kolonnenavne
 # winrates = rækkenavne (rækkenavne er en liste over winrates, print den for at tjekke den. Misledende navn..)
 WinRatesMixedEq = list(solve(deck_names, winrates))
-
-print(winrates)
+#Mixed Nash Equilibrium
 print(WinRatesMixedEq)
+
+#Level-K Model, syntax: levelksolve(decks, winrates, weights)
+from LevelKModel import levelksolve
