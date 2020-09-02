@@ -79,7 +79,7 @@ def solve(decks, winrates):
 
         r.append(-1.0)
 
-    print(payoffs)
+    
 
     # inequality constraint right hand sides
 
