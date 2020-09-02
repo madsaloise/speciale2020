@@ -25,7 +25,7 @@ from MixedEquilibriumWinrates import solve
 # winrates = rækkenavne (rækkenavne er en liste over winrates, print den for at tjekke den. Misledende navn..)
 WinRatesMixedEq = list(solve(deck_names, winrates))
 #Mixed Nash Equilibrium
-print(WinRatesMixedEq)
+print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(WinRatesMixedEq))
 
 #Level-K Model, syntax: levelksolve(decks, winrates), level 0 antages at spille uniformt
 from LevelKModelTeori import levelksolve

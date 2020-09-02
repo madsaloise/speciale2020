@@ -10,35 +10,42 @@ from scipy.optimize import linprog
 
 def levelksolve(decks, winrates):
     
-
     num_decks=len(decks)
-
-    c = [0 for i in range(num_decks)]
-
-    c.append(1)
-
-    weights_level0 = [1/num_decks for i in range(num_decks)]
     
+
+    #Beregner gennemsnitlige payoffs
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
+    avg_payoff=[]
+    for i in payoffs:
+        avg_pay = sum(i)/num_decks
+        avg_payoff.append(avg_pay)
+    #Indsætter player 0's valg i en liste
+    level_0_maxpayoff = max(avg_payoff)
 
-    for r in payoffs:
+    level_k = []
+    level_k.append(level_0_maxpayoff)
+    level_0_index = avg_payoff.index(level_0_maxpayoff)
 
-        r.append(-1.0)
+    maks_index = []
+    deckID = [level_0_index]
+    for p in range(4):
+        for i in payoffs:
+            maks_index.append(payoffs[level_0_index])
+        level_k.append(max(maks_index))
+        maxIDlist = np.argmax(maks_index)
+        deckID.append(maxIDlist)
+        level_0_index = maxIDlist
+        maks_index = []
+    #Danner en liste med forskellige spilleres valg
+    counter=0
+    plays = []
+    print("I et level-k hierarki har vi følgende:")
+    for i in level_k:
+        ilevel_k = counter
+        val_level_k = level_k[ilevel_k]
+        deckIDcounter = deckID[ilevel_k]
+        leveliplay = decks[deckIDcounter]
+        plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
+        counter += 1
+    return plays
 
-    
-
-    b_ub = [0 for i in range(num_decks)]
-  
-    ones = [1 for i in range(num_decks)]
-
-    ones.append(0)
-    
-    A_eq = [ones]
-
-    b_eq = [1]
-
-    bounds = [(0,None) for i in range(num_decks+1)]
-
-    solution = linprog(c, A_ub=payoffs, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds)
-
-    return zip(decks,solution['x'])

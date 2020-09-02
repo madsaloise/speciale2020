@@ -25,6 +25,3 @@ def ImportExcelFile(decknames, winrates, dataframe):
                 return Row_list
             else:
                 "Set one of the inputs to 1"
-
-print(ImportExcelFile(1,0,0))
-print(ImportExcelFile(0,1,0))
