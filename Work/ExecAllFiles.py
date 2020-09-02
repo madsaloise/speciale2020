@@ -27,5 +27,6 @@ WinRatesMixedEq = list(solve(deck_names, winrates))
 #Mixed Nash Equilibrium
 print(WinRatesMixedEq)
 
-#Level-K Model, syntax: levelksolve(decks, winrates, weights)
+#Level-K Model, syntax: levelksolve(decks, winrates), level 0 antages at spille uniformt
 from LevelKModel import levelksolve
+print(list(levelksolve(deck_names, winrates)))

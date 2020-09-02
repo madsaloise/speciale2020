@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 from scipy.optimize import linprog
 
-def levelksolve(decks, winrates, weights):
+def levelksolve(decks, winrates):
     
 
     num_decks=len(decks)
@@ -17,6 +17,8 @@ def levelksolve(decks, winrates, weights):
 
     c.append(1)
 
+    weights = [1/num_decks for i in range(num_decks)]
+    print(weights)
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
 
     for r in payoffs:
