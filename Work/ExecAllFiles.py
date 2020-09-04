@@ -18,12 +18,12 @@ winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
 
 #Importerer 
-from MixedEquilibriumWinrates import solve
+from MixedEquilibriumWinrates import solvemixednash
 #Syntax:
-# solve(decks, winrates)
+# solvemixednash(decks, winrates)
 # decks = kolonnenavne
 # winrates = rækkenavne (rækkenavne er en liste over winrates, print den for at tjekke den. Misledende navn..)
-WinRatesMixedEq = list(solve(deck_names, winrates))
+WinRatesMixedEq = list(solvemixednash(deck_names, winrates))
 
 print(WinRatesMixedEq)
 #Mixed Nash Equilibrium

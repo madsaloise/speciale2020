@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import linprog
 
 
-def solve(decks, winrates):
+def solvemixednash(decks, winrates):
 
     '''find an optimal strategy based on the given deck winrates.
 
@@ -69,4 +69,4 @@ def solve(decks, winrates):
 
 if __name__ == '__main__':
 
-    print(list(solve(decks, winrates)))
+    print(list(solvemixednash(decks, winrates)))
