@@ -36,6 +36,7 @@ def levelksolve(decks, winrates):
         deckID.append(maxIDlist)
         level_0_index = maxIDlist
         maks_index = []
+    
     #Danner en liste med forskellige spilleres valg
     counter=0
     plays = []

@@ -24,6 +24,8 @@ from MixedEquilibriumWinrates import solve
 # decks = kolonnenavne
 # winrates = rækkenavne (rækkenavne er en liste over winrates, print den for at tjekke den. Misledende navn..)
 WinRatesMixedEq = list(solve(deck_names, winrates))
+
+print(WinRatesMixedEq)
 #Mixed Nash Equilibrium
 print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(WinRatesMixedEq))
 
