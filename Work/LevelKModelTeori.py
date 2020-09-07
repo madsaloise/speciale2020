@@ -21,31 +21,26 @@ def levelksolve(decks, winrates):
         avg_payoff.append(avg_pay)
     #Indsætter player 0's valg i en liste
     level_0_maxpayoff = max(avg_payoff)
-
-    level_k = []
-    level_k.append(level_0_maxpayoff)
     level_0_index = avg_payoff.index(level_0_maxpayoff)
-
+    
     maks_index = []
     deckID = [level_0_index]
     for p in range(4):
         for i in payoffs:
             maks_index.append(payoffs[level_0_index])
-        level_k.append(max(maks_index))
+        #level_k.append(max(maks_index))
         maxIDlist = np.argmax(maks_index)
         deckID.append(maxIDlist)
         level_0_index = maxIDlist
         maks_index = []
         
     print(deckID)
-    print(level_k)
     #Danner en liste med forskellige spilleres valg
     counter=0
     plays = []
     print("I et level-k hierarki har vi følgende:")
-    for i in level_k:
+    for i in deckID:
         ilevel_k = counter
-        val_level_k = level_k[ilevel_k]
         deckIDcounter = deckID[ilevel_k]
         leveliplay = decks[deckIDcounter]
         plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
