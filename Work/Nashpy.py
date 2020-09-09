@@ -8,19 +8,13 @@ Row_list =[]
 for i in range((df.shape[0])):  
     # the current row denoted by "i" 
     Row_list.append(list(df.iloc[i, :])) 
-print(Row_list)
 afkast = [[u for u in [(j/50.0)-1 for j in i]] for i in Row_list]
-print(afkast)
-A = np.array(afkast)
-print("a is:")
-print(A)
-B = np.negative(A)
-print("b is:")
-print(B)
-rps = nash.Game(A, B)
-print("rps is: ")
-print(rps)
+A = afkast
+spil = np.array(A)
+rps = nash.Game(spil)
 
 eqs = rps.support_enumeration()
-print(list(eqs))
+for eq in eqs:
+    print(eq)
+
 
