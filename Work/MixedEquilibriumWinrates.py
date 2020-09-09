@@ -67,6 +67,6 @@ def solvemixednash(decks, winrates):
 
     return zip(decks,solution['x'])
 
-if __name__ == '__main__':
+'''if __name__ == '__main__':
 
-    print(list(solvemixednash(decks, winrates)))
+    print(list(solvemixednash(decks, winrates)))'''

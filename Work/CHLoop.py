@@ -55,7 +55,7 @@ def CHSolve(decks, winrates, levels):
             maxIDlist = []
             maks_index = []
         count += 1
-
+    print(deckID)
     #Danner en liste med forskellige spilleres valg
     counter=0
     plays = []

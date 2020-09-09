@@ -6,7 +6,7 @@ import pandas as pd
 
 #Importerer
 def ImportExcelFile(decknames, winrates, dataframe):
-    df = pd.read_excel (r'C:\speciale2020\Data\Winrates_Data.xlsx')
+    df = pd.read_excel (r'C:\speciale2020\Data\Winrates_Data_2.xlsx')
 
     column_names = list(df.columns)
 
