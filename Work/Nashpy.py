@@ -10,10 +10,10 @@ from DataPrep import ImportExcelFile
 deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
+payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
 
 
-
-A = np.array(winrates)
+A = np.array(payoffs)
 B = np.negative(A)
 rps = nash.Game(A, B)
 
