@@ -31,7 +31,7 @@ print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(Wi
 #Level-K Model, syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
 print(list(levelksolve(deck_names, winrates, 4)))
-
+'''
 #CH Model, syntax: CHSolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from CHLoop import CHSolve
-print(list(levelksolve(deck_names, winrates, 4)))
+print(list(CHSolve(deck_names, winrates, 4)))'''

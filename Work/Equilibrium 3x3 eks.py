@@ -35,7 +35,6 @@ def solve(decks, winrates):
 
         r.append(-1.0)
 
-    print(payoffs)
 
     b_ub = [0 for i in range(num_decks)]
   

@@ -39,17 +39,17 @@ def CHSolve(decks, winrates, levels):
         if count == 0:
             for i in payoffs:
                 maks_index.append(payoffs[level_0_index])
-            deckID.append(np.argmax(maks_index))
-            level_0_index = [np.argmax(maks_index)]
+            deckID.append(np.argmin(maks_index))
+            level_0_index = [np.argmin(maks_index)]
             maks_index = [] 
         else: 
             for i in payoffs:
                 #Finder payoffs for hvert af decks, som spiller h spiller. level_0_indeks burde nok være en liste efterhånden?    
                 for j in enumerate(deckID):
-                    maks_index.append(payoffs[level_0_index[j]])
+                    maks_index.append(payoffs[level_0_index.index(j)])
             #TODO: Det her skal vægtes og laves om til best-response funktion
             for q in maks_index:
-                maxIDlist.append(np.argmax(maks_index[q]))
+                maxIDlist.append(np.argmin(maks_index.index(q)))
             deckID.append(maxIDlist)
             level_0_index = maxIDlist
             maxIDlist = []
@@ -64,6 +64,6 @@ def CHSolve(decks, winrates, levels):
         ilevel_k = counter
         deckIDcounter = deckID[ilevel_k]
         leveliplay = decks[deckIDcounter]
-        plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay) + " med sandsynlighederne" + str(PlayWeights))
+        plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay) + " med sandsynlighederne" '''+ str(PlayWeights)''')
         counter += 1
     return plays

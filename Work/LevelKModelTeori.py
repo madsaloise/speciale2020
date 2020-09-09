@@ -28,8 +28,8 @@ def levelksolve(decks, winrates, levels):
     for p in range(levels):
         for i in payoffs:
             maks_index.append(payoffs[level_0_index])
-        deckID.append(np.argmax(maks_index))
-        level_0_index = np.argmax(maks_index)
+        deckID.append(np.argmin(maks_index))
+        level_0_index = np.argmin(maks_index)
         maks_index = []
 
     #Danner en liste med forskellige spilleres valg
