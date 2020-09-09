@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 from scipy.optimize import linprog
 
-def levelksolve(decks, winrates):
+def levelksolve(decks, winrates, levels):
     
     num_decks=len(decks)
     
@@ -25,16 +25,13 @@ def levelksolve(decks, winrates):
     
     maks_index = []
     deckID = [level_0_index]
-    for p in range(4):
+    for p in range(levels):
         for i in payoffs:
             maks_index.append(payoffs[level_0_index])
-        #level_k.append(max(maks_index))
-        maxIDlist = np.argmax(maks_index)
-        deckID.append(maxIDlist)
-        level_0_index = maxIDlist
+        deckID.append(np.argmax(maks_index))
+        level_0_index = np.argmax(maks_index)
         maks_index = []
-        
-    print(deckID)
+
     #Danner en liste med forskellige spilleres valg
     counter=0
     plays = []
