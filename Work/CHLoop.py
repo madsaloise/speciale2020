@@ -23,10 +23,9 @@ def CHSolve(decks, winrates, levels):
     level_0_index = avg_payoff.index(level_0_maxpayoff)
     
 
-    #TODO: Lav vægte
-    #Uniforme vægte
-    
+    #Lister 
     range_level = []
+    maxIDlist = []
     #Gør det nemmere at vælge et tilfældigt level som højeste level som del af programmet. For k niveauer angives k-1 niveauer.
     for i in range(levels):
         range_level.append(i)
@@ -34,28 +33,33 @@ def CHSolve(decks, winrates, levels):
     #TODO: Inkluder vægte
     maks_index = []
     deckID = [level_0_index]
+    count = 0
     for p in enumerate(range_level):
-        weights = 1/(p+1)
-        if p = 0:
+        weights = 1/(count+2)
+        if count == 0:
             for i in payoffs:
                 maks_index.append(payoffs[level_0_index])
             deckID.append(np.argmax(maks_index))
-            level_0_index = np.argmax(maks_index)
-            maks_index = [] '''DONE/'''
+            level_0_index = [np.argmax(maks_index)]
+            maks_index = [] 
         else: 
             for i in payoffs:
                 #Finder payoffs for hvert af decks, som spiller h spiller. level_0_indeks burde nok være en liste efterhånden?    
                 for j in enumerate(deckID):
                     maks_index.append(payoffs[level_0_index[j]])
             #TODO: Det her skal vægtes og laves om til best-response funktion
-            maxIDlist = np.argmax(maks_index)
+            for q in maks_index:
+                maxIDlist.append(np.argmax(maks_index[q]))
             deckID.append(maxIDlist)
-            level_0_index = [maxIDlist]
+            level_0_index = maxIDlist
+            maxIDlist = []
             maks_index = []
+        count += 1
+
     #Danner en liste med forskellige spilleres valg
     counter=0
     plays = []
-    print("I et level-k hierarki har vi følgende:")
+    print("I CH-model har vi følgende:")
     for i in deckID:
         ilevel_k = counter
         deckIDcounter = deckID[ilevel_k]
