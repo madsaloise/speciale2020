@@ -3,7 +3,7 @@ import numpy as np
 A = np.array([[0, -1, 1], [1, 0, -1], [-1, 1, 0]])
 B = np.negative(A)
 rps = nash.Game(A, B)
-(print(rps))
+print(type(A[1][1]))
 '''
 #If row player only plays scissor and column player only plays paper
 sigma_r = [0, 0, 1]

@@ -16,7 +16,7 @@ from DataPrep import ImportExcelFile
 deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
-
+print(data)
 #Importerer 
 from MixedEquilibriumWinrates import solvemixednash
 #Syntax:
