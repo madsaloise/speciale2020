@@ -16,7 +16,6 @@ from DataPrep import ImportExcelFile
 deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
-print(data)
 #Importerer 
 from MixedEquilibriumWinrates import solvemixednash
 #Syntax:
@@ -30,7 +29,7 @@ print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(Wi
 
 #Level-K Model, syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
-print(list(levelksolve(deck_names, winrates, 4)))
+print(list(levelksolve(deck_names, winrates, 10)))
 '''
 #CH Model, syntax: CHSolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from CHLoop import CHSolve

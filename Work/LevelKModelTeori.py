@@ -12,7 +12,6 @@ def levelksolve(decks, winrates, levels):
     
     num_decks=len(decks)
     
-
     #Beregner gennemsnitlige payoffs
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
     avg_payoff=[]

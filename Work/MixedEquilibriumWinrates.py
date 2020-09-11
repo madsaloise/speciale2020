@@ -1,11 +1,3 @@
-''' hs_gto.py
-
-
-
-Calculates a game theory optimal deck selection strategy for hearthstone laddering. 
-
-Utilities in the payoff matrix are based on win-rates from the tempostorm website '''
-
 import seaborn as sns
 
 import numpy as np
@@ -19,13 +11,9 @@ from scipy.optimize import linprog
 
 def solvemixednash(decks, winrates):
 
-    '''find an optimal strategy based on the given deck winrates.
-
-    the number of decks must match the number of rows/columns in winrates'''
-
     num_decks=len(decks)
 
-    # maximize the new variable z
+    # maximize the new variable c
 
     c = [0 for i in range(num_decks)]
 
@@ -48,8 +36,6 @@ def solvemixednash(decks, winrates):
     # setup equality constraint so x forms a probability distribution
 
     ones = [1 for i in range(num_decks)]
-
-    # leave z out of this formula
 
     ones.append(0)
 
