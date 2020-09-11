@@ -12,4 +12,5 @@ deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
 payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
-print(payoffs)
+print(len(deck_names))
+a, b, c, d, e, f, g, h, i, j, k, l, m, n, o = symbols('a, b, c, d, e, f, g, h, i, j, k, l, m, n, o')
