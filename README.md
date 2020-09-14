@@ -7,7 +7,9 @@ Funktionel kode findes i mappen 'Work'.
 Anvendte pakker er:
 
 Pandas
+
 Numpy
+
 Scipy.optimize (linprog)
 
 
