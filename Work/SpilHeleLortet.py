@@ -6,15 +6,18 @@ from scipy.optimize import linprog
 
 #Importerer DataPrep
 from DataPrep import ImportExcelFile 
+from DataPrep import ImportFrekvenser 
 #Syntax:
 # ImportExcelFile(Kolonner, Rækker, dataframe) 
+# ImportFrekvenser(Frekvenser)
 # Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0
 # Vælger man flere med et vil den bare returnere kolonnenavnene, just dont 
 
 deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
-print(winrates)
+frekvenser = ImportFrekvenser(1)
+
 #Dominans, Syntax: ElimineringDomStrat(deck, winrates)
 from ElimineringDomineredeStrat import ElimineringDomStrat
 ElimineringDomStrat(deck_names, winrates)
