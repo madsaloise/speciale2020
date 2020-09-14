@@ -2,7 +2,7 @@ import numpy as np
 
 
 #Importerer DataPrep
-from DataPrep import ImportExcelFile 
+from DataPrepForTesting import ImportExcelFile 
 #Syntax:
 # ImportExcelFile(Kolonner, Rækker, dataframe) 
 # Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0
@@ -12,6 +12,7 @@ deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
 payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
+
 A = np.array(payoffs)
 B = []
 for i in payoffs:
