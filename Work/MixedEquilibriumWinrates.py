@@ -16,7 +16,6 @@ def solvemixednash(decks, winrates):
     # Beregn payoff
 
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
-
     # append -1 til brug for øvre grænse
     
     for r in payoffs:

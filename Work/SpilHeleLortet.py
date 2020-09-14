@@ -14,7 +14,7 @@ from DataPrep import ImportExcelFile
 deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
-
+print(winrates)
 #Dominans, Syntax: ElimineringDomStrat(deck, winrates)
 from ElimineringDomineredeStrat import ElimineringDomStrat
 ElimineringDomStrat(deck_names, winrates)
