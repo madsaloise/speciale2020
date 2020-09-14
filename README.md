@@ -1,6 +1,6 @@
 # speciale2020
 
-Denne github indeholder koden til vores speciale i spilteori.
+Denne github indeholder koden til vores speciale i Økonomi.
 
 Funktionel kode findes i mappen 'Work'. 
 
