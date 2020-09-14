@@ -2,8 +2,6 @@
 import numpy as np
 import pandas as pd
 from scipy.optimize import linprog
-
-
 #Importerer DataPrep
 from DataPrep import ImportExcelFile 
 from DataPrep import ImportFrekvenser 
