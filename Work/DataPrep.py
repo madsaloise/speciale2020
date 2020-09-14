@@ -22,7 +22,7 @@ def ImportExcelFile(decknames, winrates, dataframe):
                 for i in range((df.shape[0])):  
                     # the current row denoted by "i" 
                     Row_list.append(list(df.iloc[i, :])) 
-                    
+                            
                 return Row_list
             else:
                 "Set one of the inputs to 1"

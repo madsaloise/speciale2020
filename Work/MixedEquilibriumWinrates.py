@@ -24,7 +24,7 @@ def solvemixednash(decks, winrates):
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
 
     # append a column of -1s to subtract z from each upper bound constraint 
-
+    
     for r in payoffs:
 
         r.append(-1.0)
@@ -51,8 +51,8 @@ def solvemixednash(decks, winrates):
 
     solution = linprog(c, A_ub=payoffs, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds)
 
-    return zip(decks,solution['x'])
+    MixedStrat = [(i,j) for i,j in zip(decks,solution['x']) if j != 0]
 
-'''if __name__ == '__main__':
+    return MixedStrat
+    
 
-    print(list(solvemixednash(decks, winrates)))'''

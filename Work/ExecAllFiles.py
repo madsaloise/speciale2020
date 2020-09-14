@@ -17,20 +17,25 @@ deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)
 data = ImportExcelFile(0,0,1)
 
-#Importerer 
+#Dominans, Syntax: ElimineringDomStrat(deck, winrates)
+from ElimineringDomineredeStrat import ElimineringDomStrat
+ElimineringDomStrat(deck_names, winrates)
+
+
+#Importerer Nash
 from MixedEquilibriumWinrates import solvemixednash
 #Syntax:
 # solvemixednash(decks, winrates)
 # decks = kolonnenavne
 # winrates = rækkenavne (rækkenavne er en liste over winrates, print den for at tjekke den. Misledende navn..)
-WinRatesMixedEq = list(solvemixednash(deck_names, winrates))
+WinRatesMixedEq = solvemixednash(deck_names, winrates)
 
 #Mixed Nash Equilibrium
 print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(WinRatesMixedEq))
 
 #Level-K Model, syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
-print(list(levelksolve(deck_names, winrates, 10)))
+print(list(levelksolve(deck_names, winrates, 4)))
 '''
 #CH Model, syntax: CHSolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from CHLoop import CHSolve
