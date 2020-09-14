@@ -6,7 +6,7 @@ import pandas as pd
 
 #Importerer
 def ImportExcelFile(decknames, winrates, dataframe):
-    df = pd.read_excel (r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_Artikel.xlsx')
+    df = pd.read_excel (r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2.xlsx')
 
     column_names = list(df.columns)
 
@@ -22,6 +22,7 @@ def ImportExcelFile(decknames, winrates, dataframe):
                 for i in range((df.shape[0])):  
                     # the current row denoted by "i" 
                     Row_list.append(list(df.iloc[i, :])) 
+                    
                 return Row_list
             else:
                 "Set one of the inputs to 1"
