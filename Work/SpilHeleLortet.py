@@ -28,9 +28,9 @@ ElimineringDomStrat(deck_names, winrates)
 #Importerer Nash
 #Syntax: solvemixednash(decks, winrates)
 from MixedEquilibriumWinrates import solvemixednash
+#Loop, hvis vi får brug for en liste med nash-ligevægte. Rykkes til relevant fil senere.
 #Printer
-print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates)) + ". Andre decks spilles med en sandsynlighed på 0.")
-
+print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates, 0)) + ". Andre decks spilles med en sandsynlighed på 0.")
 #Level-K Model, 
 #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
@@ -39,3 +39,7 @@ print(list(levelksolve(deck_names, winrates, 4)))
 #CH Model, syntax: CHSolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from CHLoop import CHSolve
 print(list(CHSolve(deck_names, winrates, 4)))'''
+
+from MixedEqVSFrekvensGraf import MixedEqGraph
+# Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
+MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser)

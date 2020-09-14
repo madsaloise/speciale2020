@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.optimize import linprog
 
-def solvemixednash(decks, winrates):
+def solvemixednash(decks, winrates, GrafData):
 
     num_decks=len(decks)
 
@@ -42,8 +42,10 @@ def solvemixednash(decks, winrates):
 
     solution = linprog(c, A_ub=payoffs, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds)
 
-    MixedStrat = [(i,j) for i,j in zip(decks,solution['x']) if j != 0]
-
-    return MixedStrat
+    if GrafData == 0:
+        MixedStrat = [(i,j) for i,j in zip(decks,solution['x']) if j != 0]
+        return MixedStrat
+    else:
+        return zip(decks,solution['x'])
     
 
