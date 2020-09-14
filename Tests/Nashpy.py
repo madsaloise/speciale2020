@@ -1,7 +1,6 @@
 import nashpy as nash
 import numpy as np
-import pandas as pd
-from DataPrep import ImportExcelFile 
+from DataPrepForTesting import ImportExcelFile 
 #tager en krig at beregne. Se jupyter notebook
 deck_names = ImportExcelFile(1,0,0)
 winrates = ImportExcelFile(0,1,0)

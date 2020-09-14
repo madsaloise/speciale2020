@@ -1,10 +1,4 @@
-import seaborn as sns
-
 import numpy as np
-
-import pandas as pd
-
-import matplotlib.pyplot as plt
 
 from scipy.optimize import linprog
 
@@ -13,27 +7,27 @@ def solvemixednash(decks, winrates):
 
     num_decks=len(decks)
 
-    # maximize the new variable c
+    # Maximer c
 
     c = [0 for i in range(num_decks)]
 
     c.append(1)
 
-    # calculate the payoff matrix from win percentages
+    # Beregn payoff
 
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
 
-    # append a column of -1s to subtract z from each upper bound constraint 
+    # append -1 til brug for øvre grænse
     
     for r in payoffs:
 
         r.append(-1.0)
 
-    # inequality constraint right hand sides
+    # højreside-grænse
 
     b_ub = [0 for i in range(num_decks)]
 
-    # setup equality constraint so x forms a probability distribution
+    # equality constraint
 
     ones = [1 for i in range(num_decks)]
 
@@ -41,11 +35,11 @@ def solvemixednash(decks, winrates):
 
     A_eq = [ones]
 
-    # the x add up to 1
+    # x summerer til 1
 
     b_eq = [1]
 
-    # x and z must be non-negative
+    # x og c must skal være positive
 
     bounds = [(0,None) for i in range(num_decks+1)]
 
