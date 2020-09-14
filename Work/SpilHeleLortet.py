@@ -10,8 +10,8 @@ from DataPrep import ImportFrekvenser
 #Syntax:
 # ImportExcelFile(Kolonner, Rækker, dataframe, Path) 
 # ImportFrekvenser(Path)
-# Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0
-# Vælger man flere med et vil den bare returnere kolonnenavnene, just dont 
+# Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0. Stien angives med R'Sti.xlsx'
+# Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
 #Winrates Data
 PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2.xlsx'

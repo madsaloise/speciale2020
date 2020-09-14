@@ -1,7 +1,5 @@
 import numpy as np
 
-
-#Lige pt. tjekker den kun på tværs
 def ElimineringDomStrat(deck_names, winrates):
     count = 0
     DomineredeStrat = []

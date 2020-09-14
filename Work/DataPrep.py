@@ -1,7 +1,5 @@
 #Preparing Data from excel to multiple lists for rows and columns
-
 import numpy as np
-
 import pandas as pd
 
 #Importerer
