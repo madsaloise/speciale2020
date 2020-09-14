@@ -1,5 +1,6 @@
 import matplotlib as plt
 import numpy as np
+#Dovenskab
 def Average(lst): 
     return sum(lst) / len(lst) 
 

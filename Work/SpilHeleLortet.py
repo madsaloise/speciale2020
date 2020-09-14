@@ -28,7 +28,6 @@ ElimineringDomStrat(deck_names, winrates)
 #Importerer Nash
 #Syntax: solvemixednash(decks, winrates)
 from MixedEquilibriumWinrates import solvemixednash
-#Loop, hvis vi får brug for en liste med nash-ligevægte. Rykkes til relevant fil senere.
 #Printer
 print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates, 0)) + ". Andre decks spilles med en sandsynlighed på 0.")
 #Level-K Model, 
