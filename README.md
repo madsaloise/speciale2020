@@ -12,4 +12,6 @@ Numpy
 
 Scipy.optimize (linprog)
 
+matplotlib
+
 
