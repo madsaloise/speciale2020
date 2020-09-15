@@ -2,22 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-def CHSolve(decks, winrates, levels, AntalSimuleringer = 10, MatriceStørrelse = len(decks)) :
-    num_decks=len(decks)
-    np.random.seed(60)
+def CHSolve(winrates, MatriceStørrelse, AntalSimuleringer = 10):
+    np.random.seed(60)    
     #TODO: Omskriv Winrates til:
     # [ [[Payoff11, - Payoff11], [Payoff21, -Payoff21]], [[Payoff12, -Payoff12], [Payoff22, - Payoff22]] ]
-    def normal_form_game_payoff(winrates):
-        normal_form_game = []
-        for i in range(n):
-            temp1 = []
-            for j in range(n):
-                temp2 = []
-                for k in range(2):
-                    num = np.random.randint(1,11)
-                    temp2.append(num)
-                temp1.append(temp2)
-            normal_form_game.append(temp1)
+    def normal_form_game_payoff(n):
+        normal_form_game = [[u for u in [[j, 100-j] for j in i]] for i in winrates]
         return normal_form_game
 
     def level_k_probabilities_2(k,player,lamda=0.56, lamda2 = 0.05):
@@ -294,13 +284,13 @@ def CHSolve(decks, winrates, levels, AntalSimuleringer = 10, MatriceStørrelse =
         level2_p2 = []
         tie_p2 = []
         # of strategies
-        for j in range(20):
+        for j in range(MatriceStørrelse):
             lamda = 0.5
             winners1 = []
             winners2 = []
             n=j + 1
             # of games
-            for i in range(20):
+            for i in range(AntalSimuleringer):
                 normal_form_game_player = normal_form_game_payoff(n)
                 payoff1, payoff2 = game_simulation(lamda)
                 max1 = max(payoff1)

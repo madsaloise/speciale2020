@@ -10,6 +10,7 @@ def levelksolve(decks, winrates, levels):
     for i in payoffs:
         avg_pay = sum(i)/num_decks
         avg_payoff.append(avg_pay)
+    
     #Indsætter player 0's valg i en liste
     level_0_maxpayoff = max(avg_payoff)
     level_0_index = avg_payoff.index(level_0_maxpayoff)

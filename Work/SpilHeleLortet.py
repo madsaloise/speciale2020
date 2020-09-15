@@ -34,10 +34,10 @@ print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(so
 #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
 print(list(levelksolve(deck_names, winrates, 4)))
-'''
-#CH Model, syntax: CHSolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
-from CHLoop import CHSolve
-print(list(CHSolve(deck_names, winrates, 4)))'''
+
+#CH Model, syntax: CHSolve(winrates, MatriceStørrelse, AntalSimuleringer = 10), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
+from CHModel_Test1  import CHSolve
+CHSolve(winrates, len(deck_names), 10)
 
 from MixedEqVSFrekvensGraf import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
