@@ -7,7 +7,7 @@ from math import factorial
 from math import exp
 import scipy
 import statsmodels
-
+import nashpy as nash
 
 def player_distribution(levels, tau):
     def poisson_distribution(levels, tau):
@@ -38,7 +38,9 @@ def CHDistr(decks, winrates, levels, tau):
             temp_prob = Deck_temp[i] / sum(Deck_temp)
             Deck_combination.append(temp_prob)
         Deck_combination = tuple(Deck_combination)
-        
+    return Deck_combination
+
+
 def CHSolve(decks, winrates, levels, tau):
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
@@ -62,5 +64,17 @@ def CHSolve(decks, winrates, levels, tau):
     deckID.append(np.argmin(maks_index))
     level_0_index = np.argmin(maks_index)
     maks_index = []
+
+    ###Level 2###
+    A = payoffs
     
-    ###Level 2 til n###
+
+
+    return deckID
+
+
+def CHPrint(decks, winrates, levels, tau):
+    Print_Decks = CHSolve(decks, winrates, levels, tau)
+    for i in range(levels):
+        print("Level-" + str(i) + " spiller" + str(Print_Decks[i]))
+
