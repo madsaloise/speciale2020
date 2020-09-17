@@ -3,15 +3,20 @@ def CHSolution(winrates, tau, levels):
     num_actions = []
     for i in range(levels):
         num_actions.append(len(payoffs))
+    #List of distribution by level
     distribution = []
     for i in range(levels):
         if i < range(levels[-1]):
-            for i in num_actions:
-                if i == 0:
-                    distribution.append(1/levels)
-            distribution.append((exp(-tau))*(tau**levels)/(factorial(levels)))
+            distribution.append((exp(-tau))*(tau**i)/(factorial(i)))
         else:
             distribution.append(1-sum(distribution))
-    for 
-            
+    #strategies
+    for i in range(levels):
+        if i == 0:
+            distribution.append(1/levels)
+        else:
+            exppayoffperaction = []
+            for j in levels:
+                denom = distribution
+
         
