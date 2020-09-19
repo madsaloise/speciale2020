@@ -12,7 +12,6 @@ def solvemixednash(decks, winrates, GrafData):
     c.append(1)
 
     # Beregn payoff
-
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
     # append -1 til brug for øvre grænse
     
@@ -44,6 +43,9 @@ def solvemixednash(decks, winrates, GrafData):
 
     if GrafData == 0:
         MixedStrat = [(i,j) for i,j in zip(decks,solution['x']) if j != 0]
+        return MixedStrat
+    elif GrafData == 2:
+        MixedStrat = [j for i,j in zip(decks,solution['x'])]
         return MixedStrat
     else:
         return zip(decks,solution['x'])

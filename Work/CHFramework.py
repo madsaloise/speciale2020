@@ -115,7 +115,10 @@ def CHSolve(winrates, MatriceStørrelse, AntalSimuleringer = 10):
         payoff=0
         for i in range(n):
             for j in range(n):
-                payoff = payoff + player_probabilities[i]*normal_form_game_player[i][j][0]*(level_0_probabilities[j]*player_distribution[0]+level_1_probabilities[j]*player_distribution[1]+level_2_probabilities[j]*player_distribution[2])
+                payoff = payoff + player_probabilities[i]*normal_form_game_player[i][j][0]*(
+                    level_0_probabilities[j]*player_distribution[0]+level_1_probabilities[j]*
+                    player_distribution[1]+level_2_probabilities[j]*player_distribution[2])
+
         return payoff
 
     def level_2_payoff(lk_probabilities_0,lk_probabilities_1,lk_probabilities_2, lk_probabilities_p):
