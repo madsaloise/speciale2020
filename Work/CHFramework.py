@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-
 def CHSolve(winrates, MatriceStørrelse, AntalSimuleringer = 10):
     np.random.seed(60)    
     #TODO: Omskriv Winrates til:
@@ -331,5 +330,9 @@ def CHSolve(winrates, MatriceStørrelse, AntalSimuleringer = 10):
         plt.text(2.8, 78, r'$\lambda_1$ = $\lambda_2$')
         plt.legend(loc='upper right')
         plt.show()
-
-        
+from DataPrep import ImportExcelFile
+PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2.xlsx'
+decks = ImportExcelFile(1,0,0, PathWin)
+winrates = ImportExcelFile(0,1,0, PathWin) 
+data = ImportExcelFile(0,0,1, PathWin)    
+print(CHSolve(winrates, len(decks), 50))       

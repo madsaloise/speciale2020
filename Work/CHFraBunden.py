@@ -7,22 +7,29 @@ from math import factorial
 from math import exp
 import scipy
 import statsmodels
-import nashpy as nash
-
+import gamegym
+###///DONE###
 def player_distribution(levels, tau):
     def poisson_distribution(levels, tau):
         distribution = (exp(-tau))*(tau**levels)/(factorial(levels))
         return distribution
     fractions = []
-    for i in levels:
-        fractions.append(poisson_distribution(tau, i))
+    for i in range(levels-1):
+        fractions.append(poisson_distribution(i, tau))
+    fractions.append(1-sum(fractions))
     return fractions
+###DONE///###
 
-        
+from DataPrep import ImportExcelFile
+PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2.xlsx'
+decks = ImportExcelFile(1,0,0, PathWin)
+winrates = ImportExcelFile(0,1,0, PathWin)
+data = ImportExcelFile(0,0,1, PathWin)        
 def CHDistr(decks, winrates, levels, tau):
     n = len(winrates)
-    def player_beliefs(levels):
-        fractions = player_distribution(levels, tau)
+    def player_beliefs(levels, tau):
+        fractions = []
+        fractions.append(player_distribution(levels, tau))
         belief = sum(fractions[0:(levels)])
         return belief
     Deck_combination = []
@@ -31,7 +38,7 @@ def CHDistr(decks, winrates, levels, tau):
         for i in range(n):
             temp_dist = 0 
             for j in range(n):
-                temp_dist = temp_dist + player_distribution(o, tau)[o-1]/player_beliefs(o)
+                temp_dist = temp_dist + player_distribution(o, tau)[o]/player_beliefs(o, tau)
             temp_dist = np.exp(temp_dist)
             Deck_temp.append(temp_dist)
         for i in range(n):
@@ -39,7 +46,7 @@ def CHDistr(decks, winrates, levels, tau):
             Deck_combination.append(temp_prob)
         Deck_combination = tuple(Deck_combination)
     return Deck_combination
-
+print(CHDistr(decks, winrates, 5, 1))
 
 def CHSolve(decks, winrates, levels, tau):
     num_decks=len(decks)
