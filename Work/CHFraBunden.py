@@ -19,7 +19,7 @@ def player_distribution(levels, tau):
     fractions.append(1-sum(fractions))
     return fractions
 ###DONE///###
-
+print(player_distribution(2,1))
 from DataPrep import ImportExcelFile
 PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2.xlsx'
 decks = ImportExcelFile(1,0,0, PathWin)
@@ -46,7 +46,7 @@ def CHDistr(decks, winrates, levels, tau):
                 Deck_combination.append(temp_prob)
     Deck_combination = tuple(Deck_combination)
     return Deck_combination
-print(CHDistr(decks, winrates, 5, 1))
+
 
 def CHSolve(decks, winrates, levels, tau):
     num_decks=len(decks)
