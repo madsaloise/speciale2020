@@ -36,15 +36,15 @@ def CHDistr(decks, winrates, levels, tau):
     Deck_temp =[]
     for o in range(levels):
         for i in range(n):
-            temp_dist = 0 
+            temp_dist = []
             for j in range(n):
-                temp_dist = temp_dist + player_distribution(o, tau)[o]/player_beliefs(o, tau)
+                temp_dist = temp_dist + player_distribution(o, tau)
             temp_dist = np.exp(temp_dist)
             Deck_temp.append(temp_dist)
-        for i in range(n):
-            temp_prob = Deck_temp[i] / sum(Deck_temp)
-            Deck_combination.append(temp_prob)
-        Deck_combination = tuple(Deck_combination)
+            for i in range(n):
+                temp_prob = Deck_temp[i] / sum(Deck_temp)
+                Deck_combination.append(temp_prob)
+    Deck_combination = tuple(Deck_combination)
     return Deck_combination
 print(CHDistr(decks, winrates, 5, 1))
 
