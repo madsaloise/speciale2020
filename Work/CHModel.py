@@ -5,11 +5,6 @@ import collections
 import functools
 from math import factorial
 from math import exp
-from DataPrep import ImportExcelFile
-PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2.xlsx'
-decks = ImportExcelFile(1,0,0, PathWin)
-winrates = ImportExcelFile(0,1,0, PathWin)
-data = ImportExcelFile(0,0,1, PathWin) 
 
 def CHSolve(winrates, decks, tau, levels = 2):
     normal_form_game = [[u for u in [[j, 100-j] for j in i]] for i in winrates]
@@ -135,27 +130,26 @@ def CHSolve(winrates, decks, tau, levels = 2):
         lk_probabilities_0p2 = level_k_probabilities_1(0, 1)
         lk_probabilities_1p2 = level_k_probabilities_1(1, 1, tau)
         lk_probabilities_2p2 = level_k_probabilities_2(2, 1, tau, tau)
-        probabilistic_distribution = [0,0,1]
         print ('\n\n')
         print ('Game')
         print ('\n')
         print ('Player 1')
-        print ('Level-0 -->', lk_probabilities_0p1)
-        print ('Level-1 -->', lk_probabilities_1p1)
-        print ('Level-2 -->',lk_probabilities_2p1)
+        print ('Level-0 -->', list(zip(decks, lk_probabilities_0p1)))
+        print ('Level-1 -->', list(zip(decks,lk_probabilities_1p1)))
+        print ('Level-2 -->',list(zip(decks,lk_probabilities_2p1)))
         payoff_10 = level_k_payoff_p1(lk_probabilities_0p2, lk_probabilities_1p2, lk_probabilities_2p2, lk_probabilities_0p1)
         payoff_11 = level_k_payoff_p1(lk_probabilities_0p2, lk_probabilities_1p2, lk_probabilities_2p2, lk_probabilities_1p1)
         payoff_12 = level_k_payoff_p1(lk_probabilities_0p2, lk_probabilities_1p2, lk_probabilities_2p2, lk_probabilities_2p1)
         payoff_1 = [payoff_10, payoff_11, payoff_12]
         print ('Avg. Payoff -->',payoff_1)
         print ('Player 2')
-        print ('Level-0 -->', lk_probabilities_0p2)
-        print ('Level-1 -->', lk_probabilities_1p2)
-        print ('Level-2 -->', lk_probabilities_2p2)
+        print ('Level-0 -->', list(zip(decks,lk_probabilities_0p2)))
+        print ('Level-1 -->', list(zip(decks,lk_probabilities_1p2)))
+        print ('Level-2 -->', list(zip(decks,lk_probabilities_2p2)))
         payoff_20 = level_k_payoff_p2(lk_probabilities_0p1, lk_probabilities_1p1, lk_probabilities_2p1, lk_probabilities_0p2)
         payoff_21 = level_k_payoff_p2(lk_probabilities_0p1, lk_probabilities_1p1, lk_probabilities_2p1, lk_probabilities_1p2)
         payoff_22 = level_k_payoff_p2(lk_probabilities_0p1, lk_probabilities_1p1, lk_probabilities_2p1, lk_probabilities_2p2)
         payoff_2 = [payoff_20, payoff_21, payoff_22]
         print ('Avg. Payoff -->',payoff_2)
         return payoff_1, payoff_2
-print(CHSolve(winrates, decks, 0.01, levels = 2))
+    return game_play(tau)
