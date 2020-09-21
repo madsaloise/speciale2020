@@ -38,7 +38,9 @@ print(list(levelksolve(deck_names, winrates, 4)))
 #CH Model, syntax: CHSolve(winrates, MatriceStørrelse, AntalSimuleringer = 10), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 import CHModel
 from CHModel import CHSolve
-print(CHSolve(winrates, deck_names, 0.5))
+
+print(CHSolve(winrates, deck_names, 1))
+print(CHSolve(winrates, deck_names, 0))
 
 from MixedEqVSFrekvensGraf import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
