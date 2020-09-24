@@ -92,35 +92,6 @@ def CHSolve(winrates, decks, tau, levels = 2):
             fractions.append(poisson_distribution(tau, i))
         return fractions
 
-    def level_k_payoff_p1(lk_probabilities_0,lk_probabilities_1,lk_probabilities_2,lk_probabilities_p):
-        n=len(normal_form_game_player)
-        player_probabilities = lk_probabilities_p
-        level_0_probabilities = lk_probabilities_0
-        level_1_probabilities = lk_probabilities_1
-        level_2_probabilities = lk_probabilities_2
-        player_distributionvar = player_distribution(tau, levels)
-        payoff = 0
-        for i in range(n):
-            for j in range(n):
-                #Checked
-                payoff = payoff + player_probabilities[i] * normal_form_game_player[i][j][0] * (
-                            level_0_probabilities[j] * player_distributionvar[0] + level_1_probabilities[j] *
-                            player_distributionvar[1] + level_2_probabilities[j] * player_distributionvar[2])
-        return payoff
-    def level_k_payoff_p2(lk_probabilities_0,lk_probabilities_1,lk_probabilities_2, lk_probabilities_p):
-        n=len(normal_form_game_player)
-        player_probabilities = lk_probabilities_p
-        level_0_probabilities = lk_probabilities_0
-        level_1_probabilities = lk_probabilities_1
-        level_2_probabilities = lk_probabilities_2
-        player_distributionvar = player_distribution(tau, levels)
-        payoff = 0
-        for i in range(n):
-            for j in range(n):
-                payoff = payoff + player_probabilities[j] * normal_form_game_player[i][j][1] * (
-                            level_0_probabilities[i] * player_distributionvar[0] + level_1_probabilities[i] *
-                            player_distributionvar[1] + level_2_probabilities[i] * player_distributionvar[2])
-        return payoff
     def game_play(tau):
         n = len(normal_form_game_player)
         j11 = level_k_probabilities_1(1, 0,tau).index(max(level_k_probabilities_1(1, 0,tau)))
@@ -141,24 +112,12 @@ def CHSolve(winrates, decks, tau, levels = 2):
         print ('Level-0 -->', list(zip(decks, lk_probabilities_0p1)))
         print ('Level-1 -->', decks[j11],lk_probabilities_1p1)
         print ('Level-2 -->',decks[j21],lk_probabilities_2p1)
-        '''
-        payoff_10 = level_k_payoff_p1(lk_probabilities_0p2, lk_probabilities_1p2, lk_probabilities_2p2, lk_probabilities_0p1)
-        payoff_11 = level_k_payoff_p1(lk_probabilities_0p2, lk_probabilities_1p2, lk_probabilities_2p2, lk_probabilities_1p1)
-        payoff_12 = level_k_payoff_p1(lk_probabilities_0p2, lk_probabilities_1p2, lk_probabilities_2p2, lk_probabilities_2p1)
-        payoff_1 = [payoff_10, payoff_11, payoff_12]
-        print ('Avg. Payoff -->',payoff_1)
-        '''
+
         print ('Player 2')
         print ('Level-0 -->', list(zip(decks,lk_probabilities_0p2)))
         print ('Level-1 -->', decks[j12],lk_probabilities_1p2)
         print ('Level-2 -->', decks[j22],lk_probabilities_2p2)
-        '''
-        payoff_20 = level_k_payoff_p2(lk_probabilities_0p1, lk_probabilities_1p1, lk_probabilities_2p1, lk_probabilities_0p2)
-        payoff_21 = level_k_payoff_p2(lk_probabilities_0p1, lk_probabilities_1p1, lk_probabilities_2p1, lk_probabilities_1p2)
-        payoff_22 = level_k_payoff_p2(lk_probabilities_0p1, lk_probabilities_1p1, lk_probabilities_2p1, lk_probabilities_2p2)
-        payoff_2 = [payoff_20, payoff_21, payoff_22]
-        print ('Avg. Payoff -->',payoff_2)
-        '''
+
         
     return game_play(tau)
 
