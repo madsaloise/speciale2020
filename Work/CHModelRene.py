@@ -23,9 +23,8 @@ def player_plays(winrates, level, deckID, indeks_tal):
     else:
         return 0
 
-def CHSolve(decks, winrates, levels, tau = 0.5):
-    for i in range(levels):
-        print(player_distribution(tau, i))
+def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):
+
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
@@ -37,37 +36,50 @@ def CHSolve(decks, winrates, levels, tau = 0.5):
     #Indsætter player 0's valg i en liste
     level_0_maxpayoff = max(avg_payoff)
     level_0_index = avg_payoff.index(level_0_maxpayoff)
+    #Level 1:
     deckID = [level_0_index]
 
-    #Lvl1
+    #Lvl2 og up
     maks_index = []
-    maks_index.append(payoffs[level_0_index])
-    deckID.append(np.argmin(maks_index))
-    level_0_index = np.argmin(maks_index)
-    maks_index = []
-    print(deckID)
-    #Level 2 og op
-    for p in range(levels-1):
+    payoff_index = []
+    deck_prob = []
+    for p in range(levels):
         if p > 1:
             A = list.copy(winrates)
+            i_list = []
+            count1 = 0
+            #Beregner sandsynlighed for at du møder et deck betinget på dit level og beliefs omkring de andres levels.
             for i in A:
-                j_list = []
-                count = 0
+                temp_dist = 0
+                for q in range(p):
+                    temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID, count1)
+                    #print(player_plays(winrates, q, deckID, count))
+                i_list.append(temp_dist)
+                count1 += 1
+            count2 = 0
+            for i in i_list:
+                deck_prob.append(i_list[count2]/sum(i_list))
+                count2 += 1
+            maks_index = list.copy(deck_prob)
+            #Beregner gennemsnitligt payoff
+            for i in A:
+                temp_sum = []
+                count3 = 0
                 for j in i:
-                    temp_dist = []
-                    for q in range(p):
-                        temp_dist.append(j * player_distribution(tau, p)[q] * player_plays(winrates, q, deckID, count))
-                        #print(player_plays(winrates, q, deckID, count))
-                    j_list.append(sum(temp_dist))
-                    count += 1
-                print("Level-" + str(p) + "--->")
-                print(j_list)
-                maks_index.append(sum(j_list))
-            #print("Level-" + str(p) + "--->")    
-            #print(maks_index)
-            deckID.append(maks_index.index(max(maks_index)))    
+                    temp_sum.append(j * maks_index[count3])
+                    count3 += 1
+                payoff_index.append(sum(temp_sum))
+                temp_sum = []  
+            if kommentarer == 1:
+                print("Level-" + str(p) + "--->")    
+                print("Sandsynligheden for at møde andre decks: " + str(maks_index))
+                print("Payoffs: " + str(payoff_index))
+            deckID.append(payoff_index.index(max(payoff_index)))    
             maks_index = []
+            payoff_index = []
+            deck_prob = []
     print(deckID)
+    
     #Danner en liste med forskellige spilleres valg
     counter=0
     plays = []

@@ -20,7 +20,7 @@ deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
 data = ImportExcelFile(0,0,1, PathWin)
 frekvenser = ImportFrekvenser(PathFrek)
-'''
+
 #Dominans, Syntax: ElimineringDomStrat(deck, winrates)
 from ElimineringDomineredeStrat import ElimineringDomStrat
 ElimineringDomStrat(deck_names, winrates)
@@ -34,14 +34,12 @@ print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(so
 #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
 print(list(levelksolve(deck_names, winrates, 5)))
-'''
-#CH Model, syntax: CHSolve(winrates, MatriceStørrelse, AntalSimuleringer = 10), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
-import CHModel
+
+#CH Model, syntax: CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):, level 0 antages at spille uniformt. For k spillere skrives levels som k-1. 
+#"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
 from CHModelRene import CHSolve
-from CHModelPure import CHSolve
-print(CHSolve(deck_names, winrates, 5, 1))
-'''
+print(CHSolve(deck_names, winrates, 10, 0, 0.56))
+
 from MixedEqVSFrekvensGraf import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser)
-'''
