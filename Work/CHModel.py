@@ -43,7 +43,7 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
     payoff_index = []
     deck_prob = []
     for p in range(levels):
-        if p > 1:
+        if p > 0:
             #Kopierer liste
             A = list.copy(winrates)
             i_list = []

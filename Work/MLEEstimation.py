@@ -25,35 +25,53 @@ def MLEPlot(levels, maks_tau):
                 alpha=0.5,
                 marker='o',
                 markersize=8)
-
     ax.grid()
     ax.set_xlabel('$levels$', fontsize=14)
     ax.set_ylabel('$f(levels \mid \ tau)$', fontsize=14)
     ax.axis(xmin=0, ymin=0)
     ax.legend(fontsize=10)
+
+#Maximum Likelihood:    
 from CHModel import CHSolve 
-from CHModel import player_distribution
+def player_distribution(tau, levels):
+    def poisson_distribution(tau, levels):
+        distribution = (exp(-tau))*(tau**levels)/(factorial(levels))
+        return distribution
+    fractions = []
+    truncated_fractions = []
+    for i in range(levels):
+        fractions.append(poisson_distribution(tau, i))
+    for i in range(levels):
+        truncated_fractions.append(fractions[i]/sum(fractions))
+    return truncated_fractions
+print("fordeling")
+print(player_distribution(1, 5))
+def player_plays(winrates, level, deckID, indeks_tal):
+    if level == 0:
+        prob = 1/len(winrates)
+        return prob
+    elif indeks_tal in deckID and level > 0:
+        return 1 
+    else:
+        return 0
 def MLEEstimation(decks, winrates, levels, tau):
-    player_dist = player_distribution(tau, levels)
-    print(player_dist)
     CH_List = CHSolve(decks, winrates, levels, 0, tau, 1)
     print(CH_List)
-    probabilities = []
-    for i in deck_names:
-        temp_sum = 0
+    Deck_List = []
+    for i in decks:
         if i in CH_List:
-            for p in range(levels):
-                if p == 0:
-                    temp_sum = temp_sum + player_dist[p]* (1/len(deck_names))
-                else:
-                    temp_sum = temp_sum + player_dist[p]
-        else:
-            for p in range(levels):
-                if p == 0:
-                    temp_sum = temp_sum + player_dist[p]* (1/len(deck_names))
-                else:
-                    temp_sum = temp_sum 
-        probabilities.append(temp_sum)
+            Deck_List.append(decks.index(i))
+    print(Deck_List)
+    probabilities = []
+    count = 0
+    #Beregner sandsynlighed for at du møder et deck betinget på dit level og beliefs omkring de andres levels.
+    for i in winrates:
+        temp_dist = 0
+        #Summerer ssh for alle levels
+        for q in range(levels):
+            temp_dist = temp_dist + player_distribution(tau, levels)[q] * player_plays(winrates, q, Deck_List, count)
+        probabilities.append(temp_dist)
+        count += 1
     print(probabilities)
 
 
@@ -75,4 +93,4 @@ deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
 data = ImportExcelFile(0,0,1, PathWin)
 frekvenser = ImportFrekvenser(PathFrek)
-MLEEstimation(deck_names, winrates, 5, 0.5)
+MLEEstimation(deck_names, winrates, 5, tau = 0.5)
