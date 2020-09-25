@@ -49,24 +49,5 @@ def MixedEqGraph(Vores_Nash, frekvenser):
     plt.ylabel('Deck')
     plt.show()
 
-from DataPrep import ImportExcelFile 
-from DataPrep import ImportFrekvenser 
-#Syntax:
-# ImportExcelFile(Kolonner, Rækker, dataframe, Path) 
-# ImportFrekvenser(Path)
-# Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0. Stien angives med R'Sti.xlsx'
-# Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
-#Winrates Data
-PathWin = r'C:\Users\vodst\OneDrive\Bærbar\Polit\Kandidat\KU\E20 - Speciale\Github\speciale2020\Data\Winrates_Data_2.xlsx'
-#Frekvens Data
-PathFrek = r'C:\Users\vodst\OneDrive\Bærbar\Polit\Kandidat\KU\E20 - Speciale\Github\speciale2020\Data\Frekvenser.xlsx'
-
-deck_names = ImportExcelFile(1,0,0, PathWin)
-winrates = ImportExcelFile(0,1,0, PathWin)
-data = ImportExcelFile(0,0,1, PathWin)
-frekvenser = ImportFrekvenser(PathFrek)
-from MixedEquilibriumWinrates import solvemixednash
-MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser)   
-    
     
