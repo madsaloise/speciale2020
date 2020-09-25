@@ -8,9 +8,9 @@ def player_distribution(tau, levels):
         return distribution
     fractions = []
     truncated_fractions = []
-    for i in range(levels+1):
+    for i in range(levels):
         fractions.append(poisson_distribution(tau, i))
-    for i in range(levels+1):
+    for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
 #SSH på 1/antallet af decks, hvis det kun er lvl 0. 1 ellers
@@ -23,7 +23,7 @@ def player_plays(winrates, level, deckID, indeks_tal):
     else:
         return 0
 
-def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):
+def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
 
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
@@ -82,22 +82,32 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):
             maks_index = []
             payoff_index = []
             deck_prob = []
-    print(deckID)
-    
-    #Danner en liste med forskellige spilleres valg
-    counter=0
-    plays = []
-    print("I en CH-model har vi følgende:")
-    for i in deckID:
-        ilevel_k = counter
-        deckIDcounter = deckID[ilevel_k]
-        leveliplay = decks[deckIDcounter]
-        plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
-        counter += 1
-    return plays
-
+    if MLE == 1:
+        #Danner en liste med forskellige spilleres valg
+        counter=0
+        plays = []
+        for i in deckID:
+            ilevel_k = counter
+            deckIDcounter = deckID[ilevel_k]
+            leveliplay = decks[deckIDcounter]
+            plays.append(leveliplay)
+            counter += 1
+        return plays
+    else:
+        #Danner en liste med forskellige spilleres valg
+        counter=0
+        plays = []
+        print("I en CH-model har vi følgende:")
+        for i in deckID:
+            ilevel_k = counter
+            deckIDcounter = deckID[ilevel_k]
+            leveliplay = decks[deckIDcounter]
+            plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
+            counter += 1
+        return plays
+'''
 tau_range = [0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 100]
 for i in tau_range:
     print("Fordeling for tau på: " + str(i))
     print(player_distribution(i, 10)) 
-
+'''
