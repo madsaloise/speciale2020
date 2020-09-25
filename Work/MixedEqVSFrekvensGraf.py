@@ -48,33 +48,25 @@ def MixedEqGraph(Vores_Nash, frekvenser):
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
     plt.show()
-    '''
-    labels = MixedEq_Decks
-    a_values = ShareOfGames
-    b_values = MixedEq_Winrates
 
-    # Create the figure
-    fig = plt.figure()
-    ax = fig.add_subplot(111)
+from DataPrep import ImportExcelFile 
+from DataPrep import ImportFrekvenser 
+#Syntax:
+# ImportExcelFile(Kolonner, Rækker, dataframe, Path) 
+# ImportFrekvenser(Path)
+# Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0. Stien angives med R'Sti.xlsx'
+# Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
-    for i in list(range(len(labels))):
-        # Plot the line between dumbbells
-        ax.plot([a_values[i], b_values[i]], [i, i], color='black')
-        # Plot the dumbbells.
-        ax.plot(a_values[i], i, color='red', marker='o', markersize=15)
-        ax.plot(b_values[i], i, color='blue', marker='o', markersize=15)
-        # Add data label on top of dumbbells
-        ax.text(a_values[i], i, a_values[i], horizontalalignment='center', verticalalignment='center', color='white')
-        ax.text(b_values[i], i, b_values[i], horizontalalignment='center', verticalalignment='center', color='white')
-        # Add the axis label
-        ax.text(3, i, labels[i], horizontalalignment='right', verticalalignment='center', fontsize=12)
+#Winrates Data
+PathWin = r'C:\speciale2020\Data\Winrates_Data_2.xlsx'
+#Frekvens Data
+PathFrek = r'C:\speciale2020\Data\Frekvenser.xlsx'
 
-    # Adjust and show the plot
-    fig.subplots_adjust(left=0.3)
-    ax.set_axis_off()
-    plt.show()
-    '''
-
-    
+deck_names = ImportExcelFile(1,0,0, PathWin)
+winrates = ImportExcelFile(0,1,0, PathWin)
+data = ImportExcelFile(0,0,1, PathWin)
+frekvenser = ImportFrekvenser(PathFrek)
+from MixedEquilibriumWinrates import solvemixednash
+MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser)   
     
     
