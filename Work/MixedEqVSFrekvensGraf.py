@@ -33,16 +33,6 @@ def MixedEqGraph(Vores_Nash, frekvenser):
     plt.scatter(dfGraph['Observationer'], my_range, color='navy', alpha=1, label='Observationer')
     plt.scatter(dfGraph['Nash'], my_range, color='gold', alpha=1, label='Nash')
     plt.legend()
-    '''
-    for x,y in zip(ShareOfGames,MixedEq_Winrates):
-        label = "{:.2f}".format(y)
-        # this method is called for each point
-        plt.annotate(label, # this is the text
-                 (x,y), # this is the point to label
-                 textcoords="offset points", # how to position the text
-                 xytext=(0,-1), # distance from text to points (x,y)
-                 ha='center') # horizontal alignment can be left, right or center
-    '''
     textcordy = 7
     textcordx = 0
     for i, txt in enumerate(ShareOfGames):
