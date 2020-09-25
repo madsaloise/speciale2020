@@ -48,6 +48,6 @@ from MixedEqVSFrekvensGraf import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser)
 
-
+print(frekvenser)
 #Skal være til sidst
 plt.show()
