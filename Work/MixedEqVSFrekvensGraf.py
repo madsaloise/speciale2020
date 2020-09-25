@@ -26,8 +26,9 @@ def MixedEqGraph(Vores_Nash, frekvenser):
     for i in range(len(MixedEq_Decks)):
         CombinedList.append([MixedEq_Decks[i], ShareOfGames[i], MixedEq_Winrates[i]])
     dfGraph = pd.DataFrame(CombinedList, columns = ["Decks","Observationer", "Nash"])
+    dfGraph.to_excel("nash-ligevægt.xlsx") 
     my_range = range(1, len(dfGraph.index)+1)
-    
+    plt.figure()
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['Nash'], color='grey', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='navy', alpha=1, label='Observationer')
     plt.scatter(dfGraph['Nash'], my_range, color='gold', alpha=1, label='Nash')
@@ -47,7 +48,6 @@ def MixedEqGraph(Vores_Nash, frekvenser):
     plt.title("Nash VS Frekvens")
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
-    plt.show()
 
 
     

@@ -13,6 +13,7 @@ def MLEPlot(levels, maks_tau):
     poisson_pmf = lambda level, tau: tau**level / factorial(level) * exp(-tau)
     level_values = range(0, levels)
     tau_range = np.linspace(0,maks_tau, maks_tau+1)
+    plt.figure()
     fig, ax = plt.subplots(figsize=(12, 8))
 
     for tau in tau_range:
@@ -28,10 +29,6 @@ def MLEPlot(levels, maks_tau):
 
     ax.grid()
     ax.set_xlabel('$levels$', fontsize=14)
-    ax.set_ylabel('$f(levels \mid \tau)$', fontsize=14)
+    ax.set_ylabel('$f(levels \mid \ tau)$', fontsize=14)
     ax.axis(xmin=0, ymin=0)
     ax.legend(fontsize=10)
-
-    plt.show()
-
-

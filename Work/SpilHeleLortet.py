@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 from scipy.optimize import linprog
+import matplotlib.pyplot as plt
 #Importerer DataPrep
 from DataPrep import ImportExcelFile 
 from DataPrep import ImportFrekvenser 
@@ -29,7 +30,6 @@ ElimineringDomStrat(deck_names, winrates)
 #Syntax: solvemixednash(decks, winrates)
 from MixedEquilibriumWinrates import solvemixednash
 #Printer
-
 print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates, 0)) + ". Andre decks spilles med en sandsynlighed på 0.")
 #Level-K Model, 
 
@@ -41,6 +41,7 @@ print(list(levelksolve(deck_names, winrates, 10)))
 #"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
 from MLEEstimation import MLEPlot
 from CHModelRene import CHSolve
+MLEPlot(12, 8)
 print(CHSolve(deck_names, winrates, 10, 0, 0.5))
 
 from MixedEqVSFrekvensGraf import MixedEqGraph
