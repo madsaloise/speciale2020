@@ -46,7 +46,10 @@ print(CHSolve(deck_names, winrates, 10, 0, 0.5))
 
 from MixedEqVSFrekvensGraf import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
-MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser)
+Paths_Frekvenser = [r'C:\speciale2020\Data\Frekvenser.xlsx', r'C:\speciale2020\Data\Frekvenser_UnderPlatinium.xlsx']
+for x in Paths_Frekvenser:
+    frekvenser = ImportFrekvenser(x)
+    MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser)
 
 print(frekvenser)
 #Skal være til sidst
