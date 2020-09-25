@@ -47,3 +47,7 @@ print(CHSolve(deck_names, winrates, 10, 0, 0.5))
 from MixedEqVSFrekvensGraf import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser)
+
+
+#Skal være til sidst
+plt.show()

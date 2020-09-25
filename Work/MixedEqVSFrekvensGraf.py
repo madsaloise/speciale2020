@@ -26,9 +26,9 @@ def MixedEqGraph(Vores_Nash, frekvenser):
     for i in range(len(MixedEq_Decks)):
         CombinedList.append([MixedEq_Decks[i], ShareOfGames[i], MixedEq_Winrates[i]])
     dfGraph = pd.DataFrame(CombinedList, columns = ["Decks","Observationer", "Nash"])
-    dfGraph.to_excel("nash-ligevægt.xlsx") 
+    dfGraph.to_excel("nash-ligevægt_output.xlsx") 
     my_range = range(1, len(dfGraph.index)+1)
-    plt.figure()
+    fig, ax = plt.subplots(figsize=(12, 8))
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['Nash'], color='grey', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='navy', alpha=1, label='Observationer')
     plt.scatter(dfGraph['Nash'], my_range, color='gold', alpha=1, label='Nash')
@@ -43,11 +43,20 @@ def MixedEqGraph(Vores_Nash, frekvenser):
                  xytext=(0,-1), # distance from text to points (x,y)
                  ha='center') # horizontal alignment can be left, right or center
     '''
+    textcordy = 7
+    textcordx = 0
+    for i, txt in enumerate(ShareOfGames):
+        if abs(ShareOfGames[i] - MixedEq_Winrates[i]) < 1:
+            ax.annotate("{:.1f}".format(txt), (ShareOfGames[i], my_range[i]),textcoords='offset points',xytext=(textcordx-8,textcordy),ha='center',fontsize=8)
+        else:
+            ax.annotate("{:.1f}".format(txt), (ShareOfGames[i], my_range[i]),textcoords='offset points',xytext=(textcordx,textcordy),ha='center',fontsize=8)
+    for i, txt in enumerate(MixedEq_Winrates):
+        if abs(MixedEq_Winrates[i] - ShareOfGames[i]) < 1:
+            ax.annotate("{:.1f}".format(txt), (ShareOfGames[i], my_range[i]),textcoords='offset points',xytext=(textcordx+8,textcordy),ha='center',fontsize=8)
+        else:
+            ax.annotate("{:.1f}".format(txt), (MixedEq_Winrates[i], my_range[i]),textcoords='offset points',xytext=(textcordx,textcordy),ha='center',fontsize=8)
     #Titel og Akser
     plt.yticks(my_range, dfGraph['Decks'])
     plt.title("Nash VS Frekvens")
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
-
-
-    

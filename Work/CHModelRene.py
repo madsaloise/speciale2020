@@ -95,9 +95,9 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):
         plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
         counter += 1
     return plays
-
+'''
 tau_range = [0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 100]
 for i in tau_range:
     print("Fordeling for tau på: " + str(i))
     print(player_distribution(i, 10)) 
-
+'''
