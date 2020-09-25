@@ -91,3 +91,10 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):
         plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
         counter += 1
     return plays
+
+
+for i in range (5):
+    print(player_distribution(i, 4))
+
+for i in range (5):
+    print(player_distribution(1, i))
