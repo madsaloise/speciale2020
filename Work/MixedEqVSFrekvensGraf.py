@@ -58,9 +58,9 @@ from DataPrep import ImportFrekvenser
 # Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
 #Winrates Data
-PathWin = r'C:\speciale2020\Data\Winrates_Data_2.xlsx'
+PathWin = r'C:\Users\vodst\OneDrive\Bærbar\Polit\Kandidat\KU\E20 - Speciale\Github\speciale2020\Data\Winrates_Data_2.xlsx'
 #Frekvens Data
-PathFrek = r'C:\speciale2020\Data\Frekvenser.xlsx'
+PathFrek = r'C:\Users\vodst\OneDrive\Bærbar\Polit\Kandidat\KU\E20 - Speciale\Github\speciale2020\Data\Frekvenser.xlsx'
 
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
