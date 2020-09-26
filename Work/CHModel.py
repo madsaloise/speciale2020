@@ -18,13 +18,13 @@ def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:
         prob = 1/len(winrates)
         return prob
-    elif indeks_tal in deckID and level > 0:
+    elif indeks_tal == deckID and level > 0:
         return 1 
     else:
         return 0
 
 def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
-
+    print(player_distribution(tau, levels))
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
@@ -33,11 +33,11 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
         avg_pay = sum(i)/num_decks
         avg_payoff.append(avg_pay)
     
-    #Indsætter player 0's valg i en liste
+    #Indsætter player 1's valg i en liste
     level_0_maxpayoff = max(avg_payoff)
     level_0_index = avg_payoff.index(level_0_maxpayoff)
     deckID = [level_0_index]
-
+    print(deckID)
     #Lvl1 og op
     maks_index = []
     payoff_index = []
@@ -53,7 +53,10 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 temp_dist = 0
                 #Summerer ssh for alle levels
                 for q in range(p):
-                    temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID, count1)
+                    if q == 0:
+                        temp_dist = 1/len(A)
+                    else:
+                        temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID[q-1], count1)
                     #print(player_plays(winrates, q, deckID, count))
                 i_list.append(temp_dist)
                 count1 += 1
@@ -82,6 +85,7 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
             maks_index = []
             payoff_index = []
             deck_prob = []
+    #deckID = list.copy(deckID[1:])
     if MLE == 1:
         #Danner en liste med forskellige spilleres valg
         counter=0
