@@ -23,7 +23,7 @@ def player_plays(winrates, level, deckID, indeks_tal):
     else:
         return 0
 
-def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
+def CHSolveAfrund(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
     print(player_distribution(tau, levels))
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
@@ -53,11 +53,16 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                         temp_dist = temp_dist + (1/len(A))*player_distribution(tau, p)[q]
                         #print("Level 0 --->")
                         #print(player_distribution(tau, p)[q])
-                    else:
+                    elif not isinstance(deckID[q-1], list):
                         temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID[q-1], count1)
                         #print("Level 1 --->")
                         #print(player_distribution(tau, p)[q])
                         #print(player_plays(winrates, q, deckID[q-1], count1))
+                    else: 
+                        count4 = 0
+                        for i in deckID[q-1]:
+                            temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID[q-1][count4], count1) / len(deckID[q-1])
+                            count4 += 1
                     #print(player_plays(winrates, q, deckID, count))
                 i_list.append(temp_dist)
                 count1 += 1
@@ -81,7 +86,14 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 print("Sandsynligheden for at møde andre decks: " + str(maks_index))
                 print("Payoffs: " + str(payoff_index))
             #Tilføjer deck-indekset til deckID-listen
-            deckID.append(payoff_index.index(max(payoff_index)))   
+            max_payoff = round(max(payoff_index))
+            multiple_max = [round(i) for i, j in enumerate(payoff_index) if round(j) == max_payoff]
+            print("Multiple max --->")
+            print(multiple_max)
+            if len(multiple_max) == 1:
+                deckID.append(payoff_index.index(max(payoff_index)))   
+            else:
+                deckID.append(multiple_max) 
             #Nulstiller lister 
             maks_index = []
             payoff_index = []
@@ -106,9 +118,19 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]
-            leveliplay = decks[deckIDcounter]
-            plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
+            if isinstance(deckIDcounter, list):
+                counter1 = 0
+                temp_list = []
+                for i in deckIDcounter:
+                    temp_list.append(decks[deckIDcounter[counter1]])
+                    counter1 += 1
+                plays.append("Level-" + str(counter+1) + " spiller er mix af: " + str(temp_list))
+            else:
+                leveliplay = decks[deckIDcounter]
+                plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
             counter += 1
+
+
         return plays
 '''
 tau_range = [0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 100]

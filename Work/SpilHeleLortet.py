@@ -32,17 +32,18 @@ from MixedEquilibriumWinrates import solvemixednash
 #Printer
 print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates, 0)) + ". Andre decks spilles med en sandsynlighed på 0.")
 #Level-K Model, 
-'''
+
 #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
 print(list(levelksolve(deck_names, winrates, 10)))
-
+'''
 #CH Model, syntax: CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):, level 0 antages at spille uniformt. 
 #"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
 #from MLEEstimation import MLEPlot
-from CHModel import CHSolve
+from CHModelAfrundingTester import CHSolveAfrund
 #MLEPlot(12, 8)
-print(CHSolve(deck_names, winrates, 7, 0, 744))
+print(CHSolveAfrund(deck_names, winrates, 7, 1, 0.5))
+
 '''
 from MixedEqVSFrekvensGraf import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
