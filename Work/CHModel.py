@@ -22,7 +22,6 @@ def player_plays(winrates, level, deckID, indeks_tal):
         return 1 
     else:
         return 0
-
 def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
     print(player_distribution(tau, levels))
     num_decks=len(decks)
@@ -82,22 +81,16 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 print("Payoffs: " + str(payoff_index))
             #Tilføjer deck-indekset til deckID-listen
             deckID.append(payoff_index.index(max(payoff_index)))   
-            #Nulstiller lister 
-            maks_index = []
-            payoff_index = []
-            deck_prob = []
+            if p == levels:
+                return_prob = maks_index
+            else:
+                #Nulstiller lister 
+                maks_index = []
+                payoff_index = []
+                deck_prob = []
     #deckID = list.copy(deckID[1:])
     if MLE == 1:
-        #Danner en liste med forskellige spilleres valg
-        counter=0
-        plays = []
-        for i in deckID:
-            ilevel_k = counter
-            deckIDcounter = deckID[ilevel_k]
-            leveliplay = decks[deckIDcounter]
-            plays.append(leveliplay)
-            counter += 1
-        return plays
+        return return_prob
     else:
         #Danner en liste med forskellige spilleres valg
         counter=0

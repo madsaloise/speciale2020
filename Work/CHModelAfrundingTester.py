@@ -88,28 +88,22 @@ def CHSolveAfrund(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
             #Tilføjer deck-indekset til deckID-listen
             max_payoff = round(max(payoff_index))
             multiple_max = [round(i) for i, j in enumerate(payoff_index) if round(j) == max_payoff]
-            print("Multiple max --->")
-            print(multiple_max)
             if len(multiple_max) == 1:
                 deckID.append(payoff_index.index(max(payoff_index)))   
             else:
+                #print("Multiple max --->")
+                #print(multiple_max)
                 deckID.append(multiple_max) 
-            #Nulstiller lister 
-            maks_index = []
-            payoff_index = []
-            deck_prob = []
+            if p == levels:
+                return_prob = maks_index
+            else:
+                #Nulstiller lister 
+                maks_index = []
+                payoff_index = []
+                deck_prob = []
     #deckID = list.copy(deckID[1:])
     if MLE == 1:
-        #Danner en liste med forskellige spilleres valg
-        counter=0
-        plays = []
-        for i in deckID:
-            ilevel_k = counter
-            deckIDcounter = deckID[ilevel_k]
-            leveliplay = decks[deckIDcounter]
-            plays.append(leveliplay)
-            counter += 1
-        return plays
+        return return_prob
     else:
         #Danner en liste med forskellige spilleres valg
         counter=0
@@ -121,7 +115,7 @@ def CHSolveAfrund(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
             if isinstance(deckIDcounter, list):
                 counter1 = 0
                 temp_list = []
-                for i in deckIDcounter:
+                for j in deckIDcounter:
                     temp_list.append(decks[deckIDcounter[counter1]])
                     counter1 += 1
                 plays.append("Level-" + str(counter+1) + " spiller er mix af: " + str(temp_list))
@@ -129,8 +123,6 @@ def CHSolveAfrund(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 leveliplay = decks[deckIDcounter]
                 plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
             counter += 1
-
-
         return plays
 '''
 tau_range = [0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 100]
