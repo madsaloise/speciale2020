@@ -42,7 +42,7 @@ print(list(levelksolve(deck_names, winrates, level)))
 from LevelKModelPoisson import levelksolvepoisson
 
 print(levelksolvepoisson(deck_names, winrates, level, 0.12244897959183673))
-'''
+
 #CH Model, syntax: CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):, level 0 antages at spille uniformt. 
 #"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
 #from MLEEstimation import MLEPlot
@@ -65,4 +65,3 @@ OptLS_Standard(deck_names, winrates, frekvenser, level)
 
 #Skal være til sidst
 plt.show()
-'''
