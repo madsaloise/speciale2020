@@ -30,8 +30,12 @@ def OptLS_Standard(decks, winrates, Obs_Frequences, levels):
             Sum_Each_Afrund.append(sum(Diff_probs_Afrund))
         Min_Func = Sum_Each.index(min(Sum_Each))
         Min_Func_Afrund = Sum_Each_Afrund.index(min(Sum_Each_Afrund))
-        print("Level-" + str(q))
-        print("Standard:" + str(min(Sum_Each)) +"med tau på: " + str(tau_values[Sum_Each.index(min(Sum_Each))]) + ". Afrundet: " + str(min(Sum_Each_Afrund))+"med tau på: "+str(tau_values[Sum_Each_Afrund.index(min(Sum_Each_Afrund))]))
+        if isinstance(Sum_Each_Afrund.index(min(Sum_Each_Afrund)), list):
+            print("Level-" + str(q))
+            print("Standard:" + str(min(Sum_Each)) +"med tau på: " + str(tau_values[Sum_Each.index(min(Sum_Each))]) + ". Afrundet: " + str(min(Sum_Each_Afrund))+"med tau på: "+str(tau_values[Sum_Each_Afrund.index(min(Sum_Each_Afrund))]/len(Sum_Each_Afrund.index(min(Sum_Each_Afrund)))))
+        else:
+            print("Level-" + str(q))
+            print("Standard:" + str(min(Sum_Each)) +"med tau på: " + str(tau_values[Sum_Each.index(min(Sum_Each))]) + ". Afrundet: " + str(min(Sum_Each_Afrund))+"med tau på: "+str(tau_values[Sum_Each_Afrund.index(min(Sum_Each_Afrund))]))
         fig, ax = plt.subplots(figsize=(12, 8))
         plt.title("Least Squares by tau for level" + str(q))
         plt.scatter(tau_values, Sum_Each, color='navy', alpha=1, label='Standard')

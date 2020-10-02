@@ -22,11 +22,11 @@ deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
 data = ImportExcelFile(0,0,1, PathWin)
 frekvenser = ImportFrekvenser(PathFrek)
-'''
+
 #Dominans, Syntax: ElimineringDomStrat(deck, winrates)
 from ElimineringDomineredeStrat import ElimineringDomStrat
 ElimineringDomStrat(deck_names, winrates)
-'''
+
 #Importerer Nash
 #Syntax: solvemixednash(decks, winrates)
 from MixedEquilibriumWinrates import solvemixednash
@@ -38,7 +38,7 @@ tau = 0.14285714285714285
 level = 5
 #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
-print(list(levelksolve(deck_names, winrates, 10)))
+print(list(levelksolve(deck_names, winrates, level)))
 
 #CH Model, syntax: CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):, level 0 antages at spille uniformt. 
 #"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
@@ -54,11 +54,11 @@ print(CHSolveAfrund(deck_names, winrates, level, 1, tau, 0))
 from DumbellPlot import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 Paths_Frekvenser = [r'C:\speciale2020\Data\Frekvenser.xlsx', r'C:\speciale2020\Data\Frekvenser_UnderPlatinium.xlsx']
-MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level, 1, tau, 1), CHSolveAfrund(deck_names, winrates, level, 1, tau, 1) )
-'''
+MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level, 0, tau, 1) )
+
 from LeastSquares import OptLS_Standard
 
 OptLS_Standard(deck_names, winrates, frekvenser, level)
-'''
+
 #Skal være til sidst
 plt.show()
