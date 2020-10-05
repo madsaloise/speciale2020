@@ -27,9 +27,9 @@ def OptLS_Standard(decks, winrates, Obs_Frequences, levels):
             Diff_Probs_LevelK = []
             count2 = 0
             for j in ShareOfGames:
-                Diff_Probs.append((ShareOfGames[count2] - 100* CHSolve(decks, winrates, q+1, 0, i, 1)[count2])**2)
-                Diff_probs_Afrund.append((ShareOfGames[count2] - 100* CHSolveAfrund(decks, winrates, q+1, 0, i, 1)[count2])**2)
-                Diff_Probs_LevelK.append((ShareOfGames[count2] - 100* levelksolvepoisson(decks, winrates, q+1, i)[count2])**2)
+                Diff_Probs.append((abs(ShareOfGames[count2] - 100* CHSolve(decks, winrates, q+1, 0, i, 1)[count2])))
+                Diff_probs_Afrund.append((abs(ShareOfGames[count2] - 100* CHSolveAfrund(decks, winrates, q+1, 0, i, 1)[count2])))
+                Diff_Probs_LevelK.append(abs((ShareOfGames[count2] - 100* levelksolvepoisson(decks, winrates, q+1, i)[count2])))
                 count2 += 1
             Sum_Each.append(sum(Diff_Probs))
             Sum_Each_Afrund.append(sum(Diff_probs_Afrund))
