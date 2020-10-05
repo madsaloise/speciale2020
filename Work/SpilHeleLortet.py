@@ -38,7 +38,7 @@ tau = 0.14285714285714285
 level = 5
 #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
-print(list(levelksolve(deck_names, winrates, level)))
+print(list(levelksolve(deck_names, winrates, level-1)))
 from LevelKModelPoisson import levelksolvepoisson
 
 print(levelksolvepoisson(deck_names, winrates, level, 0.12244897959183673))
@@ -50,18 +50,18 @@ from CHModelAfrundingTester import CHSolveAfrund
 from CHModel import CHSolve
 
 #MLEPlot(12, 8)
-print(CHSolve(deck_names, winrates, level, 1, tau, 0))
-print(CHSolveAfrund(deck_names, winrates, level, 1, tau, 0))
+print(CHSolve(deck_names, winrates, level, 0, tau, 0))
+print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 0))
 
 
 from DumbellPlot import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 Paths_Frekvenser = [r'C:\speciale2020\Data\Frekvenser.xlsx', r'C:\speciale2020\Data\Frekvenser_UnderPlatinium.xlsx']
-MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level, 0, tau, 1) )
+MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
 
 from LeastSquares import OptLS_Standard
 
-OptLS_Standard(deck_names, winrates, frekvenser, level)
+OptLS_Standard(deck_names, winrates, frekvenser, level+1)
 
 #Skal være til sidst
 plt.show()

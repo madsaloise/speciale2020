@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 def OptLS_Standard(decks, winrates, Obs_Frequences, levels):
     Afrund_Val = []
     Standard_Val = []
+    LevelK_Val = []
     tau_values = np.linspace(0, 1)
     for q in range(levels):
         NumberOfGames = []
@@ -46,10 +47,12 @@ def OptLS_Standard(decks, winrates, Obs_Frequences, levels):
         plt.legend()
         Afrund_Val.append(tau_values[Sum_Each_Afrund.index(min(Sum_Each_Afrund))])
         Standard_Val.append(tau_values[Sum_Each.index(min(Sum_Each))])
+        LevelK_Val.append(tau_values[Sum_Each_LevelK.index(min(Sum_Each_LevelK))])
     fig, ax = plt.subplots(figsize=(12, 8))
     plt.title("Optimale tau for forskellige levels")
     plt.scatter(range(levels), Standard_Val, color='navy', alpha=1, label='Standard')
     plt.scatter(range(levels), Afrund_Val, color='red', alpha=1, label='Afrundet')
+    plt.scatter(range(levels), LevelK_Val, color='yellow', alpha=1, label='LevelK')
     plt.legend()
 
     return Min_Func
