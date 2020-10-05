@@ -14,9 +14,9 @@ from DataPrep import ImportFrekvenser
 
 
 #Winrates Data
-PathWin = r'C:\speciale2020\Data\Winrates_Data_2.xlsx'
+PathWin = r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx'
 #Frekvens Data
-PathFrek = r'C:\speciale2020\Data\Frekvenser.xlsx'
+PathFrek = r'C:\speciale2020\Data\Frekvenser_169.xlsx'
 
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
@@ -35,13 +35,14 @@ print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(so
 #Level-K Model, 
 
 tau = 0.14285714285714285
+tau_levelk = 0.12244897959183673
 level = 5
 #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
 print(list(levelksolve(deck_names, winrates, level-1)))
 from LevelKModelPoisson import levelksolvepoisson
 
-print(levelksolvepoisson(deck_names, winrates, level, 0.12244897959183673))
+print(levelksolvepoisson(deck_names, winrates, level, tau_levelk))
 
 #CH Model, syntax: CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):, level 0 antages at spille uniformt. 
 #"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
@@ -56,7 +57,6 @@ print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 0))
 
 from DumbellPlot import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
-Paths_Frekvenser = [r'C:\speciale2020\Data\Frekvenser.xlsx', r'C:\speciale2020\Data\Frekvenser_UnderPlatinium.xlsx']
 MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
 
 from LeastSquares import OptLS_Standard
