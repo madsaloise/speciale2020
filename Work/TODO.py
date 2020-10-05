@@ -6,4 +6,4 @@
 
 #Noget beskrivende statistik
 
-#Fix Afrundet payoff i LeastSquares, så den dividerer med antallet af decks, der spilles.
+#Fix Afrundet payoff i LeastSquares, så den dividerer med antallet af decks, der spilles. men lidt 
