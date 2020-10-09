@@ -22,13 +22,14 @@ winrates = ImportExcelFile(0,1,0, PathWin)
 data = ImportExcelFile(0,0,1, PathWin)
 frekvenser = ImportFrekvenser(PathFrek)
 
-print(CHSolve(deck_names, winrates, 15, 0.1, 0.2, 0, MLE = 0))
-print(CHSolve(deck_names, winrates, 15, 0.5, 0.5, 0, MLE = 0))
+print(CHSolve(deck_names, winrates, 5, 0.1, 0.2, 1, MLE = 0))
+print(CHSolve(deck_names, winrates, 5, 0.5, 0.5, 1, MLE = 0))
+'''
 from DumbellPlot import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 from LeastSquares_Beta import OptLS_Standard
 OptLS_Standard(deck_names, winrates, frekvenser, 6)
-'''
+
 MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, 10, 0.2, 0.5, 0, MLE = 1), CHSolveAfrund(deck_names, winrates, 10, 0.2, 0.5, 0, MLE = 1) )
 plt.show()
 

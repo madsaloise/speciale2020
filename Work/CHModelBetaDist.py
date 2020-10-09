@@ -47,6 +47,8 @@ def CHSolve(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
     deck_prob = []
     for p in range(levels+1):
         if p > 0:
+            print("LEVEL :" + str(p))
+            print(player_distribution(p, alpha_val, beta_val))
             #Kopierer liste
             A = list.copy(winrates)
             i_list = []
