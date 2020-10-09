@@ -1,27 +1,26 @@
 import numpy as np
 from math import factorial
 from math import exp
-
-def player_distribution(tau, levels):
-    def poisson_distribution(tau, levels):
-        distribution = (exp(-tau))*(tau**levels)/(factorial(levels))
+from scipy.stats import beta
+import matplotlib.pyplot as plt
+def player_distribution(levels, alpha_val, beta_val):
+    def beta_distribution(mean, alpha_val, beta_val):
+        distribution = beta.cdf(mean, alpha_val, beta_val)
         return distribution
     fractions = []
+    fractions_temp = []
     truncated_fractions = []
-    for i in range(levels):
-        fractions.append(poisson_distribution(tau, i))
+    for i in range(levels+1):
+        fractions_temp.append(beta_distribution((1+i)/levels, alpha_val, beta_val))
+    for i in range(len(fractions_temp)-1):
+        if i == 0: 
+            fractions.append(fractions_temp[i])
+        elif i > 0:
+            fractions.append(fractions_temp[i]-fractions_temp[i-1])
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-for i in range(5):
-    print(i)
-    print((exp(-2))*(2**i)/(factorial(i)))
-'''
-print("legend")
-print(player_distribution(0.1408542713567839, 5))
-print("ikke legend")
-print(player_distribution(0.05527638190954774, 5))
-'''
+
 #SSH på 1/antallet af decks, hvis det kun er lvl 0. 1 ellers
 def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:
@@ -31,7 +30,7 @@ def player_plays(winrates, level, deckID, indeks_tal):
         return 1 
     else:
         return 0
-def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
+def CHSolve(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
     #print(player_distribution(tau, levels))
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
@@ -58,15 +57,15 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 #Summerer ssh for alle levels
                 for q in range(p):
                     if q == 0:
-                        temp_dist = temp_dist + (1/len(A))*player_distribution(tau, p)[q]
+                        temp_dist = temp_dist + (1/len(A))*player_distribution(p, alpha_val, beta_val)[q]
                         #print("Level 0 --->")
-                        #print(player_distribution(tau, p)[q])
+                        #print(player_distribution(levels+1, alpha_val, beta_val)[q])
                     else:
-                        temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID[q-1], count1)
-                        #print("Level 1 --->")
-                        #print(player_distribution(tau, p)[q])
+                        temp_dist = temp_dist + player_distribution(p, alpha_val, beta_val)[q] * player_plays(winrates, q, deckID[q-1], count1)
+                        #print("Level " +str(p) +" --->")
+                        #print(player_distribution(levels+1, alpha_val, beta_val)[q])
                         #print(player_plays(winrates, q, deckID[q-1], count1))
-                    #print(player_plays(winrates, q, deckID, count))
+                    #print(player_plays(winrates, q, deckID, count1))
                 i_list.append(temp_dist)
                 count1 += 1
             count2 = 0

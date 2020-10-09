@@ -35,7 +35,7 @@ def RunAll(winratespath, frequenciespath):
     print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates, 0)) + ". Andre decks spilles med en sandsynlighed på 0.")
     #Level-K Model, 
 
-    tau = 0.061224489795918366
+    tau = 0.14285714285714285
     tau_levelk = 0.061224489795918366
     level = 5
     #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.

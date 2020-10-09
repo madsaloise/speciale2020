@@ -1,27 +1,26 @@
 import numpy as np
 from math import factorial
 from math import exp
-
-def player_distribution(tau, levels):
-    def poisson_distribution(tau, levels):
-        distribution = (exp(-tau))*(tau**levels)/(factorial(levels))
+from scipy.stats import beta
+import matplotlib.pyplot as plt
+def player_distribution(levels, alpha_val, beta_val):
+    def beta_distribution(mean, alpha_val, beta_val):
+        distribution = beta.cdf(mean, alpha_val, beta_val)
         return distribution
     fractions = []
+    fractions_temp = []
     truncated_fractions = []
-    for i in range(levels):
-        fractions.append(poisson_distribution(tau, i))
+    for i in range(levels+1):
+        fractions_temp.append(beta_distribution((1+i)/levels, alpha_val, beta_val))
+    for i in range(len(fractions_temp)-1):
+        if i == 0: 
+            fractions.append(fractions_temp[i])
+        elif i > 0:
+            fractions.append(fractions_temp[i]-fractions_temp[i-1])
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-for i in range(5):
-    print(i)
-    print((exp(-2))*(2**i)/(factorial(i)))
-'''
-print("legend")
-print(player_distribution(0.1408542713567839, 5))
-print("ikke legend")
-print(player_distribution(0.05527638190954774, 5))
-'''
+
 #SSH på 1/antallet af decks, hvis det kun er lvl 0. 1 ellers
 def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:
@@ -31,8 +30,7 @@ def player_plays(winrates, level, deckID, indeks_tal):
         return 1 
     else:
         return 0
-def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
-    #print(player_distribution(tau, levels))
+def CHSolveAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
@@ -48,6 +46,8 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
     deck_prob = []
     for p in range(levels+1):
         if p > 0:
+            print("LEVEL :" + str(p))
+            print(player_distribution(p, alpha_val, beta_val))
             #Kopierer liste
             A = list.copy(winrates)
             i_list = []
@@ -58,14 +58,19 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 #Summerer ssh for alle levels
                 for q in range(p):
                     if q == 0:
-                        temp_dist = temp_dist + (1/len(A))*player_distribution(tau, p)[q]
+                        temp_dist = temp_dist + (1/len(A))*player_distribution(p, alpha_val, beta_val)[q]
                         #print("Level 0 --->")
                         #print(player_distribution(tau, p)[q])
-                    else:
-                        temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID[q-1], count1)
+                    elif not isinstance(deckID[q-1], list):
+                        temp_dist = temp_dist + player_distribution(p, alpha_val, beta_val)[q] * player_plays(winrates, q, deckID[q-1], count1)
                         #print("Level 1 --->")
                         #print(player_distribution(tau, p)[q])
                         #print(player_plays(winrates, q, deckID[q-1], count1))
+                    else: 
+                        count4 = 0
+                        for i in deckID[q-1]:
+                            temp_dist = temp_dist + player_distribution(p, alpha_val, beta_val)[q] * player_plays(winrates, q, deckID[q-1][count4], count1) / len(deckID[q-1])
+                            count4 += 1
                     #print(player_plays(winrates, q, deckID, count))
                 i_list.append(temp_dist)
                 count1 += 1
@@ -89,7 +94,14 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 print("Sandsynligheden for at møde andre decks: " + str(maks_index))
                 print("Payoffs: " + str(payoff_index))
             #Tilføjer deck-indekset til deckID-listen
-            deckID.append(payoff_index.index(max(payoff_index)))   
+            max_payoff = round(max(payoff_index))
+            multiple_max = [round(i) for i, j in enumerate(payoff_index) if round(j) == max_payoff]
+            if len(multiple_max) == 1:
+                deckID.append(payoff_index.index(max(payoff_index)))   
+            else:
+                #print("Multiple max --->")
+                #print(multiple_max)
+                deckID.append(multiple_max) 
             if p == levels:
                 return_prob = maks_index
             else:
@@ -108,13 +120,15 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]
-            leveliplay = decks[deckIDcounter]
-            plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
+            if isinstance(deckIDcounter, list):
+                counter1 = 0
+                temp_list = []
+                for j in deckIDcounter:
+                    temp_list.append(decks[deckIDcounter[counter1]])
+                    counter1 += 1
+                plays.append("Level-" + str(counter+1) + " spiller er mix af: " + str(temp_list))
+            else:
+                leveliplay = decks[deckIDcounter]
+                plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
             counter += 1
         return plays
-'''
-tau_range = [0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 100]
-for i in tau_range:
-    print("Fordeling for tau på: " + str(i))
-    print(player_distribution(i, 10)) 
-'''
