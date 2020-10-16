@@ -33,7 +33,7 @@ from MixedEquilibriumWinrates import solvemixednash
 #Printer
 print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates, 0)) + ". Andre decks spilles med en sandsynlighed på 0.")
 #Level-K Model, 
-
+'''
 tau = 0.14285714285714285
 tau_levelk = 0.12244897959183673
 level = 5
@@ -65,3 +65,4 @@ OptLS_Standard(deck_names, winrates, frekvenser, level+1)
 
 #Skal være til sidst
 plt.show()
+'''

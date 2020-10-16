@@ -22,7 +22,7 @@ winrates = ImportExcelFile(0,1,0, PathWin)
 data = ImportExcelFile(0,0,1, PathWin)
 frekvenser = ImportFrekvenser(PathFrek)
 
-print(CHSolve(deck_names, winrates, 2, 0.15025539, 0.86047883, 1, MLE = 0))
+print(CHSolveAfrund(deck_names, winrates, 5, 0.05891341, 0.58515967, 1, MLE = 0))
 #print(CHSolve(deck_names, winrates, 5, 0.5, 0.5, 1, MLE = 0))
 '''
 from DumbellPlot import MixedEqGraph

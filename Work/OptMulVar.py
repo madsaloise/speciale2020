@@ -5,6 +5,7 @@ from CHModelBetaDistAfrund import CHSolveAfrund
 import matplotlib.pyplot as plt
 from DataPrep import ImportExcelFile 
 from DataPrep import ImportFrekvenser 
+import math
 #Syntax:
 # ImportExcelFile(Kolonner, Rækker, dataframe, Path) 
 # ImportFrekvenser(Path)
@@ -22,8 +23,8 @@ winrates = ImportExcelFile(0,1,0, PathWin)
 data = ImportExcelFile(0,0,1, PathWin)
 frekvenser = ImportFrekvenser(PathFrek)
 
-sum_func1 = lambda x: sum(f_one(x[0], x[1]))**(1/2)
-sum_func2 = lambda x: sum(f_two(x[0], x[1]))**(1/2)
+sum_func1 = lambda x: math.log10(sum(f_one(x[0], x[1])))
+sum_func2 = lambda x: math.log10(sum(f_two(x[0], x[1])))
 def f_one(alpha, beta):
     NumberOfGames = []
     count = 0
@@ -58,8 +59,8 @@ def f_two(alpha, beta):
 print(f_one(3.39633443e-09, 9.99999929e-01))
 
 initial_guess = [0.5, 0.4]
-sol_case1 = optimize.minimize(sum_func1, initial_guess, method='SLSQP', bounds=[(0,0.99), (0, 0.99)])
-sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[(0,0.99), (0, 0.99)])
+sol_case1 = optimize.minimize(sum_func1, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
+sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
 #method='bounded', bounds=[(0, None), (0, None)]
 print(sol_case1['x'])
 print(sol_case2['x'])

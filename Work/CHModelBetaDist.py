@@ -20,7 +20,8 @@ def player_distribution(levels, alpha_val, beta_val):
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-print(player_distribution(5, 0.08653638, 0.98999644))
+print(player_distribution(5, 0.20634508, 2.41564095))
+print(player_distribution(5, 0.05891341,0.58515967))
 #SSH på 1/antallet af decks, hvis det kun er lvl 0. 1 ellers
 def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:
@@ -101,6 +102,16 @@ def CHSolve(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
     #deckID = list.copy(deckID[1:])
     if MLE == 1:
         return return_prob
+    elif MLE == 2:
+        counter=0
+        plays = []
+        #print("I en CH-model har vi følgende:")
+        for i in deckID:
+            ilevel_k = counter
+            deckIDcounter = deckID[ilevel_k]
+            leveliplay = decks[deckIDcounter]
+            counter += 1
+        return leveliplay
     else:
         #Danner en liste med forskellige spilleres valg
         counter=0

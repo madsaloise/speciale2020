@@ -13,10 +13,7 @@ def player_distribution(tau, levels):
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-for i in range(5):
-    print(i)
-    print((exp(-2))*(2**i)/(factorial(i)))
-print(player_distribution(0.1408542713567839, 5))
+#print(player_distribution(1.14, 5))
 '''
 print("legend")
 print(player_distribution(0.1408542713567839, 5))
@@ -105,7 +102,7 @@ def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
         #Danner en liste med forskellige spilleres valg
         counter=0
         plays = []
-        print("I en CH-model har vi følgende:")
+        #print("I en CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]
