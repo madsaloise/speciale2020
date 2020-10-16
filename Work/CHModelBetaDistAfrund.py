@@ -46,8 +46,8 @@ def CHSolveAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE
     deck_prob = []
     for p in range(levels+1):
         if p > 0:
-            print("LEVEL :" + str(p))
-            print(player_distribution(p, alpha_val, beta_val))
+            #print("LEVEL :" + str(p))
+            #print(player_distribution(p, alpha_val, beta_val))
             #Kopierer liste
             A = list.copy(winrates)
             i_list = []
@@ -116,7 +116,7 @@ def CHSolveAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE
         #Danner en liste med forskellige spilleres valg
         counter=0
         plays = []
-        print("I en CH-model har vi følgende:")
+        #print("I en CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]

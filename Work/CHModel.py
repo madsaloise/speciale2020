@@ -16,6 +16,7 @@ def player_distribution(tau, levels):
 for i in range(5):
     print(i)
     print((exp(-2))*(2**i)/(factorial(i)))
+print(player_distribution(0.1408542713567839, 5))
 '''
 print("legend")
 print(player_distribution(0.1408542713567839, 5))
