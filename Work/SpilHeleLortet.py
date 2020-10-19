@@ -51,8 +51,9 @@ print(levelksolvepoisson(deck_names, winrates, level, tau_levelk))
 #"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
 #from MLEEstimation import MLEPlot
 from CHModelAfrund import CHSolveAfrund
-from CHModel import CHSolve
-print(CHSolve(deck_names, winrates, level, 0, tau, 0))
+from CHModelNormDist import CHSolveBeta
+print(CHSolveBeta(deck_names, winrates, level, 0, 0))
+'''
 print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 0))
 
 #from MLEEstimation import MLEPlot
@@ -76,7 +77,7 @@ from AlphaBetaOptimizer import f_two
 import math
 
 #Løser for optimalt alpha og beta, tager en krig at køre så det er kommenteret ud.
-'''
+
 sum_func1 = lambda x: math.log10(sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level)))
 sum_func2 = lambda x: math.log10(sum(f_two(x[0], x[1], deck_names, winrates, frekvenser, level)))
 
@@ -87,7 +88,7 @@ sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[
 print("Alpha, Beta")
 print(sol_case1['x'])
 print(sol_case2['x'])
-'''
+
 
 
 
@@ -100,3 +101,4 @@ print(CHSolveBetaAfrund(deck_names, winrates, level, 0.05891341,0.58515967, 0, M
 
 #Skal være til sidst
 plt.show()
+'''
