@@ -4,14 +4,24 @@ Denne github indeholder koden til vores speciale i Økonomi.
 
 Funktionel kode findes i mappen 'Work'. Samtlige programmer kan køres i "SpilHeleLortet" med minimalt setup.
 
-Anvendte pakker er:
+Nødvendige imports er:
 
-Pandas
+import numpy as np
 
-Numpy
+import pandas as pd
 
-Scipy.optimize (linprog)
+from scipy.optimize import linprog
 
-matplotlib
+from scipy import optimize
+
+from scipy.stats import beta
+
+import matplotlib.pyplot as plt
+
+import math
+
+from math import factorial
+
+from math import exp
 
 
