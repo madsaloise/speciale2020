@@ -52,20 +52,18 @@ print(levelksolvepoisson(deck_names, winrates, level, tau_levelk))
 #from MLEEstimation import MLEPlot
 from CHModelAfrund import CHSolveAfrund
 from CHModel import CHSolve
-
-#MLEPlot(12, 8)
 print(CHSolve(deck_names, winrates, level, 0, tau, 0))
 print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 0))
 
+from MLEEstimation import MLEPlot
+MLEPlot(level, tau)
+
 from DumbellPlot import MixedEqGraph
-# Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
-#MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
+#Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
+MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
 
 from LeastSquares import OptLS_Standard
-
-#OptLS_Standard(deck_names, winrates, frekvenser, level+1)
-
-#Skal være til sidst
+OptLS_Standard(deck_names, winrates, frekvenser, level+1)
 ###POISSON/###
 
 
@@ -78,19 +76,20 @@ from AlphaBetaOptimizer import f_two
 import math
 
 #Løser for optimalt alpha og beta, tager en krig at køre så det er kommenteret ud.
-'''
-sum_func1 = lambda x: math.log10(sum(f_one(x[0], x[1])))
-sum_func2 = lambda x: math.log10(sum(f_two(x[0], x[1])))
+
+sum_func1 = lambda x: math.log10(sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level)))
+sum_func2 = lambda x: math.log10(sum(f_two(x[0], x[1], deck_names, winrates, frekvenser, level)))
 
 initial_guess = [0.5, 0.4]
 sol_case1 = optimize.minimize(sum_func1, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
 sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
 #method='bounded', bounds=[(0, None), (0, None)]
+print("Alpha, Beta")
 print(sol_case1['x'])
 print(sol_case2['x'])
 
 
-'''
+
 
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print(CHSolveBeta(deck_names, winrates, level, 0.20634508, 2.41564095, 0, MLE = 0))
@@ -99,5 +98,5 @@ print(CHSolveBetaAfrund(deck_names, winrates, level, 0.05891341,0.58515967, 0, M
 ###BETA/###
 
 
-
+#Skal være til sidst
 plt.show()
