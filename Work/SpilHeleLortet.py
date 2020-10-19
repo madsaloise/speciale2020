@@ -55,8 +55,8 @@ from CHModel import CHSolve
 print(CHSolve(deck_names, winrates, level, 0, tau, 0))
 print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 0))
 
-from MLEEstimation import MLEPlot
-MLEPlot(level, tau)
+#from MLEEstimation import MLEPlot
+#MLEPlot(level, tau)
 
 from DumbellPlot import MixedEqGraph
 #Syntax: MixedEqGraph(Vores_Nash, Frekvenser)

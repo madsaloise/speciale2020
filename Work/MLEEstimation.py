@@ -44,8 +44,8 @@ def player_distribution(tau, levels):
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-print("fordeling")
-print(player_distribution(1, 5))
+#print("fordeling")
+#print(player_distribution(1, 5))
 def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:
         prob = 1/len(winrates)
