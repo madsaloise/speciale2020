@@ -1,7 +1,7 @@
 from scipy import optimize
 import numpy as np
-from CHModelBetaDist import CHSolve
-from CHModelBetaDistAfrund import CHSolveAfrund
+from CHModelBetaDist import CHSolveBeta
+from CHModelBetaDistAfrund import CHSolveBetaAfrund
 from MixedEquilibriumWinrates import solvemixednash
 from DataPrep import ImportExcelFile 
 from DataPrep import ImportFrekvenser 
@@ -51,7 +51,7 @@ def NashCHModel(Our_Nash, deck_names, winrates, alpha, beta):
     CHLVL1 = []
     count = 0
     for i in deck_names:
-        if deck_names[count] == deck_names[deck_names.index(CHSolve(deck_names, winrates, 1, alpha, beta, 0, MLE = 2))]:
+        if deck_names[count] == deck_names[deck_names.index(CHSolveBeta(deck_names, winrates, 1, alpha, beta, 0, MLE = 2))]:
             CHLVL1.append(1)
         else:
             CHLVL1.append(0)
@@ -82,6 +82,7 @@ def NashCHModel(Our_Nash, deck_names, winrates, alpha, beta):
     for i in range(len(CombinedProbs)):
         NormProbs.append(CombinedProbs[i]/sum(CombinedProbs))
 
+    print(deck_names)
     print(NormProbs)
     c = [0 for i in range(num_decks)]
     c.append(1)
