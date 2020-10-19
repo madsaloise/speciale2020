@@ -30,7 +30,7 @@ def player_plays(winrates, level, deckID, indeks_tal):
         return 1 
     else:
         return 0
-def CHSolveAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
+def CHSolveBetaAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]

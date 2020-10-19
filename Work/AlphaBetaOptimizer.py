@@ -1,7 +1,7 @@
 from scipy import optimize
 import numpy as np
-from CHModelBetaDist import CHSolve
-from CHModelBetaDistAfrund import CHSolveAfrund
+from CHModelBetaDist import CHSolveBeta
+from CHModelBetaDistAfrund import CHSolveBetaAfrund
 import matplotlib.pyplot as plt
 from DataPrep import ImportExcelFile 
 from DataPrep import ImportFrekvenser 
@@ -37,7 +37,7 @@ def f_one(alpha, beta):
     Diff_Probs = []
     count2 = 0
     for j in ShareOfGames:
-        Diff_Probs.append((ShareOfGames[count2] - 100* CHSolve(deck_names, winrates, 5, alpha, beta, 0, MLE = 1)[count2])**2)
+        Diff_Probs.append((ShareOfGames[count2] - 100* CHSolveBeta(deck_names, winrates, 5, alpha, beta, 0, MLE = 1)[count2])**2)
         count2 += 1
     return Diff_Probs
 
@@ -53,7 +53,7 @@ def f_two(alpha, beta):
     Diff_Probs = []
     count2 = 0
     for j in ShareOfGames:
-        Diff_Probs.append((ShareOfGames[count2] - 100* CHSolveAfrund(deck_names, winrates, 5, alpha, beta, 0, MLE = 1)[count2])**2)
+        Diff_Probs.append((ShareOfGames[count2] - 100* CHSolveBetaAfrund(deck_names, winrates, 5, alpha, beta, 0, MLE = 1)[count2])**2)
         count2 += 1
     return Diff_Probs
 print(f_one(3.39633443e-09, 9.99999929e-01))

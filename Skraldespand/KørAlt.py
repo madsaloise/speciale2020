@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from RunAll import RunAll
-from CHModelBetaDistAfrund import CHSolveAfrund
-from CHModelBetaDist import CHSolve
+from CHModelBetaDistAfrund import CHSolveBetaAfrund
+from CHModelBetaDist import CHSolveBeta
 from MixedEquilibriumWinrates import solvemixednash
 from DataPrep import ImportExcelFile 
 from DataPrep import ImportFrekvenser 
@@ -21,8 +21,8 @@ deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
 data = ImportExcelFile(0,0,1, PathWin)
 frekvenser = ImportFrekvenser(PathFrek)
-
-print(CHSolveAfrund(deck_names, winrates, 5, 0.05891341, 0.58515967, 1, MLE = 0))
+print(CHSolve(deck_names, winrates, 5, 0.20634508, 2.41564095, 0, MLE = 0))
+print(CHSolveAfrund(deck_names, winrates, 5, 0.05891341,0.58515967, 0, MLE = 0))
 #print(CHSolve(deck_names, winrates, 5, 0.5, 0.5, 1, MLE = 0))
 '''
 from DumbellPlot import MixedEqGraph

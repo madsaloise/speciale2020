@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 from scipy.optimize import linprog
+from scipy import optimize
 import matplotlib.pyplot as plt
 #Importerer DataPrep
 from DataPrep import ImportExcelFile 
@@ -33,10 +34,12 @@ from MixedEquilibriumWinrates import solvemixednash
 #Printer
 print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates, 0)) + ". Andre decks spilles med en sandsynlighed på 0.")
 #Level-K Model, 
-'''
-tau = 0.14285714285714285
+
+tau = 1.14285714285714285
 tau_levelk = 0.12244897959183673
 level = 5
+###/POISSON###
+print("POISSONFORDELING:")
 #Syntax: levelksolve(decks, winrates, levels), level 0 antages at spille uniformt. For k spillere skrives levels som k-1.
 from LevelKModelTeori import levelksolve
 print(list(levelksolve(deck_names, winrates, level-1)))
@@ -47,22 +50,54 @@ print(levelksolvepoisson(deck_names, winrates, level, tau_levelk))
 #CH Model, syntax: CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):, level 0 antages at spille uniformt. 
 #"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
 #from MLEEstimation import MLEPlot
-from CHModelAfrundingTester import CHSolveAfrund
+from CHModelAfrund import CHSolveAfrund
 from CHModel import CHSolve
 
 #MLEPlot(12, 8)
 print(CHSolve(deck_names, winrates, level, 0, tau, 0))
 print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 0))
 
-
 from DumbellPlot import MixedEqGraph
 # Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
-MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
+#MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
 
 from LeastSquares import OptLS_Standard
 
-OptLS_Standard(deck_names, winrates, frekvenser, level+1)
+#OptLS_Standard(deck_names, winrates, frekvenser, level+1)
 
 #Skal være til sidst
-plt.show()
+###POISSON/###
+
+
+###/BETA###
+print("BETAFORDELING:")
+from CHModelBetaDistAfrund import CHSolveBetaAfrund
+from CHModelBetaDist import CHSolveBeta
+from AlphaBetaOptimizer import f_one
+from AlphaBetaOptimizer import f_two
+import math
+
+#Løser for optimalt alpha og beta, tager en krig at køre så det er kommenteret ud.
 '''
+sum_func1 = lambda x: math.log10(sum(f_one(x[0], x[1])))
+sum_func2 = lambda x: math.log10(sum(f_two(x[0], x[1])))
+
+initial_guess = [0.5, 0.4]
+sol_case1 = optimize.minimize(sum_func1, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
+sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
+#method='bounded', bounds=[(0, None), (0, None)]
+print(sol_case1['x'])
+print(sol_case2['x'])
+
+
+'''
+
+#Optimale alpha og beta bruges til at beregne CH-modellerne
+print(CHSolveBeta(deck_names, winrates, level, 0.20634508, 2.41564095, 0, MLE = 0))
+print(CHSolveBetaAfrund(deck_names, winrates, level, 0.05891341,0.58515967, 0, MLE = 0))
+
+###BETA/###
+
+
+
+plt.show()

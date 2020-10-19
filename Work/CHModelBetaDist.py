@@ -20,8 +20,8 @@ def player_distribution(levels, alpha_val, beta_val):
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-print(player_distribution(5, 0.20634508, 2.41564095))
-print(player_distribution(5, 0.05891341,0.58515967))
+#print(player_distribution(5, 0.20634508, 2.41564095))
+#print(player_distribution(5, 0.05891341,0.58515967))
 #SSH på 1/antallet af decks, hvis det kun er lvl 0. 1 ellers
 def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:
@@ -31,7 +31,7 @@ def player_plays(winrates, level, deckID, indeks_tal):
         return 1 
     else:
         return 0
-def CHSolve(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
+def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
     #print(player_distribution(tau, levels))
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs

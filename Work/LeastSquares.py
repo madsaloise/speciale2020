@@ -1,7 +1,7 @@
 from scipy import optimize
 import numpy as np
 from CHModel import CHSolve
-from CHModelAfrundingTester import CHSolveAfrund
+from CHModelAfrund import CHSolveAfrund
 from LevelKModelPoisson import levelksolvepoisson
 import matplotlib.pyplot as plt
 def OptLS_Standard(decks, winrates, Obs_Frequences, levels):

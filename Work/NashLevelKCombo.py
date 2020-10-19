@@ -48,7 +48,6 @@ def player_distribution(levels, alpha_val, beta_val):
 def NashCHModel(Our_Nash, deck_names, winrates, alpha, beta):
     num_decks = len(deck_names)
     CHLVL0 = [1/num_decks for i in deck_names]
-    CHLVL1_temp = deck_names.index(CHSolve(deck_names, winrates, 1, alpha, beta, 0, MLE = 2))
     CHLVL1 = []
     count = 0
     for i in deck_names:
@@ -68,7 +67,7 @@ def NashCHModel(Our_Nash, deck_names, winrates, alpha, beta):
     print(NashProbs)
     dist_probs = player_distribution(3, alpha, beta)
     print(dist_probs)
-    ListProbs = [CHLVL0, CHLVL1, NashProbs
+    ListProbs = [CHLVL0, CHLVL1, NashProbs]
     CombinedProbs = []
     count = 0
     for i in range(len(deck_names)):
@@ -86,13 +85,37 @@ def NashCHModel(Our_Nash, deck_names, winrates, alpha, beta):
     print(NormProbs)
     c = [0 for i in range(num_decks)]
     c.append(1)
-    for i in winrates:
+    A = list.copy(winrates)
+    for i in A:
         count = 0
         for j in i:
             i[count] = NormProbs[count]* i[count]
             count += 1
-    print(len(winrates))
-    NashCH_Solution = solvemixednash(deck_names, winrates, 0)
-    return NashCH_Solution
+    #print(len(A))
+    # Lav C
+    c = [0 for i in range(num_decks)]
+    c.append(1)
+
+    # append -1 til brug for øvre grænse
+    for r in A:
+        r.append(-1.0)
+
+    # højreside-grænse
+    b_ub = [0 for i in range(num_decks)]
+
+    # equality constraint
+    ones = [1 for i in range(num_decks)]
+    ones.append(0)
+    A_eq = [ones]
+
+    # x summerer til 1
+    b_eq = [1]
+
+    # x og c must skal være positive
+    bounds = [(0,None) for i in range(num_decks+1)]
+    
+    NashCH_Solution = linprog(c, A_ub=A, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds)
+
+    return zip(deck_names,NashCH_Solution['x'])
 
 print(list(NashCHModel(solvemixednash(deck_names, winrates, 1), deck_names, winrates, 0.5, 0.5)))
