@@ -89,31 +89,3 @@ poi = PoissonRegression(y, X, β=init_β)
 
 logL = lambda x: -(x - 10) ** 2 - 10
 
-def find_tangent(β, a=0.01):
-    y1 = logL(β)
-    y2 = logL(β+a)
-    x = np.array([[β, 1], [β+a, 1]])
-    m, c = np.linalg.lstsq(x, np.array([y1, y2]), rcond=None)[0]
-    return m, c
-
-β = np.linspace(2, 18)
-fig, ax = plt.subplots(figsize=(12, 8))
-ax.plot(β, logL(β), lw=2, c='black')
-
-for β in [7, 8.5, 9.5, 10]:
-    β_line = np.linspace(β-2, β+2)
-    m, c = find_tangent(β)
-    y = m * β_line + c
-    ax.plot(β_line, y, '-', c='purple', alpha=0.8)
-    ax.text(β+2.05, y[-1], f'$G({β}) = {abs(m):.0f}$', fontsize=12)
-    ax.vlines(β, -24, logL(β), linestyles='--', alpha=0.5)
-    ax.hlines(logL(β), 6, β, linestyles='--', alpha=0.5)
-
-ax.set(ylim=(-24, -4), xlim=(6, 13))
-ax.set_xlabel(r'$\beta$', fontsize=15)
-ax.set_ylabel(r'$log \mathcal{L(\beta)}$',
-               rotation=0,
-               labelpad=25,
-               fontsize=15)
-ax.grid(alpha=0.3)
-plt.show()
