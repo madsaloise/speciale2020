@@ -8,7 +8,7 @@ def OptLS_Standard(decks, winrates, Obs_Frequences, levels):
     Afrund_Val = []
     Standard_Val = []
     LevelK_Val = []
-    tau_values = np.linspace(0, 1)
+    tau_values = np.linspace(0, 2, 200)
     for q in range(levels):
         NumberOfGames = []
         count = 0
