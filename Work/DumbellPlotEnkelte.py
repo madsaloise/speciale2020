@@ -179,7 +179,6 @@ def MixedEqGraphCHBetaAfrundet(MixedEq_Decks, CHInput, frekvenser):
             ax.annotate("{:.1f}".format(txt), (Standard_CH[i], my_range[i]),textcoords='offset points',xytext=(textcordx,textcordy),ha='center',fontsize=8)
     #Titel og Akser
     plt.yticks(my_range, dfGraph['Decks'])
-    plt.title("CH-model (beta), afrundet VS Frekvens")
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
 
@@ -222,7 +221,6 @@ def MixedEqGraphCHBetaStandard(MixedEq_Decks, CHInput, frekvenser):
             ax.annotate("{:.1f}".format(txt), (Standard_CH[i], my_range[i]),textcoords='offset points',xytext=(textcordx,textcordy),ha='center',fontsize=8)
     #Titel og Akser
     plt.yticks(my_range, dfGraph['Decks'])
-    plt.title("CH-model (beta) VS Frekvens")
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
 
@@ -265,6 +263,5 @@ def MixedEqLevelK(MixedEq_Decks, CHInput, frekvenser):
             ax.annotate("{:.1f}".format(txt), (Standard_CH[i], my_range[i]),textcoords='offset points',xytext=(textcordx,textcordy),ha='center',fontsize=8)
     #Titel og Akser
     plt.yticks(my_range, dfGraph['Decks'])
-    plt.title("Level-K model VS Frekvens")
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
