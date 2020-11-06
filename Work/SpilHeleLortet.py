@@ -35,8 +35,9 @@ from MixedEquilibriumWinrates import solvemixednash
 print("Optimal sammensætning af deck i et mixed-nash equilibrium er: " + str(solvemixednash(deck_names, winrates, 0)) + ". Andre decks spilles med en sandsynlighed på 0.")
 #Level-K Model, 
 
-tau = 0.1708542713567839
-tau_levelk = 0.16080402010050251
+tau = 0.1407035175879397
+tau_afrund = 0.15075376884422112
+tau_levelk = 0.1306532663316583
 level = 5
 
 ###/POISSON###
@@ -62,15 +63,22 @@ print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 1))
 
 #from MLEEstimation import MLEPlot
 #MLEPlot(level, tau)
+from DumbellPlotEnkelte import MixedEqGraphNash
+from DumbellPlotEnkelte import MixedEqGraphCHPoissonStandard
+from DumbellPlotEnkelte import MixedEqGraphCHPoissonAfrundet
+from DumbellPlotEnkelte import MixedEqGraphCHBetaAfrundet
+from DumbellPlotEnkelte import MixedEqGraphCHBetaStandard
+from DumbellPlotEnkelte import MixedEqLevelK
+
 '''
 from DumbellPlot import MixedEqGraph
 #Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
-'''
+
 from LeastSquares import OptLS_Standard
 OptLS_Standard(deck_names, winrates, frekvenser, level+1)
 ###POISSON/###
-
+'''
 
 ###/BETA###
 print("BETAFORDELING:")
@@ -99,10 +107,13 @@ alpha_afrund, beta_afrund = 0.05891341,0.58515967
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print(CHSolveBeta(deck_names, winrates, level, 0.24688993, 2.46672905, 0, MLE = 0))
 print(CHSolveBetaAfrund(deck_names, winrates, level, 0.0899432,  0.79928276, 0, MLE = 0))
-
+'''
 ###BETA/###
-
-
+MixedEqGraphNash(solvemixednash(deck_names, winrates, 1), frekvenser)
+MixedEqGraphCHPoissonStandard(deck_names, CHSolve(deck_names, winrates, level, 0, tau, 1), frekvenser)
+MixedEqGraphCHPoissonAfrundet(deck_names, CHSolveAfrund(deck_names, winrates, level, 0, tau_afrund, 1), frekvenser)
+MixedEqGraphCHBetaStandard(deck_names, CHSolveBeta(deck_names, winrates, level, 0.24688993, 2.46672905, 0, MLE = 1), frekvenser)
+MixedEqGraphCHBetaAfrundet(deck_names, CHSolveBetaAfrund(deck_names, winrates, level, 0.0899432,  0.79928276, 0, MLE = 1), frekvenser)
+MixedEqLevelK(deck_names, levelksolvepoisson(deck_names, winrates, level, tau_levelk), frekvenser)
 #Skal være til sidst
 plt.show()
-'''
