@@ -15,11 +15,14 @@ def player_distribution(tau, levels):
     return truncated_fractions
 #print(player_distribution(1.14, 5))
 '''
-print("legend")
-print(player_distribution(0.1408542713567839, 5))
-print("ikke legend")
-print(player_distribution(0.05527638190954774, 5))
+print("standard")
+print(player_distribution(0.1407035175879397, 5))
+print("afrund")
+print(player_distribution(0.15075376884422112, 5))
+print("levelk")
+print(player_distribution(0.1306532663316583, 5))
 '''
+
 #SSH på 1/antallet af decks, hvis det kun er lvl 0. 1 ellers
 def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:

@@ -15,9 +15,9 @@ from DataPrep import ImportFrekvenser
 
 
 #Winrates Data
-PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx'
+PathWin = r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx'
 #Frekvens Data
-PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169_PlatToLegend.xlsx'
+PathFrek = r'C:\speciale2020\Data\Frekvenser_169.xlsx'
 
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
@@ -66,11 +66,11 @@ print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 1))
 from DumbellPlot import MixedEqGraph
 #Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
-
+'''
 from LeastSquares import OptLS_Standard
 OptLS_Standard(deck_names, winrates, frekvenser, level+1)
 ###POISSON/###
-'''
+
 
 ###/BETA###
 print("BETAFORDELING:")
@@ -95,7 +95,6 @@ print(sol_case2['x'])
 
 alpha_standard, beta_standard = 0.20634508, 2.41564095
 alpha_afrund, beta_afrund = 0.05891341,0.58515967
-'''
 
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print(CHSolveBeta(deck_names, winrates, level, 0.24688993, 2.46672905, 0, MLE = 0))
@@ -106,3 +105,4 @@ print(CHSolveBetaAfrund(deck_names, winrates, level, 0.0899432,  0.79928276, 0, 
 
 #Skal være til sidst
 plt.show()
+'''
