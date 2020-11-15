@@ -100,7 +100,7 @@ sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[
 print("Alpha, Beta")
 print(sol_case1['x'])
 print(sol_case2['x'])
-
+'''
 alpha_standard, beta_standard = 0.20634508, 2.41564095
 alpha_afrund, beta_afrund = 0.05891341,0.58515967
 
@@ -117,3 +117,4 @@ MixedEqGraphCHBetaAfrundet(deck_names, CHSolveBetaAfrund(deck_names, winrates, l
 MixedEqLevelK(deck_names, levelksolvepoisson(deck_names, winrates, level, tau_levelk), frekvenser)
 #Skal være til sidst
 plt.show()
+'''
