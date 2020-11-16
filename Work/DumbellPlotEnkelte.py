@@ -50,7 +50,6 @@ def MixedEqGraphNash(Our_Nash, frekvenser):
             ax.annotate("{:.1f}".format(txt), (MixedEq_Winrates[i], my_range[i]),textcoords='offset points',xytext=(textcordx,textcordy),ha='center',fontsize=8)
     #Titel og Akser
     plt.yticks(my_range, dfGraph['Decks'])
-    plt.title("Nash VS Frekvens")
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
 
@@ -73,7 +72,7 @@ def MixedEqGraphCHPoissonStandard(MixedEq_Decks, CHInput, frekvenser):
     fig, ax = plt.subplots(figsize=(12, 8))
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['CH-model'], color='peru', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='deepskyblue', alpha=1, label='Observationer')
-    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='CH-Model')
+    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='Poisson-CH Model (1)')
     plt.legend()
     textcordy = 7
     textcordx = 0
@@ -93,7 +92,6 @@ def MixedEqGraphCHPoissonStandard(MixedEq_Decks, CHInput, frekvenser):
             ax.annotate("{:.1f}".format(txt), (Standard_CH[i], my_range[i]),textcoords='offset points',xytext=(textcordx,textcordy),ha='center',fontsize=8)
     #Titel og Akser
     plt.yticks(my_range, dfGraph['Decks'])
-    plt.title("CH-model (Poisson) VS Frekvens")
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
 
@@ -116,7 +114,7 @@ def MixedEqGraphCHPoissonAfrundet(MixedEq_Decks, CHInput, frekvenser):
     fig, ax = plt.subplots(figsize=(12, 8))
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['CH-model'], color='peru', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='deepskyblue', alpha=1, label='Observationer')
-    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='CH-Model')
+    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='Poisson-CH model (2)')
     plt.legend()
     textcordy = 7
     textcordx = 0
@@ -136,7 +134,6 @@ def MixedEqGraphCHPoissonAfrundet(MixedEq_Decks, CHInput, frekvenser):
             ax.annotate("{:.1f}".format(txt), (Standard_CH[i], my_range[i]),textcoords='offset points',xytext=(textcordx,textcordy),ha='center',fontsize=8)
     #Titel og Akser
     plt.yticks(my_range, dfGraph['Decks'])
-    plt.title("CH-model (Poisson), afrundet VS Frekvens")
     plt.xlabel('Pct. spillet')
     plt.ylabel('Deck')
 
@@ -159,7 +156,7 @@ def MixedEqGraphCHBetaAfrundet(MixedEq_Decks, CHInput, frekvenser):
     fig, ax = plt.subplots(figsize=(12, 8))
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['CH-model'], color='peru', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='deepskyblue', alpha=1, label='Observationer')
-    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='CH-Model')
+    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='Beta-CH Model (1)')
     plt.legend()
     textcordy = 7
     textcordx = 0
@@ -201,7 +198,7 @@ def MixedEqGraphCHBetaStandard(MixedEq_Decks, CHInput, frekvenser):
     fig, ax = plt.subplots(figsize=(12, 8))
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['CH-model'], color='peru', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='deepskyblue', alpha=1, label='Observationer')
-    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='CH-Model')
+    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='Beta-CH Model (2)')
     plt.legend()
     textcordy = 7
     textcordx = 0
@@ -243,7 +240,7 @@ def MixedEqLevelK(MixedEq_Decks, CHInput, frekvenser):
     fig, ax = plt.subplots(figsize=(12, 8))
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['Level-K'], color='peru', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='deepskyblue', alpha=1, label='Observationer')
-    plt.scatter(dfGraph['Level-K'], my_range, color='khaki', alpha=1, label='Level-K')
+    plt.scatter(dfGraph['Level-K'], my_range, color='khaki', alpha=1, label='Level-K Model')
     plt.legend()
     textcordy = 7
     textcordx = 0

@@ -17,7 +17,7 @@ from DataPrep import ImportFrekvenser
 #Winrates Data
 PathWin = r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx'
 #Frekvens Data
-PathFrek = r'C:\speciale2020\Data\Frekvenser_169_PlatToLegend.xlsx'
+PathFrek = r'C:\speciale2020\Data\Frekvenser_169.xlsx'
 
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
@@ -64,16 +64,14 @@ print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 1))
 #from MLEEstimation import MLEPlot
 #MLEPlot(level, tau)
 
-
-
-from DumbellPlot import MixedEqGraph
-#Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
-#MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
-'''
+#Optimerer tau
 from LeastSquares import OptLS_Standard
 OptLS_Standard(deck_names, winrates, frekvenser, level+1)
+
+#Indsæt tau som variabel øverst
+
 ###POISSON/###
-'''
+
 
 ###/BETA###
 print("BETAFORDELING:")
@@ -82,7 +80,7 @@ from CHModelBetaDist import CHSolveBeta
 from AlphaBetaOptimizer import f_one
 from AlphaBetaOptimizer import f_two
 import math
-'''
+
 sum_func1 = lambda x: sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level))
 sum_func2 = lambda x: sum(f_two(x[0], x[1], deck_names, winrates, frekvenser, level))
 
@@ -93,30 +91,17 @@ sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[
 print("Alpha, Beta")
 print(sol_case1['x'])
 print(sol_case2['x'])
-'''
-#Resultater fra optimiser, bare disregard
-alpha_standard, beta_standard = 0.20628184, 2.41621851
-alpha_afrund, beta_afrund = 0.28102937, 3.21491841
-alpha_standard_plat, beta_standard_plat = 0.24720334, 2.4701282 
-alpha_afrund_plat, beta_afrund_plat = 0.45068354, 4.27547875
-'''
+
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print(CHSolveBeta(deck_names, winrates, level,sol_case1['x'][0], sol_case1['x'][1], 0, MLE = 0))
 print(CHSolveBetaAfrund(deck_names, winrates, level, sol_case2['x'][0], sol_case2['x'][1], 0, MLE = 0))
 
+from CHModelBetaDist import player_distribution
+print("Andel af spillere af forskellige kognitive niveauer")
 print("Standard")
 print(player_distribution(5, sol_case1['x'][0], sol_case1['x'][1]))
 print("Afrundet")
 print(player_distribution(5, sol_case2['x'][0], sol_case2['x'][1]))
-'''
-from CHModelBetaDist import player_distribution
-#Tests
-print(CHSolveBeta(deck_names, winrates, level,alpha_standard_plat, beta_standard_plat, 0, MLE = 1))
-print(CHSolveBetaAfrund(deck_names, winrates, level,alpha_afrund_plat, beta_afrund_plat, 0, MLE = 1))
-print("Standard")
-print(player_distribution(5, alpha_standard_plat, beta_standard_plat))
-print("Afrundet")
-print(player_distribution(5, alpha_afrund_plat, beta_afrund_plat))
 
 
 ###BETA/###
@@ -128,7 +113,7 @@ from DumbellPlotEnkelte import MixedEqGraphCHPoissonAfrundet
 from DumbellPlotEnkelte import MixedEqGraphCHBetaAfrundet
 from DumbellPlotEnkelte import MixedEqGraphCHBetaStandard
 from DumbellPlotEnkelte import MixedEqLevelK
-'''
+
 MixedEqGraphNash(solvemixednash(deck_names, winrates, 1), frekvenser)
 MixedEqGraphCHPoissonStandard(deck_names, CHSolve(deck_names, winrates, level, 0, tau, 1), frekvenser)
 MixedEqGraphCHPoissonAfrundet(deck_names, CHSolveAfrund(deck_names, winrates, level, 0, tau_afrund, 1), frekvenser)
@@ -137,4 +122,3 @@ MixedEqGraphCHBetaAfrundet(deck_names, CHSolveBetaAfrund(deck_names, winrates, l
 MixedEqLevelK(deck_names, levelksolvepoisson(deck_names, winrates, level, tau_levelk), frekvenser)
 #Skal være til sidst
 plt.show()
-'''
