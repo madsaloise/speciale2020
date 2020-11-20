@@ -68,7 +68,7 @@ print("tau= 0.1")
 print(CHSolve(deck_names, winrates, level, 0, 0.1, 0))
 print("tau= 1.1")
 print(CHSolve(deck_names, winrates, level, 0, 1.1, 0))
-print("tau= 1.09")
+print("tau= 1")
 print(CHSolve(deck_names, winrates, level, 0, 1, 0))
 print(CHSolve(deck_names, winrates, level, 0, 2.9, 0))
 from DumbellPlot import MixedEqGraph
@@ -100,7 +100,7 @@ print("Alpha, Beta")
 print(sol_case1['x'])
 print(sol_case2['x'])
 '''
-'''
+
 #Resultater fra optimiser, bare disregard
 alpha_standard, beta_standard = 0.20628184, 2.41621851
 alpha_afrund, beta_afrund = 0.28102937, 3.21491841
@@ -108,12 +108,13 @@ alpha_standard_plat, beta_standard_plat = 0.24720334, 2.4701282
 alpha_afrund_plat, beta_afrund_plat = 0.45068354, 4.27547875
 alpha_standard_underplat, beta_standard_underplat = 0.09316826, 2.65226339 
 alpha_afrund_underplat, beta_afrund_underplat = 0.10634961, 2.63627197
-'''
-'''
+
+
 #Optimale alpha og beta bruges til at beregne CH-modellerne
-print(CHSolveBeta(deck_names, winrates, level,sol_case1['x'][0], sol_case1['x'][1], 0, MLE = 0))
-print(CHSolveBetaAfrund(deck_names, winrates, level, sol_case2['x'][0], sol_case2['x'][1], 0, MLE = 0))
-'''
+print(CHSolveBeta(deck_names, winrates, level,alpha_standard, beta_standard, 0, MLE = 0))
+print("Afrundet")
+print(CHSolveBetaAfrund(deck_names, winrates, level, alpha_afrund, beta_afrund, 0, MLE = 0))
+
 '''
 print("Standard")
 print(player_distribution(5, alpha_standard_underplat, beta_standard_underplat))
