@@ -17,9 +17,9 @@ from scipy.optimize import linprog
 
 
 #Winrates Data
-PathWin = r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx'
+PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx'
 #Frekvens Data
-PathFrek = r'C:\speciale2020\Data\Frekvenser_169.xlsx'
+PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169.xlsx'
 
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
@@ -45,7 +45,7 @@ def player_distribution(levels, alpha_val, beta_val):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
 
-def NashCHModel(Our_Nash, deck_names, winrates, alpha, beta):
+def NashCHModelNash(Our_Nash, deck_names, winrates, alpha, beta, MLE =1):
     num_decks = len(deck_names)
     CHLVL0 = [1/num_decks for i in deck_names]
     CHLVL1 = []
@@ -116,7 +116,9 @@ def NashCHModel(Our_Nash, deck_names, winrates, alpha, beta):
     bounds = [(0,None) for i in range(num_decks+1)]
     
     NashCH_Solution = linprog(c, A_ub=A, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq, bounds=bounds)
-
-    return zip(deck_names,NashCH_Solution['x'])
-
-print(list(NashCHModel(solvemixednash(deck_names, winrates, 1), deck_names, winrates, 0.5, 0.5)))
+    if MLE == 1:
+        return zip(deck_names,NashCH_Solution['x'])
+    elif MLE == 0:
+        MixedStrat = [j for i,j in zip(deck_names,NashCH_Solution['x'])] 
+        return MixedStrat
+print(NashCHModelNash(solvemixednash(deck_names, winrates, 1), deck_names, winrates, 0.5, 0.5, 0))
