@@ -15,9 +15,9 @@ from DataPrep import ImportFrekvenser
 
 
 #Winrates Data
-PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx'
+PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_166.xlsx'
 #Frekvens Data
-PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169.xlsx'
+PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_166.xlsx'
 
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
@@ -122,6 +122,7 @@ for i in sol_case3['x']:
 print(NormSolDist)
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, sol_case3['x'][0], sol_case3['x'][1], sol_case3['x'][2], sol_case3['x'][3], sol_case3['x'][4], MLE = 1))
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist[0], NormSolDist[1], NormSolDist[2], NormSolDist[3], NormSolDist[4], MLE = 1))
+print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist[0], NormSolDist[1], NormSolDist[2], NormSolDist[3], NormSolDist[4], MLE = 0))
 #Resultater fra optimiser, bare disregard
 alpha_standard, beta_standard = 0.20628184, 2.41621851
 alpha_afrund, beta_afrund = 0.28102937, 3.21491841
