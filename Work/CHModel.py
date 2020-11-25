@@ -13,8 +13,11 @@ def player_distribution(tau, levels):
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-print(player_distribution(0.1708542713567839, 5))
-print(player_distribution(0.2613065326633166, 5))
+print(player_distribution(0.1407035175879397, 1))
+print(player_distribution(0.1407035175879397, 2))
+print(player_distribution(0.1407035175879397, 3))
+print(player_distribution(0.1407035175879397, 4))
+print(player_distribution(0.1407035175879397, 5))
 
 '''
 print("standard")

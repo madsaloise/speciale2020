@@ -85,6 +85,6 @@ def f_five(alpha, beta, gamma, delta, epsilon, deck_names, winrates, frekvenser)
     Diff_Probs = []
     count2 = 0
     for j in ShareOfGames:
-        Diff_Probs.append((ShareOfGames[count2] - 100* NashCHModelNash(solvemixednash(deck_names, winrates, 1), deck_names, winrates, alpha, beta, 0)[count2])**2)
+        Diff_Probs.append((ShareOfGames[count2] - 100* CHModelFree(deck_names, winrates, alpha, beta, gamma, delta, epsilon, MLE = 1)[count2])**2)
         count2 += 1
     return Diff_Probs

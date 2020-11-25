@@ -16,15 +16,6 @@ from scipy.optimize import linprog
 # Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
 
-#Winrates Data
-PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx'
-#Frekvens Data
-PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169.xlsx'
-
-deck_names = ImportExcelFile(1,0,0, PathWin)
-winrates = ImportExcelFile(0,1,0, PathWin)
-data = ImportExcelFile(0,0,1, PathWin)
-frekvenser = ImportFrekvenser(PathFrek)
 def player_distribution_frievar(alpha, beta, gamma, delta, epsilon):
     dist = [alpha, beta, gamma, delta, epsilon]
     return dist
@@ -208,10 +199,5 @@ def NashCHModelCH(Our_Nash, deck_names, winrates, alpha, beta, gamma, delta, eps
     elif MLE == 0: 
         Strategi = deck_names[payoff_index.index(max(payoff_index))]
         return Strategi
-alpha = 0.2
-beta = 0.1
-gamma = 0.1
-delta = 0.3
-epsilon = 0.3
-print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, alpha, beta, gamma, delta, epsilon, MLE = 1))
+
 

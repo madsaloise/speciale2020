@@ -101,6 +101,7 @@ import math
 initial_guess1 = [0.5, 0.5]
 initial_guess2 = [0.2, 0.2, 0.2, 0.2, 0.2]
 '''
+
 sum_func1 = lambda x: sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level))
 sum_func2 = lambda x: sum(f_two(x[0], x[1], deck_names, winrates, frekvenser, level))
 sol_case1 = optimize.minimize(sum_func1, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
