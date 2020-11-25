@@ -15,9 +15,9 @@ from DataPrep import ImportFrekvenser
 
 
 #Winrates Data
-PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_166.xlsx'
+PathWin = r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx'
 #Frekvens Data
-PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_166.xlsx'
+PathFrek = r'C:\speciale2020\Data\Frekvenser_169.xlsx'
 
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
@@ -89,33 +89,45 @@ print("BETAFORDELING:")
 from CHModelBetaDistAfrund import CHSolveBetaAfrund
 from CHModelBetaDist import CHSolveBeta
 from CHModelBetaDist import player_distribution
+from CHModelFreeWeights import CHModelFree
 from AlphaBetaOptimizer import f_one
 from AlphaBetaOptimizer import f_two
 from AlphaBetaOptimizer import f_three
 from AlphaBetaOptimizer import f_four
+from AlphaBetaOptimizer import f_five
 from BR_Til_Nash_CHMODEL import NashCHModelCH
 from BR_Til_Nash_NashLigevægt import NashCHModelNash
 import math
 initial_guess1 = [0.5, 0.5]
-initial_guess2 = [0.3, 0.3, 0.3, 0.3, 0.3]
+initial_guess2 = [0.2, 0.2, 0.2, 0.2, 0.2]
 '''
 sum_func1 = lambda x: sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level))
 sum_func2 = lambda x: sum(f_two(x[0], x[1], deck_names, winrates, frekvenser, level))
 sol_case1 = optimize.minimize(sum_func1, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
 sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
 '''
-
+'''
 sum_func3 = lambda x: sum(f_four(x[0], x[1], x[2], x[3], x[4], deck_names, winrates, frekvenser))
 sol_case3 = optimize.minimize(sum_func3, initial_guess2, method='SLSQP', bounds=[(0,None), (0, None),(0,None), (0, None), (0,None)])
-
-print("Alpha, Beta")
 '''
-print(sol_case1['x'])
-print(sol_case2['x'])
-'''
-print(sol_case3['x'])
+sum_func4 = lambda x: sum(f_five(x[0], x[1], x[2], x[3], x[4], deck_names, winrates, frekvenser))
+sol_case4 = optimize.minimize(sum_func4, initial_guess2, method='SLSQP', bounds=[(0,None), (0, None),(0,None), (0, None), (0,None)])
+print(sol_case4['x'])
 NormSolDist = []
 count = 0
+for i in sol_case4['x']:
+    NormSolDist.append(sol_case4['x'][count]/sum(sol_case4['x']))
+    count += 1
+print(NormSolDist)
+'''
+print("Alpha, Beta")
+
+print(sol_case1['x'])
+print(sol_case2['x'])
+
+print(sol_case3['x'])
+
+
 for i in sol_case3['x']:
     NormSolDist.append(sol_case3['x'][count]/sum(sol_case3['x']))
     count += 1
@@ -130,7 +142,7 @@ alpha_standard_plat, beta_standard_plat = 0.24720334, 2.4701282
 alpha_afrund_plat, beta_afrund_plat = 0.45068354, 4.27547875
 alpha_standard_underplat, beta_standard_underplat = 0.09316826, 2.65226339 
 alpha_afrund_underplat, beta_afrund_underplat = 0.10634961, 2.63627197
-
+'''
 '''
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print(CHSolveBeta(deck_names, winrates, level,alpha_standard, beta_standard, 0, MLE = 1))
