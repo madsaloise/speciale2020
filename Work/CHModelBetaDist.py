@@ -20,7 +20,7 @@ def player_distribution(levels, alpha_val, beta_val):
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-print(player_distribution(5, 0.17872715,1.78459794))
+print(player_distribution(5, 0.09316826, 2.65226339))
 print(sum(player_distribution(5,  0.17872715,1.78459794)[2:]))
 print(player_distribution(5, 0.15303938 , 1.09506258))
 print(sum(player_distribution(5,  0.15303938 , 1.09506258)[2:]))

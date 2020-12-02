@@ -100,13 +100,12 @@ from BR_Til_Nash_NashLigevægt import NashCHModelNash
 import math
 initial_guess1 = [0.5, 0.5]
 initial_guess2 = [0.2, 0.2, 0.2, 0.2, 0.2]
-'''
 
+'''
 sum_func1 = lambda x: sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level))
 sum_func2 = lambda x: sum(f_two(x[0], x[1], deck_names, winrates, frekvenser, level))
-sol_case1 = optimize.minimize(sum_func1, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
-sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
-'''
+sol_case1 = optimize.minimize(sum_func1, initial_guess1, method='SLSQP', bounds=[(0,None), (0, None)])
+sol_case2 = optimize.minimize(sum_func2, initial_guess1, method='SLSQP', bounds=[(0,None), (0, None)])
 '''
 sum_func3 = lambda x: sum(f_four(x[0], x[1], x[2], x[3], x[4], deck_names, winrates, frekvenser))
 sol_case3 = optimize.minimize(sum_func3, initial_guess2, method='SLSQP', bounds=[(0,None), (0, None),(0,None), (0, None), (0,None)])
@@ -114,28 +113,32 @@ sol_case3 = optimize.minimize(sum_func3, initial_guess2, method='SLSQP', bounds=
 sum_func4 = lambda x: sum(f_five(x[0], x[1], x[2], x[3], x[4], deck_names, winrates, frekvenser))
 sol_case4 = optimize.minimize(sum_func4, initial_guess2, method='SLSQP', bounds=[(0,None), (0, None),(0,None), (0, None), (0,None)])
 print(sol_case4['x'])
-NormSolDist = []
+'''
+NormSolDist1 = []
 count = 0
+for i in sol_case3['x']:
+    NormSolDist1.append(sol_case3['x'][count]/sum(sol_case3['x']))
+    count += 1
+print(NormSolDist1)
+
+print("Alpha, Beta")
+'''
+print(sol_case1['x'])
+print(sol_case2['x'])
+'''
+print(sol_case3['x'])
+
+'''
+NormSolDist = []
 for i in sol_case4['x']:
     NormSolDist.append(sol_case4['x'][count]/sum(sol_case4['x']))
     count += 1
+
 print(NormSolDist)
 '''
-print("Alpha, Beta")
-
-print(sol_case1['x'])
-print(sol_case2['x'])
-
-print(sol_case3['x'])
-
-
-for i in sol_case3['x']:
-    NormSolDist.append(sol_case3['x'][count]/sum(sol_case3['x']))
-    count += 1
-print(NormSolDist)
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, sol_case3['x'][0], sol_case3['x'][1], sol_case3['x'][2], sol_case3['x'][3], sol_case3['x'][4], MLE = 1))
-print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist[0], NormSolDist[1], NormSolDist[2], NormSolDist[3], NormSolDist[4], MLE = 1))
-print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist[0], NormSolDist[1], NormSolDist[2], NormSolDist[3], NormSolDist[4], MLE = 0))
+print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist1[0], NormSolDist1[1], NormSolDist1[2], NormSolDist1[3], NormSolDist1[4], MLE = 1))
+print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist1[0], NormSolDist1[1], NormSolDist1[2], NormSolDist1[3], NormSolDist1[4], MLE = 0))
 #Resultater fra optimiser, bare disregard
 alpha_standard, beta_standard = 0.20628184, 2.41621851
 alpha_afrund, beta_afrund = 0.28102937, 3.21491841
@@ -143,7 +146,7 @@ alpha_standard_plat, beta_standard_plat = 0.24720334, 2.4701282
 alpha_afrund_plat, beta_afrund_plat = 0.45068354, 4.27547875
 alpha_standard_underplat, beta_standard_underplat = 0.09316826, 2.65226339 
 alpha_afrund_underplat, beta_afrund_underplat = 0.10634961, 2.63627197
-'''
+
 '''
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print(CHSolveBeta(deck_names, winrates, level,alpha_standard, beta_standard, 0, MLE = 1))

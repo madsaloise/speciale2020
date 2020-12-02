@@ -17,7 +17,7 @@ print(player_distribution(0.1407035175879397, 1))
 print(player_distribution(0.1407035175879397, 2))
 print(player_distribution(0.1407035175879397, 3))
 print(player_distribution(0.1407035175879397, 4))
-print(player_distribution(0.1407035175879397, 5))
+print(player_distribution(0.06030150753768844, 5))
 
 '''
 print("standard")

@@ -190,11 +190,9 @@ def CHModelFree(deck_names, winrates, alpha, beta, gamma, delta, epsilon, MLE = 
             count3 += 1
         payoff_index.append(sum(temp_sum))
         temp_sum = []  
-    '''
     print("Level-" + str(5) + "--->")    
     print("Sandsynligheden for at møde andre decks: " + str(NormProbs))
     print("Payoffs: " + str(payoff_index))
-    '''
     #Tilføjer deck-indekset til deckID-listen
     if MLE == 1:
         return NormProbs
