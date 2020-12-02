@@ -46,8 +46,6 @@ def CHSolveBetaAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer,
     deck_prob = []
     for p in range(levels+1):
         if p > 0:
-            #print("LEVEL :" + str(p))
-            #print(player_distribution(p, alpha_val, beta_val))
             #Kopierer liste
             A = list.copy(winrates)
             i_list = []
@@ -59,19 +57,13 @@ def CHSolveBetaAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer,
                 for q in range(p):
                     if q == 0:
                         temp_dist = temp_dist + (1/len(A))*player_distribution(p, alpha_val, beta_val)[q]
-                        #print("Level 0 --->")
-                        #print(player_distribution(tau, p)[q])
                     elif not isinstance(deckID[q-1], list):
                         temp_dist = temp_dist + player_distribution(p, alpha_val, beta_val)[q] * player_plays(winrates, q, deckID[q-1], count1)
-                        #print("Level 1 --->")
-                        #print(player_distribution(tau, p)[q])
-                        #print(player_plays(winrates, q, deckID[q-1], count1))
                     else: 
                         count4 = 0
                         for i in deckID[q-1]:
                             temp_dist = temp_dist + player_distribution(p, alpha_val, beta_val)[q] * player_plays(winrates, q, deckID[q-1][count4], count1) / len(deckID[q-1])
                             count4 += 1
-                    #print(player_plays(winrates, q, deckID, count))
                 i_list.append(temp_dist)
                 count1 += 1
             count2 = 0
@@ -99,8 +91,6 @@ def CHSolveBetaAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer,
             if len(multiple_max) == 1:
                 deckID.append(payoff_index.index(max(payoff_index)))   
             else:
-                #print("Multiple max --->")
-                #print(multiple_max)
                 deckID.append(multiple_max) 
             if p == levels:
                 return_prob = maks_index
@@ -109,7 +99,6 @@ def CHSolveBetaAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer,
                 maks_index = []
                 payoff_index = []
                 deck_prob = []
-    #deckID = list.copy(deckID[1:])
     if MLE == 1:
         return return_prob
     else:

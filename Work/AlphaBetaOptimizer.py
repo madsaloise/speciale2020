@@ -72,7 +72,7 @@ def f_four(alpha, beta, gamma, delta, epsilon, deck_names, winrates, frekvenser)
         count2 += 1
     return Diff_Probs
 
-#Frievægte
+#Frievægte normal CH
 def f_five(alpha, beta, gamma, delta, epsilon, deck_names, winrates, frekvenser):
     NumberOfGames = []
     count = 0

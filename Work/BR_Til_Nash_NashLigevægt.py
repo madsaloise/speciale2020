@@ -9,13 +9,6 @@ from math import factorial
 from math import exp
 from scipy.stats import beta
 from scipy.optimize import linprog
-#Syntax:
-# ImportExcelFile(Kolonner, Rækker, dataframe, Path) 
-# ImportFrekvenser(Path)
-# Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0. Stien angives med R'Sti.xlsx'
-# Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
-
-
 def player_distribution(levels, alpha_val, beta_val):
     def beta_distribution(mean, alpha_val, beta_val):
         distribution = beta.cdf(mean, alpha_val, beta_val)
@@ -51,11 +44,7 @@ def NashCHModelNash(Our_Nash, deck_names, winrates, alpha, beta, MLE =1):
     for a, b in MixedEq:
         MixedEq_Decks.append(a)
         NashProbs.append(b)
-    print(CHLVL0)
-    print(CHLVL1)
-    print(NashProbs)
     dist_probs = player_distribution(3, alpha, beta)
-    print(dist_probs)
     ListProbs = [CHLVL0, CHLVL1, NashProbs]
     CombinedProbs = []
     count = 0
@@ -70,9 +59,6 @@ def NashCHModelNash(Our_Nash, deck_names, winrates, alpha, beta, MLE =1):
     NormProbs = []
     for i in range(len(CombinedProbs)):
         NormProbs.append(CombinedProbs[i]/sum(CombinedProbs))
-
-    print(deck_names)
-    print(NormProbs)
     c = [0 for i in range(num_decks)]
     c.append(1)
     A = list.copy(winrates)

@@ -50,19 +50,13 @@ def CHSolveAfrund(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 for q in range(p):
                     if q == 0:
                         temp_dist = temp_dist + (1/len(A))*player_distribution(tau, p)[q]
-                        #print("Level 0 --->")
-                        #print(player_distribution(tau, p)[q])
                     elif not isinstance(deckID[q-1], list):
                         temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID[q-1], count1)
-                        #print("Level 1 --->")
-                        #print(player_distribution(tau, p)[q])
-                        #print(player_plays(winrates, q, deckID[q-1], count1))
                     else: 
                         count4 = 0
                         for i in deckID[q-1]:
                             temp_dist = temp_dist + player_distribution(tau, p)[q] * player_plays(winrates, q, deckID[q-1][count4], count1) / len(deckID[q-1])
                             count4 += 1
-                    #print(player_plays(winrates, q, deckID, count))
                 i_list.append(temp_dist)
                 count1 += 1
             count2 = 0
@@ -90,8 +84,6 @@ def CHSolveAfrund(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
             if len(multiple_max) == 1:
                 deckID.append(payoff_index.index(max(payoff_index)))   
             else:
-                #print("Multiple max --->")
-                #print(multiple_max)
                 deckID.append(multiple_max) 
             if p == levels:
                 return_prob = maks_index
@@ -100,7 +92,6 @@ def CHSolveAfrund(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 maks_index = []
                 payoff_index = []
                 deck_prob = []
-    #deckID = list.copy(deckID[1:])
     if MLE == 1:
         return return_prob
     else:
@@ -123,9 +114,3 @@ def CHSolveAfrund(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
                 plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
             counter += 1
         return plays
-'''
-tau_range = [0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 100]
-for i in tau_range:
-    print("Fordeling for tau på: " + str(i))
-    print(player_distribution(i, 10)) 
-'''

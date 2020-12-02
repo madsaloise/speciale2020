@@ -23,7 +23,6 @@ def levelksolve(decks, winrates, levels):
         deckID.append(np.argmin(maks_index))
         level_0_index = np.argmin(maks_index)
         maks_index = []
-    #print(deckID)
     #Danner en liste med forskellige spilleres valg
     counter=0
     plays = []

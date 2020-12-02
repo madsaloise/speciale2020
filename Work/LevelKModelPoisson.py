@@ -36,11 +36,8 @@ def levelksolvepoisson(decks, winrates, levels, tau):
         deckID.append(np.argmin(maks_index))
         level_0_index = np.argmin(maks_index)
         maks_index = []
-    #print(deckID)
     #Danner en liste med forskellige spilleres valg
-    #print(player_distribution(0.14285714285714285, levels))
     plays = []
-    #print("I et level-k hierarki med tau på 0.14 har vi følgende:")
     for j in range(levels):
         counter=0
         for i in decks:

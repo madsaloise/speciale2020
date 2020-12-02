@@ -20,12 +20,7 @@ def player_distribution(levels, alpha_val, beta_val):
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-print(player_distribution(5, 0.09316826, 2.65226339))
-print(sum(player_distribution(5,  0.17872715,1.78459794)[2:]))
-print(player_distribution(5, 0.15303938 , 1.09506258))
-print(sum(player_distribution(5,  0.15303938 , 1.09506258)[2:]))
-#print(player_distribution(5, 0.0899432,  0.79928276))
-#SSH på 1/antallet af decks, hvis det kun er lvl 0. 1 ellers
+
 def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:
         prob = 1/len(winrates)
@@ -35,7 +30,6 @@ def player_plays(winrates, level, deckID, indeks_tal):
     else:
         return 0
 def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
-    #print(player_distribution(tau, levels))
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
@@ -51,8 +45,6 @@ def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE =
     deck_prob = []
     for p in range(levels+1):
         if p > 0:
-            #print("LEVEL :" + str(p))
-            #print(player_distribution(p, alpha_val, beta_val))
             #Kopierer liste
             A = list.copy(winrates)
             i_list = []
@@ -64,14 +56,8 @@ def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE =
                 for q in range(p):
                     if q == 0:
                         temp_dist = temp_dist + (1/len(A))*player_distribution(p, alpha_val, beta_val)[q]
-                        #print("Level 0 --->")
-                        #print(player_distribution(levels+1, alpha_val, beta_val)[q])
                     else:
                         temp_dist = temp_dist + player_distribution(p, alpha_val, beta_val)[q] * player_plays(winrates, q, deckID[q-1], count1)
-                        #print("Level " +str(p) +" --->")
-                        #print(player_distribution(levels+1, alpha_val, beta_val)[q])
-                        #print(player_plays(winrates, q, deckID[q-1], count1))
-                    #print(player_plays(winrates, q, deckID, count1))
                 i_list.append(temp_dist)
                 count1 += 1
             count2 = 0
@@ -102,13 +88,12 @@ def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE =
                 maks_index = []
                 payoff_index = []
                 deck_prob = []
-    #deckID = list.copy(deckID[1:])
     if MLE == 1:
         return return_prob
     elif MLE == 2:
         counter=0
         plays = []
-        #print("I en CH-model har vi følgende:")
+        print("I en CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]
@@ -127,9 +112,3 @@ def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE =
             plays.append("Level-" + str(counter+1) + " spiller: "+ str(leveliplay))
             counter += 1
         return plays
-'''
-tau_range = [0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 3, 4, 5, 100]
-for i in tau_range:
-    print("Fordeling for tau på: " + str(i))
-    print(player_distribution(i, 10)) 
-'''

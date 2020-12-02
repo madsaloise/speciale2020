@@ -9,12 +9,6 @@ from math import factorial
 from math import exp
 from scipy.stats import beta
 from scipy.optimize import linprog
-#Syntax:
-# ImportExcelFile(Kolonner, Rækker, dataframe, Path) 
-# ImportFrekvenser(Path)
-# Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0. Stien angives med R'Sti.xlsx'
-# Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
-
 
 def player_distribution_frievar(alpha, beta, gamma, delta, epsilon):
     dist = [alpha, beta, gamma, delta, epsilon]
@@ -28,7 +22,6 @@ def player_plays(winrates, level, deckID, indeks_tal):
     else:
         return 0
 def CHSolveBeta2(decks, winrates, levels, alpha, beta, gamma, delta, epsilon, kommentarer, MLE = 0):
-    #print(player_distribution(tau, levels))
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
     payoffs = [[u for u in [(j/50.0)-1 for j in i]] for i in winrates]
@@ -44,8 +37,6 @@ def CHSolveBeta2(decks, winrates, levels, alpha, beta, gamma, delta, epsilon, ko
     deck_prob = []
     for p in range(levels+1):
         if p > 0:
-            #print("LEVEL :" + str(p))
-            #print(player_distribution(p, alpha_val, beta_val))
             #Kopierer liste
             A = list.copy(winrates)
             i_list = []
@@ -57,14 +48,8 @@ def CHSolveBeta2(decks, winrates, levels, alpha, beta, gamma, delta, epsilon, ko
                 for q in range(p):
                     if q == 0:
                         temp_dist = temp_dist + (1/len(A))*player_distribution_frievar(alpha, beta, gamma, delta, epsilon)[q]
-                        #print("Level 0 --->")
-                        #print(player_distribution(levels+1, alpha_val, beta_val)[q])
                     else:
                         temp_dist = temp_dist + player_distribution_frievar(alpha, beta, gamma, delta, epsilon)[q] * player_plays(winrates, q, deckID[q-1], count1)
-                        #print("Level " +str(p) +" --->")
-                        #print(player_distribution(levels+1, alpha_val, beta_val)[q])
-                        #print(player_plays(winrates, q, deckID[q-1], count1))
-                    #print(player_plays(winrates, q, deckID, count1))
                 i_list.append(temp_dist)
                 count1 += 1
             count2 = 0
@@ -95,13 +80,12 @@ def CHSolveBeta2(decks, winrates, levels, alpha, beta, gamma, delta, epsilon, ko
                 maks_index = []
                 payoff_index = []
                 deck_prob = []
-    #deckID = list.copy(deckID[1:])
     if MLE == 1:
         return return_prob
     elif MLE == 2:
         counter=0
         plays = []
-        #print("I en CH-model har vi følgende:")
+        print("I en CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]
@@ -157,12 +141,6 @@ def CHModelFree(deck_names, winrates, alpha, beta, gamma, delta, epsilon, MLE = 
         else:
             CHLVL4.append(0)
         count += 1
-    '''    
-    print(CHLVL0)
-    print(CHLVL1)
-    print(CHLVL2)
-    print(NashProbs)
-    '''
     dist_probs = player_distribution_frievar(alpha, beta, gamma, delta, epsilon)
     #print(dist_probs)
     ListProbs = [CHLVL0, CHLVL1, CHLVL2, CHLVL3, CHLVL4]

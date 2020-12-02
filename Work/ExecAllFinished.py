@@ -13,7 +13,6 @@ from DataPrep import ImportFrekvenser
 # Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0. Stien angives med R'Sti.xlsx'
 # Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
-
 #Winrates Data
 PathWin = r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx'
 #Frekvens Data
@@ -51,7 +50,6 @@ print(levelksolvepoisson(deck_names, winrates, level, tau_levelk))
 
 #CH Model, syntax: CHSolve(decks, winrates, levels, kommentarer, tau = 0.5):, level 0 antages at spille uniformt. 
 #"Kommentarer" skal være en, hvis man vil se sandsynligheder og payoffs, 0 ellers.
-#from MLEEstimation import MLEPlot
 from CHModelAfrund import CHSolveAfrund
 from CHModel import CHSolve
 print("standard")
@@ -61,8 +59,6 @@ print("Afrund")
 print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 0))
 print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 1))
 
-#from MLEEstimation import MLEPlot
-#MLEPlot(level, tau)
 
 #Optimerer tau
 from LeastSquares import OptLS_Standard
@@ -77,31 +73,59 @@ OptLS_Standard(deck_names, winrates, frekvenser, level+1)
 print("BETAFORDELING:")
 from CHModelBetaDistAfrund import CHSolveBetaAfrund
 from CHModelBetaDist import CHSolveBeta
+from CHModelBetaDist import player_distribution
+from CHModelFreeWeights import CHModelFree
 from AlphaBetaOptimizer import f_one
 from AlphaBetaOptimizer import f_two
+from AlphaBetaOptimizer import f_three
+from AlphaBetaOptimizer import f_four
+from AlphaBetaOptimizer import f_five
+from BR_Til_Nash_CHMODEL import NashCHModelCH
+from BR_Til_Nash_NashLigevægt import NashCHModelNash
 import math
 
 sum_func1 = lambda x: sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level))
 sum_func2 = lambda x: sum(f_two(x[0], x[1], deck_names, winrates, frekvenser, level))
+sum_func3 = lambda x: sum(f_four(x[0], x[1], x[2], x[3], x[4], deck_names, winrates, frekvenser))
+sum_func4 = lambda x: sum(f_five(x[0], x[1], x[2], x[3], x[4], deck_names, winrates, frekvenser))
+
+
 
 initial_guess = [0.5, 0.5]
+initial_guess2 = [0.2, 0.2, 0.2, 0.2, 0.2]
+
 sol_case1 = optimize.minimize(sum_func1, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
 sol_case2 = optimize.minimize(sum_func2, initial_guess, method='SLSQP', bounds=[(0,None), (0, None)])
-
+sol_case3 = optimize.minimize(sum_func3, initial_guess2, method='SLSQP', bounds=[(0,None), (0, None),(0,None), (0, None), (0,None)])
+sol_case4 = optimize.minimize(sum_func4, initial_guess2, method='SLSQP', bounds=[(0,None), (0, None),(0,None), (0, None), (0,None)])
 print("Alpha, Beta")
 print(sol_case1['x'])
 print(sol_case2['x'])
+#print(sol_case3['x'])
+#print(sol_case4['x'])
+
+NormSolDist1 = []
+count = 0
+for i in sol_case3['x']:
+    NormSolDist1.append(sol_case3['x'][count]/sum(sol_case3['x']))
+    count += 1
+print(NormSolDist1)
+
+NormSolDist2 = []
+count = 0
+for i in sol_case4['x']:
+    NormSolDist2.append(sol_case4['x'][count]/sum(sol_case4['x']))
+    count += 1
+print(NormSolDist2)
+
 
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print(CHSolveBeta(deck_names, winrates, level,sol_case1['x'][0], sol_case1['x'][1], 0, MLE = 0))
 print(CHSolveBetaAfrund(deck_names, winrates, level, sol_case2['x'][0], sol_case2['x'][1], 0, MLE = 0))
+print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, sol_case3['x'][0], sol_case3['x'][1], sol_case3['x'][2], sol_case3['x'][3], sol_case3['x'][4], MLE = 1))
+print(CHModelFree(deck_names, winrates, sol_case4['x'][0], sol_case4['x'][1], sol_case4['x'][2], sol_case4['x'][3], sol_case4['x'][4], MLE = 1))
 
-from CHModelBetaDist import player_distribution
-print("Andel af spillere af forskellige kognitive niveauer")
-print("Standard")
-print(player_distribution(5, sol_case1['x'][0], sol_case1['x'][1]))
-print("Afrundet")
-print(player_distribution(5, sol_case2['x'][0], sol_case2['x'][1]))
+
 
 
 ###BETA/###

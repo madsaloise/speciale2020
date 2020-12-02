@@ -13,7 +13,6 @@ from DataPrep import ImportFrekvenser
 # Det, som man gerne vil gemme fra funktionen angives som 1, de andre som 0. Stien angives med R'Sti.xlsx'
 # Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
-
 #Winrates Data
 PathWin = r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx'
 #Frekvens Data
