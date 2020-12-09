@@ -67,10 +67,10 @@ def CHSolveBeta2(decks, winrates, levels, alpha, beta, gamma, delta, epsilon, ko
                     count3 += 1
                 payoff_index.append(sum(temp_sum))
                 temp_sum = []  
-            if kommentarer == 1:
-                print("Level-" + str(p) + "--->")    
-                print("Sandsynligheden for at møde andre decks: " + str(maks_index))
-                print("Payoffs: " + str(payoff_index))
+            #if kommentarer == 1:
+                #print("Level-" + str(p) + "--->")    
+                #print("Sandsynligheden for at møde andre decks: " + str(maks_index))
+                #print("Payoffs: " + str(payoff_index))
             #Tilføjer deck-indekset til deckID-listen
             deckID.append(payoff_index.index(max(payoff_index)))   
             if p == levels:
@@ -85,7 +85,7 @@ def CHSolveBeta2(decks, winrates, levels, alpha, beta, gamma, delta, epsilon, ko
     elif MLE == 2:
         counter=0
         plays = []
-        print("I en CH-model har vi følgende:")
+        #print("I en CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]
@@ -96,7 +96,7 @@ def CHSolveBeta2(decks, winrates, levels, alpha, beta, gamma, delta, epsilon, ko
         #Danner en liste med forskellige spilleres valg
         counter=0
         plays = []
-        print("I en standard CH-model har vi følgende:")
+        #print("I en standard CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]
@@ -168,9 +168,9 @@ def CHModelFree(deck_names, winrates, alpha, beta, gamma, delta, epsilon, MLE = 
             count3 += 1
         payoff_index.append(sum(temp_sum))
         temp_sum = []  
-    print("Level-" + str(5) + "--->")    
-    print("Sandsynligheden for at møde andre decks: " + str(NormProbs))
-    print("Payoffs: " + str(payoff_index))
+    #print("Level-" + str(5) + "--->")    
+    #print("Sandsynligheden for at møde andre decks: " + str(NormProbs))
+    #print("Payoffs: " + str(payoff_index))
     #Tilføjer deck-indekset til deckID-listen
     if MLE == 1:
         return NormProbs

@@ -105,7 +105,7 @@ def CHSolveBetaAfrund(decks, winrates, levels, alpha_val, beta_val, kommentarer,
         #Danner en liste med forskellige spilleres valg
         counter=0
         plays = []
-        print("I en afrundetCH-model har vi følgende:")
+        #print("I en afrundet CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]

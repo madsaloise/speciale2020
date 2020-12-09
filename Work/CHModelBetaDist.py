@@ -93,7 +93,7 @@ def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE =
     elif MLE == 2:
         counter=0
         plays = []
-        print("I en CH-model har vi følgende:")
+        #print("I en CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]
@@ -104,7 +104,7 @@ def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE =
         #Danner en liste med forskellige spilleres valg
         counter=0
         plays = []
-        print("I en standard CH-model har vi følgende:")
+        #print("I en standard CH-model har vi følgende:")
         for i in deckID:
             ilevel_k = counter
             deckIDcounter = deckID[ilevel_k]

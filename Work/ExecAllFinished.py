@@ -129,7 +129,7 @@ print(CHModelFree(deck_names, winrates, sol_case4['x'][0], sol_case4['x'][1], so
 
 
 ###BETA/###
-
+'''
 ###DUMBELL PLOTS###
 from DumbellPlotEnkelte import MixedEqGraphNash
 from DumbellPlotEnkelte import MixedEqGraphCHPoissonStandard
@@ -141,8 +141,9 @@ from DumbellPlotEnkelte import MixedEqLevelK
 MixedEqGraphNash(solvemixednash(deck_names, winrates, 1), frekvenser)
 MixedEqGraphCHPoissonStandard(deck_names, CHSolve(deck_names, winrates, level, 0, tau, 1), frekvenser)
 MixedEqGraphCHPoissonAfrundet(deck_names, CHSolveAfrund(deck_names, winrates, level, 0, tau_afrund, 1), frekvenser)
-MixedEqGraphCHBetaStandard(deck_names, CHSolveBeta(deck_names, winrates, level, 0.24688993, 2.46672905, 0, MLE = 1), frekvenser)
+MixedEqGraphCHBetaStandard(deck_names, CHSolveBeta(deck_names, winrates, level, sol_case1['x'][0], sol_case1['x'][1], 0, MLE = 1), frekvenser)
 MixedEqGraphCHBetaAfrundet(deck_names, CHSolveBetaAfrund(deck_names, winrates, level, 0.0899432,  0.79928276, 0, MLE = 1), frekvenser)
 MixedEqLevelK(deck_names, levelksolvepoisson(deck_names, winrates, level, tau_levelk), frekvenser)
 #Skal være til sidst
 plt.show()
+'''

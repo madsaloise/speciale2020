@@ -156,7 +156,7 @@ def MixedEqGraphCHBetaAfrundet(MixedEq_Decks, CHInput, frekvenser):
     fig, ax = plt.subplots(figsize=(12, 8))
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['CH-model'], color='peru', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='deepskyblue', alpha=1, label='Observationer')
-    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='Beta-CH Model (1)')
+    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='Beta-CH Model (2)')
     plt.legend()
     textcordy = 7
     textcordx = 0
@@ -198,7 +198,7 @@ def MixedEqGraphCHBetaStandard(MixedEq_Decks, CHInput, frekvenser):
     fig, ax = plt.subplots(figsize=(12, 8))
     plt.hlines(y = my_range, xmin = dfGraph['Observationer'], xmax = dfGraph['CH-model'], color='peru', alpha = 0.4)
     plt.scatter(dfGraph['Observationer'], my_range, color='deepskyblue', alpha=1, label='Observationer')
-    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='Beta-CH Model (2)')
+    plt.scatter(dfGraph['CH-model'], my_range, color='khaki', alpha=1, label='Beta-CH Model (1)')
     plt.legend()
     textcordy = 7
     textcordx = 0
