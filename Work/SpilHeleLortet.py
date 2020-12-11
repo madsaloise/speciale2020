@@ -78,10 +78,10 @@ print(CHSolve(deck_names, winrates, level, 0, 2.9, 0))
 from DumbellPlot import MixedEqGraph
 #Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 #MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
-
+'''
 from LeastSquares import OptLS_Standard
 OptLS_Standard(deck_names, winrates, frekvenser, 9+1)
-
+'''
 ###POISSON/###
 
 
@@ -96,6 +96,7 @@ from AlphaBetaOptimizer import f_two
 from AlphaBetaOptimizer import f_three
 from AlphaBetaOptimizer import f_four
 from AlphaBetaOptimizer import f_five
+from AlphaBetaOptimizer import f_six
 from BR_Til_Nash_CHMODEL import NashCHModelCH
 from BR_Til_Nash_NashLigevægt import NashCHModelNash
 import math
@@ -141,6 +142,17 @@ print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrate
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist1[0], NormSolDist1[1], NormSolDist1[2], NormSolDist1[3], NormSolDist1[4], MLE = 1))
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist1[0], NormSolDist1[1], NormSolDist1[2], NormSolDist1[3], NormSolDist1[4], MLE = 0))
 '''
+sum_func6 = lambda x: sum(f_six(x[0], x[1], deck_names, winrates, frekvenser, level))
+sol_case6 = optimize.minimize(sum_func6, initial_guess1, method='SLSQP', bounds=[(0,None), (0, None)])
+NormSolDist6 = []
+count = 0
+for i in sol_case6['x']:
+    NormSolDist6.append(sol_case6['x'][count]/sum(sol_case6['x']))
+    count += 1
+print(NormSolDist6)
+#Optimale alpha og beta bruges til at beregne CH-modellerne
+print("Skaleret")
+print(CHSolveBeta(deck_names, winrates, level,sol_case6['x'][0], sol_case6['x'][1], 0, MLE = 1))
 #Resultater fra optimiser, bare disregard
 alpha_standard, beta_standard = 0.20628184, 2.41621851
 alpha_afrund, beta_afrund = 0.28102937, 3.21491841
@@ -174,7 +186,7 @@ print(player_distribution(5, alpha_afrund_plat, beta_afrund_plat))
 '''
 
 ###BETA/###
-
+'''
 ###DUMBELL PLOTS###
 from DumbellPlotEnkelte import MixedEqGraphNash
 from DumbellPlotEnkelte import MixedEqGraphCHPoissonStandard
@@ -192,8 +204,9 @@ MixedEqGraphCHBetaAfrundet(deck_names, CHSolveBetaAfrund(deck_names, winrates, l
 MixedEqLevelK(deck_names, levelksolvepoisson(deck_names, winrates, level, tau_levelk), frekvenser)
 #Skal være til sidst
 
-'''
+
 from BR_Til_Nash_NashLigevægt import NashCHModelNash
 print(list(NashCHModelNash(solvemixednash(deck_names, winrates, 1), deck_names, winrates, sol_case1['x'][0], sol_case1['x'][1])))
-'''
+
 plt.show()
+'''

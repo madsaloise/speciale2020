@@ -88,3 +88,38 @@ def f_five(alpha, beta, gamma, delta, epsilon, deck_names, winrates, frekvenser)
         Diff_Probs.append((ShareOfGames[count2] - 100* CHModelFree(deck_names, winrates, alpha, beta, gamma, delta, epsilon, MLE = 1)[count2])**2)
         count2 += 1
     return Diff_Probs
+
+#Skaleret med frekvenser
+def f_six(alpha, beta, deck_names, winrates, frekvenser, levels):
+    NumberOfGames = []
+    count = 0
+    for i in frekvenser:
+        NumberOfGames.append(sum(i)+i[count])
+        count += 1 
+    ShareOfGames = []
+    for i in NumberOfGames:
+        ShareOfGames.append(100 * i / sum(NumberOfGames))
+    Diff_Probs = []
+    count2 = 0
+    for j in ShareOfGames:
+        Diff_Probs.append(((ShareOfGames[count2] - 100* CHSolveBeta(deck_names, winrates, levels, alpha, beta, 0, MLE = 1)[count2])**2)*ShareOfGames[count2])
+        count2 += 1
+    return Diff_Probs
+
+
+#Skaleret med levelk (10% på levels >0, 20% på 0)
+def f_seven(alpha, beta, deck_names, winrates, frekvenser, levels):
+    NumberOfGames = []
+    count = 0
+    for i in frekvenser:
+        NumberOfGames.append(sum(i)+i[count])
+        count += 1 
+    ShareOfGames = []
+    for i in NumberOfGames:
+        ShareOfGames.append(100 * i / sum(NumberOfGames))
+    Diff_Probs = []
+    count2 = 0
+    for j in ShareOfGames:
+        Diff_Probs.append((ShareOfGames[count2] - 100* CHSolveBeta(deck_names, winrates, levels, alpha, beta, 0, MLE = 1)[count2])**2)
+        count2 += 1
+    return Diff_Probs

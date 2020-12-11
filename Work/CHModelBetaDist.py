@@ -20,7 +20,6 @@ def player_distribution(levels, alpha_val, beta_val):
     for i in range(levels):
         truncated_fractions.append(fractions[i]/sum(fractions))
     return truncated_fractions
-
 def player_plays(winrates, level, deckID, indeks_tal):
     if level == 0:
         prob = 1/len(winrates)
