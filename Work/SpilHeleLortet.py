@@ -28,7 +28,8 @@ frekvenser = ImportFrekvenser(PathFrek)
 #Dominans, Syntax: ElimineringDomStrat(deck, winrates)
 from ElimineringDomineredeStrat import ElimineringDomStrat
 ElimineringDomStrat(deck_names, winrates)
-
+from CHModel import CHSolve
+from CHModelAfrund import CHSolveAfrund
 #Importerer Nash
 #Syntax: solvemixednash(decks, winrates)
 from MixedEquilibriumWinrates import solvemixednash
@@ -60,12 +61,12 @@ print("standard")
 print(CHSolve(deck_names, winrates, level, 0, tau, 0))
 print(CHSolve(deck_names, winrates, level, 0, tau, 1))
 print("Afrund")
-print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 0))
-print(CHSolveAfrund(deck_names, winrates, level, 0, tau, 1))
-'''
+print(CHSolveAfrund(deck_names, winrates, level, 0, tau_afrund, 0))
+print(CHSolveAfrund(deck_names, winrates, level, 0, tau_afrund, 1))
+
 #from MLEEstimation import MLEPlot
 #MLEPlot(level, tau)
-from CHModel import CHSolve
+'''
 '''
 print("tau= 0.1")
 print(CHSolve(deck_names, winrates, level, 0, 0.1, 0))
@@ -79,11 +80,12 @@ from DumbellPlot import MixedEqGraph
 #Syntax: MixedEqGraph(Vores_Nash, Frekvenser)
 #MixedEqGraph(solvemixednash(deck_names, winrates, 1), frekvenser,CHSolve(deck_names, winrates, level+1, 0, tau, 1), CHSolveAfrund(deck_names, winrates, level+1, 0, tau, 1) )
 '''
-from LeastSquares import OptLS_Standard
-OptLS_Standard(deck_names, winrates, frekvenser, 9+1)
 '''
+from LeastSquares import OptLS_Standard
+#OptLS_Standard(deck_names, winrates, frekvenser, level+1)
+#plt.show()
 ###POISSON/###
-
+'''
 
 ###/BETA###
 print("BETAFORDELING:")
@@ -97,13 +99,17 @@ from AlphaBetaOptimizer import f_three
 from AlphaBetaOptimizer import f_four
 from AlphaBetaOptimizer import f_five
 from AlphaBetaOptimizer import f_six
+from AlphaBetaOptimizer import f_seven
 from BR_Til_Nash_CHMODEL import NashCHModelCH
 from BR_Til_Nash_NashLigevægt import NashCHModelNash
 import math
 initial_guess1 = [0.5, 0.5]
 initial_guess2 = [0.2, 0.2, 0.2, 0.2, 0.2]
 
-'''
+print("Standard")
+print(CHSolveBeta(deck_names, winrates, level, 0.13644470638608094, 0.8635552936139191, 0, MLE = 0))
+print(CHSolveBeta(deck_names, winrates, level, 0.13644470638608094, 0.8635552936139191, 0, MLE = 1))
+
 sum_func1 = lambda x: sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level))
 sum_func2 = lambda x: sum(f_two(x[0], x[1], deck_names, winrates, frekvenser, level))
 sol_case1 = optimize.minimize(sum_func1, initial_guess1, method='SLSQP', bounds=[(0,None), (0, None)])
@@ -129,21 +135,25 @@ print(sol_case1['x'])
 print(sol_case2['x'])
 
 print(sol_case3['x'])
-'''
-'''
-NormSolDist = []
-for i in sol_case4['x']:
-    NormSolDist.append(sol_case4['x'][count]/sum(sol_case4['x']))
+
+sum_func3 = lambda x: sum(f_four(x[0], x[1], x[2], x[3], x[4], deck_names, winrates, frekvenser))
+sol_case3 = optimize.minimize(sum_func3, initial_guess2, method='SLSQP', bounds=[(0,None), (0, None),(0,None), (0, None), (0,None)])
+count = 0
+NormSolDist1 = []
+for i in sol_case3['x']:
+    NormSolDist1.append(sol_case3['x'][count]/sum(sol_case3['x']))
     count += 1
 
-print(NormSolDist)
+print(NormSolDist1)
 
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, sol_case3['x'][0], sol_case3['x'][1], sol_case3['x'][2], sol_case3['x'][3], sol_case3['x'][4], MLE = 1))
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist1[0], NormSolDist1[1], NormSolDist1[2], NormSolDist1[3], NormSolDist1[4], MLE = 1))
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist1[0], NormSolDist1[1], NormSolDist1[2], NormSolDist1[3], NormSolDist1[4], MLE = 0))
 '''
-sum_func6 = lambda x: sum(f_six(x[0], x[1], deck_names, winrates, frekvenser, level))
+'''
+sum_func6 = lambda x: sum(f_seven(x[0], x[1], deck_names, winrates, frekvenser, level))
 sol_case6 = optimize.minimize(sum_func6, initial_guess1, method='SLSQP', bounds=[(0,None), (0, None)])
+sol_case6['x']
 NormSolDist6 = []
 count = 0
 for i in sol_case6['x']:
@@ -152,7 +162,10 @@ for i in sol_case6['x']:
 print(NormSolDist6)
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print("Skaleret")
+'''
+'''
 print(CHSolveBeta(deck_names, winrates, level,sol_case6['x'][0], sol_case6['x'][1], 0, MLE = 1))
+'''
 #Resultater fra optimiser, bare disregard
 alpha_standard, beta_standard = 0.20628184, 2.41621851
 alpha_afrund, beta_afrund = 0.28102937, 3.21491841
@@ -160,14 +173,32 @@ alpha_standard_plat, beta_standard_plat = 0.24720334, 2.4701282
 alpha_afrund_plat, beta_afrund_plat = 0.45068354, 4.27547875
 alpha_standard_underplat, beta_standard_underplat = 0.09316826, 2.65226339 
 alpha_afrund_underplat, beta_afrund_underplat = 0.10634961, 2.63627197
+from AlphaBetaOptimizer import f_one
+from CHModelBetaDist import CHSolveBeta
+WinratesList = [r'C:\speciale2020\Data\Winrates_Data_166.xlsx', r'C:\speciale2020\Data\Winrates_Data_167.xlsx', r'C:\speciale2020\Data\Winrates_Data_168.xlsx']
+FrekvenserList = [r'C:\speciale2020\Data\Frekvenser_166.xlsx', r'C:\speciale2020\Data\Frekvenser_167.xlsx', r'C:\speciale2020\Data\Frekvenser_168.xlsx']
+WeekList = [166, 167, 168]
+count = 0
+initial_guess1 = [0.5, 0.5]
+for i in WeekList:
+    deck_names = ImportExcelFile(1,0,0, WinratesList[count])
+    winrates = ImportExcelFile(0,1,0, WinratesList[count])
+    frekvenser = ImportFrekvenser(FrekvenserList[count])
+    OptLS_Standard(deck_names, winrates, frekvenser, level+1)
+    sum_func1 = lambda x: sum(f_one(x[0], x[1], deck_names, winrates, frekvenser, level))
+    sol_case1 = optimize.minimize(sum_func1, initial_guess1, method='SLSQP', bounds=[(0,None), (0, None)])
+    print("alpha, beta")
+    print(sol_case1['x'])
+    print(CHSolveBeta(deck_names, winrates, level,sol_case1['x'][0], sol_case1['x'][1], 0, MLE = 1))
+    count += 1
 
-
+'''
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print("Standard")
 print(CHSolveBeta(deck_names, winrates, level,alpha_standard, beta_standard, 0, MLE = 1))
 print("Afrundet")
 print(CHSolveBetaAfrund(deck_names, winrates, level, alpha_afrund, beta_afrund, 0, MLE = 1))
-
+'''
 
 '''
 
@@ -194,6 +225,7 @@ from DumbellPlotEnkelte import MixedEqGraphCHPoissonAfrundet
 from DumbellPlotEnkelte import MixedEqGraphCHBetaAfrundet
 from DumbellPlotEnkelte import MixedEqGraphCHBetaStandard
 from DumbellPlotEnkelte import MixedEqLevelK
+from DumbellPlotEnkelte import NashCH
 
 
 MixedEqGraphNash(solvemixednash(deck_names, winrates, 1), frekvenser)
@@ -202,9 +234,10 @@ MixedEqGraphCHPoissonAfrundet(deck_names, CHSolveAfrund(deck_names, winrates, le
 MixedEqGraphCHBetaStandard(deck_names, CHSolveBeta(deck_names, winrates, level, alpha_standard, beta_standard, 0, MLE = 1), frekvenser)
 MixedEqGraphCHBetaAfrundet(deck_names, CHSolveBetaAfrund(deck_names, winrates, level,alpha_afrund, beta_afrund, 0, MLE = 1), frekvenser)
 MixedEqLevelK(deck_names, levelksolvepoisson(deck_names, winrates, level, tau_levelk), frekvenser)
+NashCH(deck_names, NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, 0.8638375736535256, 0.09599785625939583, 0.03119252040390985, 0.00813884245046459, 0.0008332072327040807, MLE = 1), frekvenser)
 #Skal være til sidst
-
-
+'''
+'''
 from BR_Til_Nash_NashLigevægt import NashCHModelNash
 print(list(NashCHModelNash(solvemixednash(deck_names, winrates, 1), deck_names, winrates, sol_case1['x'][0], sol_case1['x'][1])))
 

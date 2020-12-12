@@ -107,8 +107,9 @@ def f_six(alpha, beta, deck_names, winrates, frekvenser, levels):
     return Diff_Probs
 
 
-#Skaleret med levelk (10% på levels >0, 20% på 0)
+#Custom vægte på decks
 def f_seven(alpha, beta, deck_names, winrates, frekvenser, levels):
+    LevelKDecks = [20/12, 10, 20/12, 10, 10, 20/12, 20/12, 10, 10, 20/12, 10, 10, 20/12, 20/12, 20/12, 20/12, 20/12, 20/12, 20/12, 10]
     NumberOfGames = []
     count = 0
     for i in frekvenser:
@@ -120,6 +121,6 @@ def f_seven(alpha, beta, deck_names, winrates, frekvenser, levels):
     Diff_Probs = []
     count2 = 0
     for j in ShareOfGames:
-        Diff_Probs.append((ShareOfGames[count2] - 100* CHSolveBeta(deck_names, winrates, levels, alpha, beta, 0, MLE = 1)[count2])**2)
+        Diff_Probs.append(((ShareOfGames[count2] - 100* CHSolveBeta(deck_names, winrates, levels, alpha, beta, 0, MLE = 1)[count2])**2)*LevelKDecks[count2])
         count2 += 1
     return Diff_Probs
