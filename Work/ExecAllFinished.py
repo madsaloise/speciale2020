@@ -20,9 +20,9 @@ from DataPrep import ImportFrekvenser
 # Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
 #Winrates Data
-PathWin = r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx'
+PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx'
 #Frekvens Data
-PathFrek = r'C:\speciale2020\Data\Frekvenser_169.xlsx'
+PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169.xlsx'
 
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
@@ -189,8 +189,8 @@ MixedEqLevelK(deck_names, levelksolvepoisson(deck_names, winrates, level, tau_le
 NashCH(deck_names, NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, 0.8638375736535256, 0.09599785625939583, 0.03119252040390985, 0.00813884245046459, 0.0008332072327040807, MLE = 1), frekvenser)
 
 #Tests af andre uger
-WinratesList = [r'C:\speciale2020\Data\Winrates_Data_166.xlsx', r'C:\speciale2020\Data\Winrates_Data_167.xlsx', r'C:\speciale2020\Data\Winrates_Data_168.xlsx']
-FrekvenserList = [r'C:\speciale2020\Data\Frekvenser_166.xlsx', r'C:\speciale2020\Data\Frekvenser_167.xlsx', r'C:\speciale2020\Data\Frekvenser_168.xlsx']
+WinratesList = [r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_166.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_167.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_168.xlsx']
+FrekvenserList = [r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_166.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_167.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_168.xlsx']
 WeekList = [166, 167, 168]
 count = 0
 initial_guess1 = [0.5, 0.5]
@@ -208,12 +208,12 @@ for i in WeekList:
     count += 1
 
 #Tests af highability og lowability
-WinratesList = [r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx', r'C:\speciale2020\Data\Winrates_Data_2_169.xlsx']
-FrekvenserList = [r'C:\speciale2020\Data\Frekvenser_169_PlatToLegend.xlsx', r'C:\speciale2020\Data\Frekvenser_169_UnderPlatinium.xlsx']
+WinratesList = [r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx']
+FrekvenserList = [r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169_PlatToLegend.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169_UnderPlatinium.xlsx']
 RankingList = ["Highability", "Lowability"]
 count = 0
 initial_guess1 = [0.5, 0.5]
-for i in WeekList:
+for i in RankingList:
     print(RankingList[count])
     deck_names = ImportExcelFile(1,0,0, WinratesList[count])
     winrates = ImportExcelFile(0,1,0, WinratesList[count])
