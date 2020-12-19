@@ -5,10 +5,18 @@ from scipy.optimize import linprog
 from scipy import optimize
 import matplotlib.pyplot as plt
 import time
-
-
+from pathlib import Path
+#Måler tid
 t0= time.process_time()
 
+#Sæt sti
+dirname = 'C:\\speciale2020\\Data'
+#Data er i excel
+suffix = '.xlsx'
+
+#Navne på ark
+WinrateNavne = ['Winrates_Data_2_169', 'Winrates_Data_166', 'Winrates_Data_167', 'Winrates_Data_168']
+FrekvensNavne = ['Frekvenser_169', 'Frekvenser_166', 'Frekvenser_167', 'Frekvenser_168' ,'Frekvenser_169_PlatToLegend', 'Frekvenser_169_UnderPlatinium']
 
 #Importerer DataPrep
 from DataPrep import ImportExcelFile 
@@ -20,14 +28,23 @@ from DataPrep import ImportFrekvenser
 # Vælger man flere input med 1 vil den bare returnere kolonnenavnene, just dont 
 
 #Winrates Data
-PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx'
+#PathWin = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx'
+PathWin = Path(dirname, WinrateNavne[0]).with_suffix(suffix)
 #Frekvens Data
-PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169.xlsx'
-
+#PathFrek = r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169.xlsx'
+PathFrek = Path(dirname, FrekvensNavne[0]).with_suffix(suffix)
 deck_names = ImportExcelFile(1,0,0, PathWin)
 winrates = ImportExcelFile(0,1,0, PathWin)
 data = ImportExcelFile(0,0,1, PathWin)
 frekvenser = ImportFrekvenser(PathFrek)
+
+#Sætter parametre for poisson
+tau = 0.1407035175879397
+tau_afrund = 0.15075376884422112
+tau_levelk = 0.1306532663316583
+
+#Vi betragter level 5
+level = 5
 
 #Dominans, Syntax: ElimineringDomStrat(deck, winrates)
 from ElimineringDomineredeStrat import ElimineringDomStrat
@@ -188,9 +205,11 @@ MixedEqGraphCHBetaAfrundet(deck_names, CHSolveBetaAfrund(deck_names, winrates, l
 MixedEqLevelK(deck_names, levelksolvepoisson(deck_names, winrates, level, tau_levelk), frekvenser)
 NashCH(deck_names, NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, 0.8638375736535256, 0.09599785625939583, 0.03119252040390985, 0.00813884245046459, 0.0008332072327040807, MLE = 1), frekvenser)
 
+
+#from BR_Til_Nash_NashLigevægt import NashCHModelNash
 #Tests af andre uger
-WinratesList = [r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_166.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_167.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_168.xlsx']
-FrekvenserList = [r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_166.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_167.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_168.xlsx']
+WinratesList = [Path(dirname, WinrateNavne[1]).with_suffix(suffix), Path(dirname, WinrateNavne[2]).with_suffix(suffix), Path(dirname, WinrateNavne[3]).with_suffix(suffix)]
+FrekvenserList = [Path(dirname, FrekvensNavne[1]).with_suffix(suffix), Path(dirname, FrekvensNavne[2]).with_suffix(suffix), Path(dirname, FrekvensNavne[3]).with_suffix(suffix)]
 WeekList = [166, 167, 168]
 count = 0
 initial_guess1 = [0.5, 0.5]
@@ -208,8 +227,8 @@ for i in WeekList:
     count += 1
 
 #Tests af highability og lowability
-WinratesList = [r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Winrates_Data_2_169.xlsx']
-FrekvenserList = [r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169_PlatToLegend.xlsx', r'C:\Users\Mads\Desktop\Speciale\Kode\Git\Data\Frekvenser_169_UnderPlatinium.xlsx']
+WinratesList = [Path(dirname, WinrateNavne[0]).with_suffix(suffix), Path(dirname, WinrateNavne[0]).with_suffix(suffix)]
+FrekvenserList = [Path(dirname, FrekvensNavne[4]).with_suffix(suffix), Path(dirname, FrekvensNavne[5]).with_suffix(suffix)]
 RankingList = ["Highability", "Lowability"]
 count = 0
 initial_guess1 = [0.5, 0.5]

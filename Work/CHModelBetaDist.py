@@ -28,7 +28,7 @@ def player_plays(winrates, level, deckID, indeks_tal):
         return 1 
     else:
         return 0
-print(player_distribution(5,0.24720334, 2.4701282))
+#print(player_distribution(5,0.13644470638608094, 0.8635552936139191))
 def CHSolveBeta(decks, winrates, levels, alpha_val, beta_val, kommentarer, MLE = 0):
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs

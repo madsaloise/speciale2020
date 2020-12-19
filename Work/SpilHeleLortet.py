@@ -150,10 +150,11 @@ print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrate
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist1[0], NormSolDist1[1], NormSolDist1[2], NormSolDist1[3], NormSolDist1[4], MLE = 1))
 print(NashCHModelCH(solvemixednash(deck_names, winrates, 1), deck_names, winrates, NormSolDist1[0], NormSolDist1[1], NormSolDist1[2], NormSolDist1[3], NormSolDist1[4], MLE = 0))
 '''
-'''
+from AlphaBetaOptimizer import f_seven
+initial_guess1 = [0.5, 0.5]
 sum_func6 = lambda x: sum(f_seven(x[0], x[1], deck_names, winrates, frekvenser, level))
 sol_case6 = optimize.minimize(sum_func6, initial_guess1, method='SLSQP', bounds=[(0,None), (0, None)])
-sol_case6['x']
+print(sol_case6['x'])
 NormSolDist6 = []
 count = 0
 for i in sol_case6['x']:
@@ -162,7 +163,7 @@ for i in sol_case6['x']:
 print(NormSolDist6)
 #Optimale alpha og beta bruges til at beregne CH-modellerne
 print("Skaleret")
-'''
+
 '''
 print(CHSolveBeta(deck_names, winrates, level,sol_case6['x'][0], sol_case6['x'][1], 0, MLE = 1))
 '''
@@ -179,7 +180,7 @@ WinratesList = [r'C:\speciale2020\Data\Winrates_Data_166.xlsx', r'C:\speciale202
 FrekvenserList = [r'C:\speciale2020\Data\Frekvenser_166.xlsx', r'C:\speciale2020\Data\Frekvenser_167.xlsx', r'C:\speciale2020\Data\Frekvenser_168.xlsx']
 WeekList = [166, 167, 168]
 count = 0
-initial_guess1 = [0.5, 0.5]
+
 for i in WeekList:
     deck_names = ImportExcelFile(1,0,0, WinratesList[count])
     winrates = ImportExcelFile(0,1,0, WinratesList[count])
