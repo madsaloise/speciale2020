@@ -33,7 +33,7 @@ def player_plays(winrates, level, deckID, indeks_tal):
         return 1 
     else:
         return 0
-print(sum(player_distribution(0.1708542713567839,5)[1:]))
+#print(sum(player_distribution(0.1708542713567839,5)[1:]))
 def CHSolve(decks, winrates, levels, kommentarer, tau = 0.5, MLE = 0):
     num_decks=len(decks)
     #Beregner gennemsnitlige payoffs
