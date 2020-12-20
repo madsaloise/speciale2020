@@ -2,7 +2,7 @@
 
 Denne github indeholder koden til vores speciale i Økonomi.
 
-Funktionel kode findes i mappen 'Work'. Samtlige programmer kan køres i "SpilHeleLortet" med minimalt setup.
+Funktionel kode findes i mappen 'Work'. Samtlige programmer kan køres i "ExecAllFinished" med minimalt setup.
 
 Nødvendige imports er:
 
